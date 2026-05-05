@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="th">
+  <header class="site-header">
+    <h1 class="header-title">DISCOGRAPHY</h1>
+    <div class="header-line"></div>
+    <p class="header-subtitle">=</p>
+</header>
+ <header class="main-header">
+        <button class="menu-trigger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- พื้นที่ Backdrop สำหรับกดปิดข้างนอก -->
+    <div class="menu-backdrop" id="menuBackdrop" onclick="toggleMenu()"></div>
+
+    <!-- แถบเมนูสีชมพู -->
+    <div class="side-menu" id="sideMenu">
+        <button class="close-menu-btn" onclick="toggleMenu()">✕</button>
+        <ul class="side-nav-links">
+            <li><a href="home.html">HOME</a></li>
+            <li><a href="news.html">NEWS</a></li>
+            <li><a href="schedule.html">SCHEDULE</a></li>
+            <li><a href="profile.html">PROFILE</a></li>
+            <li><a href="discography.html">DISCOGRAPHY</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+          <li><a href="theater.html">THEATER</a></li>
+          <li><a href="concert.html">CONCERT</a></li>
+          <li><a href="https://blm48-membership.vercel.app/">MEMBERSHIP</a></li>
+        </ul>
+    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLM48 Discography</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+      .site-header {
+        text-align: center;
+        padding: clamp(30px, 10vw, 60px) 20px 20px 20px;
+        position: relative;
+        z-index: 10;
+    }
+
+    .header-title {
+        font-size: clamp(28px, 8vw, 42px);
+        font-weight: 700;
+        color: #444;
+        margin: 0;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    .header-subtitle {
+        font-size: clamp(12px, 3vw, 16px);
+        font-weight: 500;
+        color: #e2a0b3;
+        margin-top: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    .header-line {
+        width: 50px;
+        height: 2px;
+        background-color: #fddc5a;
+        margin: 20px auto;
+    }
+      
+     /* --- Gallery Section --- */
+    .gallery-container {
+        display: flex;
+        flex-wrap: wrap; /* ให้รูปลงมาบรรทัดใหม่เมื่อจอแคบ */
+        gap: 15px;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .image-window {
+        width: 300px;
+        max-width: 100%; /* ป้องกันรูปกว้างเกินจอ */
+        height: 400px;
+        overflow: hidden;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+      
+      /* ปรับขนาดรูป Gallery ในมือถือให้เล็กลงหน่อยเพื่อให้เห็นครบ */
+    @media (max-width: 600px) {
+        .image-window {
+            width: 100%; /* เต็มจอในมือถือ */
+            height: 350px;
+        }
+    }
+
+    .image-window img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.3s ease;
+    }
+      
+    /* แถม: เอฟเฟกต์ตอนเอาเมาส์วางให้ดูมีลูกเล่น */
+    .image-window:hover img {
+        transform: scale(1.05);
+    }
+        /* --- CSS ส่วนพื้นฐานจาก style.css --- */
+       body {
+        font-family: 'Quicksand', sans-serif;
+        background-color: #ffffff;
+        margin: 0;
+        padding: 10px; /* ลด padding ลงในมือถือ */
+        color: #333;
+        overflow-x: hidden;
+    }
+
+    .blm48-container {
+        max-width: 1100px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+        /* --- ระบบ Filter --- */
+        .disco-filter {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .disco-filter input[type="radio"] {
+            display: none;
+        }
+
+        .disco-filter label {
+            display: inline-block;
+            margin: 0 15px;
+            padding: 5px 10px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #bbb;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            border-bottom: 2px solid transparent;
+        }
+
+        /* เมื่อกดเลือกหมวดหมู่ */
+        #all:checked ~ label[for="all"],
+        #single:checked ~ label[for="single"],
+        #album:checked ~ label[for="album"],
+        #special:checked ~ label[for="special"],
+        #concert:checked ~ label[for="concert"] {
+            color: #e2a0b3;
+            border-bottom: 2px solid #e2a0b3;
+        }
+
+        /* --- ระบบ Grid --- */
+        .disco-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 40px 25px;
+            margin-top: 50px;
+            text-align: left;
+        }
+
+        /* การแสดงผลตาม Filter */
+        .disco-item { display: none; }
+        #all:checked ~ .disco-grid .disco-item { display: block; }
+        #single:checked ~ .disco-grid .cat-single { display: block; }
+        #album:checked ~ .disco-grid .cat-album { display: block; }
+        #special:checked ~ .disco-grid .cat-special { display: block; }
+        #concert:checked ~ .disco-grid .cat-concert { display: block; }
+
+        /* --- Item & Card Design --- */
+        .cover-box {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            background-color: #000;
+            cursor: pointer;
+            border-radius: 10px; /* เพิ่มความโค้งมนเล็กน้อย */
+        }
+
+        .cover-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(226, 160, 179, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .overlay span {
+            font-weight: 700;
+            color: white;
+            border: 2px solid white;
+            padding: 10px 25px;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 30px;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .cover-link:hover .cover-box img { transform: scale(1.1); }
+        .cover-link:hover .overlay { opacity: 1; }
+        .cover-link:hover .overlay span { transform: translateY(0); }
+
+        /* --- Tags & Meta --- */
+        .item-info { margin-top: 20px; }
+        
+        .meta {
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .tag-single, .tag-special, .tag-album, .tag-concert {
+            font-size: 10px;
+            padding: 2px 8px;
+            border: 1px solid;
+            border-radius: 2px;
+            text-transform: uppercase;
+        }
+
+        .tag-single { color: #5bc0de; border-color: #5bc0de; }
+        .tag-special { color: #fddc5a; border-color: #fddc5a; }
+        .tag-album { color: #fc3eb2; border-color: #fc3eb2; }
+        .tag-concert { color: #9900ff; border-color: #9900ff; }
+        .date { color: #888; }
+
+        .title {
+            font-size: 16px;
+            font-weight: 500;
+            margin: 0;
+            color: #444;
+            line-height: 1.4;
+        }
+
+        /* --- พื้นหลังกลีบดอกไม้ร่วง --- */
+        .blossom-background {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .petal {
+            position: absolute;
+            background-color: #ffb6c1;
+            border-radius: 50% 0 50% 50%;
+            opacity: 0;
+            animation: dreamyFall infinite linear;
+        }
+      
+      /* ปรับแต่งสำหรับมือถือจอเล็กมาก */
+    @media (max-width: 380px) {
+        .disco-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+    }
+
+    .cover-box {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+        border-radius: 12px;
+    }
+
+    /* ปรับปรุง Overlay ในมือถือ (ให้เห็นชื่อชัดขึ้นโดยไม่ต้อง Hover) */
+    @media (hover: none) {
+        .overlay { opacity: 1; background: rgba(0,0,0,0.1); }
+        .overlay span { display: none; } /* ซ่อนปุ่ม "View" ในมือถือเพื่อไม่ให้บังรูป */
+    }
+
+    /* --- Footer --- */
+    .main-footer {
+        margin-top: 60px;
+        padding: 40px 20px;
+        border-top: 1px solid #f5f5f5;
+        text-align: center;
+    }
+
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+
+    .icon-btn {
+        width: 40px;
+        height: 40px;
+        background-color: #fddc5a;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        color: #000;
+        transition: 0.3s;
+    }
+
+    .copyright {
+        font-size: 10px;
+        line-height: 1.6;
+    }
+
+    /* --- Performance: ซ่อนกลีบดอกไม้บางส่วนในมือถือ --- */
+    @media (max-width: 768px) {
+        .p4, .p6, .p8, .p10 { display: none; }
+    }
+      
+
+        @keyframes dreamyFall {
+            0% { top: -10%; opacity: 0; transform: translateX(0) rotate(0deg); }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { top: 110%; opacity: 0; transform: translateX(200px) rotate(1080deg); }
+        }
+
+        .p1 { width: 15px; height: 15px; left: 5%;  animation-duration: 10s; animation-delay: 0s; }
+        .p2 { width: 10px; height: 10px; left: 15%; animation-duration: 15s; animation-delay: 2s; }
+        .p3 { width: 18px; height: 18px; left: 25%; animation-duration: 12s; animation-delay: 5s; }
+        .p4 { width: 12px; height: 12px; left: 35%; animation-duration: 18s; animation-delay: 1s; }
+        .p5 { width: 14px; height: 14px; left: 45%; animation-duration: 14s; animation-delay: 3s; }
+        .p6 { width: 16px; height: 16px; left: 55%; animation-duration: 20s; animation-delay: 7s; }
+        .p7 { width: 11px; height: 11px; left: 65%; animation-duration: 13s; animation-delay: 4s; }
+        .p8 { width: 20px; height: 20px; left: 75%; animation-duration: 16s; animation-delay: 8s; }
+        .p9 { width: 13px; height: 13px; left: 85%; animation-duration: 11s; animation-delay: 2s; }
+        .p10 { width: 17px; height: 17px; left: 95%; animation-duration: 19s; animation-delay: 6s; }
+
+        /* --- Footer Style --- */
+       .footer-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+        .main-footer {
+            margin-top: 80px;
+            padding: 60px 0 30px 0;
+            border-top: 1px solid #f5f5f5;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo-footer {
+            width: 10px; /* ปรับลดขนาดจาก 100px เป็น 60px */
+            height: auto;
+            margin: 0 auto 20px auto;
+            opacity: 0.7; /* ความจางเพิ่มความเป็น Minimal */
+            display: block;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .icon-btn {
+            width: 45px;
+            height: 45px;
+            background-color: #fddc5a;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: #000;
+            transition: 0.3s;
+        }
+
+        .icon-btn:hover {
+            transform: translateY(-5px);
+            background-color: #e2a0b3;
+            color: #fff;
+        }
+
+        .copyright {
+            font-size: 11px;
+            color: #999;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* --- New Header & Side Menu --- */
+    .main-header {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%;
+        height: 70px;
+        display: flex;
+        justify-content: flex-end; /* ดันปุ่มไปขวาสุด */
+        align-items: center;
+        padding: 0 30px;
+        z-index: 1000; /* ให้อยู่เหนือทุกอย่าง */
+        background: transparent;
+    }
+
+    .menu-trigger {
+        background: none; border: none; cursor: pointer;
+        display: flex; flex-direction: column; gap: 6px;
+    }
+
+    .menu-trigger span {
+        display: block; width: 28px; height: 1.5px;
+        background-color: #333; transition: 0.3s;
+    }
+
+    /* Backdrop พื้นหลังตอนเปิดเมนู */
+    .menu-backdrop {
+        position: fixed; top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.2);
+        opacity: 0; visibility: hidden;
+        transition: 0.4s; z-index: 2000;
+        backdrop-filter: blur(2px);
+    }
+
+    /* ตัวเมนูเฉียงสีชมพู */
+    .side-menu {
+        position: fixed; top: 0; right: -100%; /* ซ่อนไว้ขวาสุด */
+        width: 80%; max-width: 400px; height: 100%;
+        background-color: #ff8da1; /* สีชมพูแบบ =LOVE */
+        z-index: 2001;
+        transition: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        /* ตัดทรงเฉียง */
+        clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+        padding: 60px 40px;
+        display: flex; flex-direction: column;
+    }
+
+    /* เมื่อเมนูทำงาน */
+    .menu-active .menu-backdrop { opacity: 1; visibility: visible; }
+    .menu-active .side-menu { right: 0; }
+
+    .close-menu-btn {
+        align-self: flex-end;
+        background: none; border: none;
+        color: white; font-size: 30px; cursor: pointer;
+        margin-bottom: 30px;
+    }
+
+    .side-nav-links { list-style: none; padding: 0; margin: 0; }
+    .side-nav-links li { margin: 20px 0; text-align: right; }
+    .side-nav-links a {
+        text-decoration: none; color: white;
+        font-size: 18px; font-weight: 500;
+        letter-spacing: 2px; transition: 0.3s;
+    }
+    .side-nav-links a:hover { color: #fff9e6; padding-right: 10px; }
+
+    /* ปรับปุ่มเมนูให้เห็นชัดขึ้นบนรูป Banner */
+    .menu-trigger span { background-color: #ffffff; box-shadow: 0 0 5px rgba(0,0,0,0.2); }
+    </style>
+</head>
+<body>
+
+    <div class="blossom-background">
+        <div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div>
+        <div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div>
+        <div class="petal p7"></div><div class="petal p8"></div><div class="petal p9"></div>
+        <div class="petal p10"></div>
+    </div>
+
+    <div class="blm48-container">
+    <nav class="disco-filter">
+        <input type="radio" id="all" name="disco_cat" checked>
+        <label for="all">ALL</label>
+
+        <input type="radio" id="single" name="disco_cat">
+        <label for="single">SINGLE</label>
+
+        <input type="radio" id="album" name="disco_cat">
+        <label for="album">ALBUM</label>
+
+        <input type="radio" id="special" name="disco_cat">
+        <label for="special">SPECIAL</label>
+
+        <input type="radio" id="concert" name="disco_cat">
+        <label for="concert">CONCERT</label>
+
+        <div class="disco-grid">
+            
+            <div class="disco-item cat-single">
+                <a href="https://youtube.com/playlist?list=PLIZN3HRIc9-Bj8Cdm_Tdy9_KtZpkT0Za7&si=LsDw_w8oVdvdsnY4" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1Nd5WMn3yZdREl6I_vtdS7JJnYWiC3eYs=s1000" alt="Sustainable">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-single">Digital</span>
+                        <span class="date">2026.04.25</span>
+                    </div>
+                    <h3 class="title">Sustainable</h3>
+                </div>
+            </div>
+
+            <div class="disco-item cat-special">
+                <a href="https://youtu.be/TAPlWWZMGFQ?si=o_5w0Sq6Yw3QEyaO" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1f95utx33yfxcFUsr_OlTSt0pZllO-CSi=s1000" alt="Celebration">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-special">SPECIAL SINGLE</span>
+                        <span class="date">2026.04.04</span>
+                    </div>
+                    <h3 class="title">Celebration</h3>
+                </div>
+            </div>
+
+            <div class="disco-item cat-single">
+                <a href="https://youtube.com/playlist?list=PLIZN3HRIc9-DaI6E3Q9uJp4vSXAXBbNaV&si=6-dMx-XkgoavIsl0" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1qXtFoBEr2DdfPDZGiF53ZW_PNytLPBSw=s1000" alt="BINGO!">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-single">9th SINGLE</span>
+                        <span class="date">2026.01.31</span>
+                    </div>
+                    <h3 class="title">BINGO!</h3>
+                </div>
+            </div>
+
+            <div class="disco-item cat-single">
+                <a href="https://www.youtube.com/watch?v=QaxSjLIxcSE" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1OqH7oOp6AWAVKTNnP2hXDKkfk7o6t9FO=s1000" alt="BINGO!">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-single">DIGITAL</span>
+                        <span class="date">2026.01.31</span>
+                    </div>
+                    <h3 class="title">BINGO!</h3>
+                </div>
+            </div>
+		    <div class="disco-item cat-special">
+                <a href="https://youtube.com/playlist?list=PLIZN3HRIc9-CltU6zPLvMI53A1Ur_ChF2&si=PsTn_xwrTG34Kaxd" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1eBeiupo0dGwXd3ramURgVG57LNYtGgxu=s1000" alt="Sasameyuki Regret - ความในใจที่มี Regret
+">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-special">SPECIAL SINGLE</span>
+                        <span class="date">2025.12.20</span>
+                    </div>
+                    <h3 class="title">Sasameyuki Regret - ความในใจที่มี Regret</h3>
+                </div>
+            </div>
+            <div class="disco-item cat-special">
+                <a href="https://www.youtube.com/playlist?list=PLIZN3HRIc9-BTerMvI4G1Yj6sNOt7GQwI" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1OdLLWspqoQ4LI6UAXJ4NOkRotcAvdF6S=s1000" alt="Rhythm:You
+">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-special">SPECIAL ALBUM</span>
+                        <span class="date">2025.12.30</span>
+                    </div>
+                    <h3 class="title">Rhythm:You</h3>
+                </div>
+            </div>
+
+            <div class="disco-item cat-concert">
+                <a href="https://www.youtube.com/playlist?list=PLIZN3HRIc9-BwecC4mVSgOh3SVQY2IGRl" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1LmBiiH9S-466htE4d9qRhYPxs-nQ3U8T=s1000" 
+                        alt="BLM48 Ride The Rhythm Concert [Type B]">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-concert">CONCERT</span>
+                        <span class="date">2025.11.22</span>
+                    </div>
+                    <h3 class="title">BLM48 Ride The Rhythm Concert [Type B]</h3>
+                </div>
+            </div>
+            <div class="disco-item cat-concert">
+                <a href="https://www.youtube.com/playlist?list=PLIZN3HRIc9-CfuYmAZur9IgHlCrWTHmXL" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1tyq5l8AWA9pkZV2I-t10v57s5VBnEwYJ=s1000" 
+                        alt="BLM48 Ride The Rhythm Concert [Type A]">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-concert">CONCERT</span>
+                        <span class="date">2025.11.22</span>
+                    </div>
+                    <h3 class="title">BLM48 Ride The Rhythm Concert [Type A]</h3>
+                </div>
+            </div>
+            <div class="disco-item cat-special">
+                <a href="https://youtube.com/playlist?list=PLIZN3HRIc9-Cdk1yYitKdlBsI3dng4Rbd&si=YUheBu6GNSzjO10A" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1Bf8DmSlqsGaTMuk_16Ab_-fKL0iw_3xM=s1000" 
+                        alt="Koisuru Fortune Cookie - คุกกี้เสี่ยงทาย">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-special">Digital</span>
+                        <span class="date">2025.11.08</span>
+                    </div>
+                    <h3 class="title">Koisuru Fortune Cookie - คุกกี้เสี่ยงทาย</h3>
+                </div>
+            </div>
+            <div class="disco-item cat-single">
+                <a href="https://www.youtube.com/playlist?list=PLIZN3HRIc9-BiFp6L0R_Z5ci89ZlqqF5O" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1ZLoplK_Ms8AkXVTKm8-hG0xFJCHTn5JM=s1000" 
+                        alt="Mirai to wa?">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-single">4th Generation Debut Song</span>
+                        <span class="date">2025.08.31</span>
+                    </div>
+                    <h3 class="title">Mirai to wa?</h3>
+                </div>
+            </div>
+            <div class="disco-item cat-single">
+                <a href="https://www.youtube.com/playlist?list=PLIZN3HRIc9-AOfi_LFwlyAxMpja6cxzI9" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1KTbGFcQkzhzSk_7R66W3zY7DBqDGoJGg=s1000" 
+                        alt="Flying Get">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-single">8th Single</span>
+                        <span class="date">2025.07.07</span>
+                    </div>
+                    <h3 class="title">Flying Get</h3>
+                </div>
+            </div>
+            <div class="disco-item cat-album">
+                <a href="https://www.youtube.com/playlist?list=PLIZN3HRIc9-CGvqE4gDAht1qQoBLj0ZKw" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1cCYa9MnogcjQkM5cF4LPj1U-vJh-vks_=s1000" 
+                        alt="Green Flash">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-album">2nd Album</span>
+                        <span class="date">2025.03.08</span>
+                    </div>
+                    <h3 class="title">Green Flash</h3>
+                </div>
+            </div>
+            <div class="disco-item cat-single">
+                <a href="https://www.youtube.com/playlist?list=PLIZN3HRIc9-AvAey0zmU3R0KwLGnOV5ZJ" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1HyE8KYT_e5BZ-zRno4PZS-fw52a5McpU=s1000" 
+                        alt="Koitsun Jatta - หมดใจ...แล้วไง">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-single">7th Single</span>
+                        <span class="date">2025.02.01</span>
+                    </div>
+                    <h3 class="title">Koitsun Jatta - หมดใจ...แล้วไง</h3>
+                </div>
+            </div>
+            <div class="disco-item cat-single">
+                <a href="https://www.youtube.com/playlist?list=PLIZN3HRIc9-DkAwE7R7NxPkl6WDSAMqro" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1-gg0QhiWv6ObRpNLRDXGdAQ8ONCUgFy8=s1000" 
+                        alt="BLM FESTIVAL">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-single">6th Single</span>
+                        <span class="date">2024.12.07</span>
+                    </div>
+                    <h3 class="title">BLM FESTIVAL</h3>
+                </div>
+            </div>
+            <div class="disco-item cat-special">
+                <a href="https://www.youtube.com/playlist?list=PLIZN3HRIc9-CP_hUiP62h4PvBeuYH36B_" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1NlkfRX0Jrb1mAikNHmdjbJ92gcl2ZmFX=s1000" 
+                        alt="Nemo Hamo Rumor">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-special">Special Single</span>
+                        <span class="date">2024.11.10</span>
+                    </div>
+                    <h3 class="title">Nemo Hamo Rumor</h3>
+                </div>
+            </div>
+            <div class="disco-item cat-special">
+                <a href="https://youtu.be/vrDjBguTDt4?si=-apAF7n-KjB0QveC" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1o-7aJ0carNdLxifksRcQuulnNSW3Gm37=s1000"
+                        alt="Teacher Teacher">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-special">Special Single</span>
+                        <span class="date">2024.10.05</span>
+                    </div>
+                    <h3 class="title">Teacher Teacher</h3>
+                </div>
+            </div>
+            <div class="disco-item cat-single">
+                <a href="https://youtube.com/playlist?list=PLIZN3HRIc9-Aq0LvzgM-6BZnP69fn2XI3&si=m3vJKQe-Bvl8-53i" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1kHmpWZ2Imt7l6_qGpoE79gQVw1th3bJm=s1000"
+                        alt="LOVE TRIP">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-single">5th Single</span>
+                        <span class="date">2024.08.25</span>
+                    </div>
+                    <h3 class="title">LOVE TRIP</h3>
+                </div>
+            </div>
+            <div class="disco-item cat-single">
+                <a href="https://youtube.com/playlist?list=PLIZN3HRIc9-APmr_ypIufWLvOYdTR9BfK&si=nMYoi5ryDIvwwKJ4" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1CLavdcU9cPvgVNe_DKHyaqa-8Znpf_Kl=s1000"
+                        alt="REBORN">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-single">3rd Generation Debut Song</span>
+                        <span class="date">2024.07.21</span>
+                    </div>
+                    <h3 class="title">REBORN</h3>
+                </div>
+            </div>
+            <div class="disco-item cat-single">
+                <a href="https://youtube.com/playlist?list=PLIZN3HRIc9-Aq0eRfo5iZ61NM93QCLXFz&si=F10rMJGmZtBGku8x" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1VjmYz6vylTf3eDXg_-cM-N_XMw3d1y67=s1000"
+                        alt="POISNED">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-single">Original Single</span>
+                        <span class="date">2024.06.29</span>
+                    </div>
+                    <h3 class="title">POISNED</h3>
+                </div>
+            </div>
+            <div class="disco-item cat-single">
+                <a href="https://youtube.com/playlist?list=PLIZN3HRIc9-A8QqBKxfIwTeGYjUlclFBn&si=XRmHPxqSDSMExSP6" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1i_L8D2Fy4EqpsA6TOvbyfrvJEy1ItKXg=s1000"
+                        alt="Heavy Rotation">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-single">4th Single</span>
+                        <span class="date">2024.03.22</span>
+                    </div>
+                    <h3 class="title">Heavy Rotation</h3>
+                </div>
+            </div>
+            <div class="disco-item cat-special">
+                <a href="https://youtu.be/CNxk4OvAM-U?si=rz2CfEn47T4r9s-e" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1vpQHw0mmk72Swc064LHkKES3l21Tc2lo=s1000"
+                        alt="Make Noise">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-special">Special Single</span>
+                        <span class="date">2024.02.05</span>
+                    </div>
+                    <h3 class="title">Make Noise</h3>
+                </div>
+            </div>
+            <div class="disco-item cat-album">
+                <a href="https://www.youtube.com/playlist?list=PLIZN3HRIc9-CyMhOCv0deg6lyccsne5sK" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/17fX9Sv3bJQSGZ_Wb3v30W0cjghjAzuLS=s1000"
+                        alt="Warota People">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-album">1st Album</span>
+                        <span class="date">2023.12.02</span>
+                    </div>
+                    <h3 class="title">Warota People</h3>
+                </div>
+            </div>
+            <div class="disco-item cat-single">
+                <a href="https://www.youtube.com/playlist?list=PLIZN3HRIc9-DasEzp34K0-SiWf-m0cFTP" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1JiKRUX1_uR1K5eiP93rSoyPEADcKwerQ=s1000"
+                        alt="Tsugi no Season - ฤดูใหม่">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-single">2nd Generation Debut Song</span>
+                        <span class="date">2023.09.30</span>
+                    </div>
+                    <h3 class="title">Tsugi no Season - ฤดูใหม่</h3>
+                </div>
+            </div>
+            <div class="disco-item cat-single">
+                <a href="https://www.youtube.com/playlist?list=PLIZN3HRIc9-DH7Yp9Xi_bAdMOAXbUVHpk" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1myJZL5Qggh34uOX1n4tziVYBypQZCvNs=s1000"
+                        alt="Sayonara Crawl">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-single">3rd Single</span>
+                        <span class="date">2023.09.02</span>
+                    </div>
+                    <h3 class="title">Sayonara Crawl</h3>
+                </div>
+            </div>
+            <div class="disco-item cat-single">
+                <a href="https://www.youtube.com/playlist?list=PLIZN3HRIc9-DXwouyhTLzU6efqGXy_T3i" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1-bwbRuedxPp6tFjbkqv_0D1rZWhGDQ8d=s1000"
+                        alt="Maeshika Mukanee">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-single">2nd Single</span>
+                        <span class="date">2023.06.01</span>
+                    </div>
+                    <h3 class="title">Maeshika Mukanee</h3>
+                </div>
+            </div>
+            <div class="disco-item cat-single">
+                <a href="https://www.youtube.com/playlist?list=PLIZN3HRIc9-AVOTfFixnfvl83Bcw3R-Hg" target="_blank" class="cover-link">
+                    <div class="cover-box">
+                        <img src="https://lh3.googleusercontent.com/d/1Y4osXIzBhSAAt2IVsn_9GNRmHR7HN3uN=s1000"
+                        alt="ดีอะ - D.AAA">
+                        <div class="overlay"><span>WATCH MV</span></div>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <div class="meta">
+                        <span class="tag-single">1st Single</span>
+                        <span class="date">2023.03.14</span>
+                    </div>
+                    <h3 class="title">ดีอะ - D.AAA</h3>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+</div>
+
+    <footer class="main-footer">
+      <div class="blossom-container">
+    <div class="petal p1"></div>
+    <div class="petal p2"></div>
+    <div class="petal p3"></div>
+    <div class="petal p4"></div>
+  </div>
+
+       <div class="social-icons">
+  <a href="https://www.youtube.com/@blm48official" class="icon-btn">
+    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+  </a>
+
+  <a href="https://www.facebook.com/Blm48official" class="icon-btn">
+    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+  </a>
+
+  <a href="https://www.instagram.com/blm48.official" class="icon-btn">
+    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.668-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
+  </a>
+
+  <a href="https://www.tiktok.com/@blm48_official" class="icon-btn">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+  </a>
+
+  <a href="https://x.com/BLM48_OFFICIAL" class="icon-btn">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+  </a>
+</div>
+
+     <div class="copyright">
+      © BLM48 official
+    </div>
+  </div>
+</body>
+<script>
+    
+    function toggleMenu() {
+        document.body.classList.toggle('menu-active');
+    }
+    // ฟังก์ชันสั่งปิดหน้า Landing
+    function exitLanding() {
+      document.getElementById('landing-overlay').classList.add('fade-out');
+    }
+</script> 
+</html>
