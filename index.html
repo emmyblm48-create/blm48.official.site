@@ -478,8 +478,8 @@
     @media (max-width: 600px) {
       .video-grid { grid-template-columns: 1fr; }
     }
-   /* --- Menu System (Updated Colors) --- */
-.main-header {
+    /* --- New Header & Side Menu --- */
+   .main-header {
     position: fixed;
     top: 0; left: 0;
     width: 100%;
@@ -492,28 +492,31 @@
     box-sizing: border-box;
 }
 
-/* ปุ่มเมนู (Hamburger) เปลี่ยนเป็นสีดำ */
-.menu-trigger {
-    background: rgba(0, 0, 0, 0.8); /* พื้นหลังปุ่มสีดำโปร่งแสง */
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
+    .menu-trigger {
+        background: none; border: none; cursor: pointer;
+        display: flex; flex-direction: column; gap: 6px;
+    }
 
-.menu-trigger span {
+    .menu-trigger span {
     display: block; 
     width: 28px; 
     height: 2px;
-    background-color: #fddc5a; /* ขีดในปุ่มใช้สีเหลืองเพื่อตัดกับพื้นหลังดำ */
+    background-color: #000000;
     transition: 0.3s;
 }
 
-/* Side Menu เปลี่ยนเป็นสีเหลือง ตัวอักษรดำ */
-.side-menu {
+    /* Backdrop พื้นหลังตอนเปิดเมนู */
+    .menu-backdrop {
+        position: fixed; top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.2);
+        opacity: 0; visibility: hidden;
+        transition: 0.4s; z-index: 2000;
+        backdrop-filter: blur(2px);
+    }
+
+    /* ตัวเมนูเฉียงสีชมพู */
+    .side-menu {
     position: fixed; 
     top: 0; 
     right: -100%;
@@ -529,8 +532,11 @@
     flex-direction: column;
 }
 
-/* ปุ่มกากบาทปิดเมนู */
-.close-menu-btn {
+    /* เมื่อเมนูทำงาน */
+    .menu-active .menu-backdrop { opacity: 1; visibility: visible; }
+    .menu-active .side-menu { right: 0; }
+
+    .close-menu-btn {
     align-self: flex-end;
     background: none; 
     border: none;
@@ -540,13 +546,9 @@
     margin-bottom: 30px;
 }
 
-/* รายการเมนู */
-.side-nav-links li { 
-    margin: 20px 0; 
-    text-align: right; 
-}
-
-.side-nav-links a {
+    .side-nav-links { list-style: none; padding: 0; margin: 0; }
+    .side-nav-links li { margin: 20px 0; text-align: right; }
+    .side-nav-links a {
     text-decoration: none; 
     color: #000; /* ตัวอักษรสีดำ */
     font-size: 18px; 
@@ -554,10 +556,12 @@
     letter-spacing: 2px;
     transition: 0.3s;
 }
-
-.side-nav-links a:hover {
+    .side-nav-links a:hover {
     opacity: 0.6; /* เอฟเฟกต์เวลาเอาเมาส์ไปชี้ */
 }
+
+    /* ปรับปุ่มเมนูให้เห็นชัดขึ้นบนรูป Banner */
+    .menu-trigger span { background-color: #ffffff; box-shadow: 0 0 5px rgba(0,0,0,0.2); }
     
   </style>
 </head>
