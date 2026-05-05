@@ -160,19 +160,19 @@
     .p4, .p5 { display: none; }
   }
 
-      /* --- New Header & Side Menu --- */
-    .main-header {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%;
-        height: 70px;
-        display: flex;
-        justify-content: flex-end; /* ดันปุ่มไปขวาสุด */
-        align-items: center;
-        padding: 0 30px;
-        z-index: 1000; /* ให้อยู่เหนือทุกอย่าง */
-        background: transparent;
-    }
+       /* --- New Header & Side Menu --- */
+   .main-header {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 30px;
+    z-index: 1000;
+    box-sizing: border-box;
+}
 
     .menu-trigger {
         background: none; border: none; cursor: pointer;
@@ -180,9 +180,12 @@
     }
 
     .menu-trigger span {
-        display: block; width: 28px; height: 1.5px;
-        background-color: #333; transition: 0.3s;
-    }
+    display: block; 
+    width: 28px; 
+    height: 2px;
+    background-color: #000000;
+    transition: 0.3s;
+}
 
     /* Backdrop พื้นหลังตอนเปิดเมนู */
     .menu-backdrop {
@@ -196,36 +199,48 @@
 
     /* ตัวเมนูเฉียงสีชมพู */
     .side-menu {
-        position: fixed; top: 0; right: -100%; /* ซ่อนไว้ขวาสุด */
-        width: 80%; max-width: 400px; height: 100%;
-        background-color: #ff8da1; /* สีชมพูแบบ =LOVE */
-        z-index: 2001;
-        transition: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-        /* ตัดทรงเฉียง */
-        clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
-        padding: 60px 40px;
-        display: flex; flex-direction: column;
-    }
+    position: fixed; 
+    top: 0; 
+    right: -100%;
+    width: 80%; 
+    max-width: 400px; 
+    height: 100%;
+    background-color: #fddc5a; /* เปลี่ยนเป็นสีเหลืองตามรูปตัวอย่าง */
+    z-index: 2001;
+    transition: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+    padding: 60px 40px;
+    display: flex; 
+    flex-direction: column;
+}
 
     /* เมื่อเมนูทำงาน */
     .menu-active .menu-backdrop { opacity: 1; visibility: visible; }
     .menu-active .side-menu { right: 0; }
 
     .close-menu-btn {
-        align-self: flex-end;
-        background: none; border: none;
-        color: white; font-size: 30px; cursor: pointer;
-        margin-bottom: 30px;
-    }
+    align-self: flex-end;
+    background: none; 
+    border: none;
+    color: #000; /* เปลี่ยนเป็นสีดำ */
+    font-size: 30px; 
+    cursor: pointer;
+    margin-bottom: 30px;
+}
 
     .side-nav-links { list-style: none; padding: 0; margin: 0; }
     .side-nav-links li { margin: 20px 0; text-align: right; }
     .side-nav-links a {
-        text-decoration: none; color: white;
-        font-size: 18px; font-weight: 500;
-        letter-spacing: 2px; transition: 0.3s;
-    }
-    .side-nav-links a:hover { color: #fff9e6; padding-right: 10px; }
+    text-decoration: none; 
+    color: #000; /* ตัวอักษรสีดำ */
+    font-size: 18px; 
+    font-weight: 500;
+    letter-spacing: 2px;
+    transition: 0.3s;
+}
+    .side-nav-links a:hover {
+    opacity: 0.6; /* เอฟเฟกต์เวลาเอาเมาส์ไปชี้ */
+}
 
     /* ปรับปุ่มเมนูให้เห็นชัดขึ้นบนรูป Banner */
     .menu-trigger span { background-color: #ffffff; box-shadow: 0 0 5px rgba(0,0,0,0.2); }
@@ -249,7 +264,7 @@
     <div class="side-menu" id="sideMenu">
         <button class="close-menu-btn" onclick="toggleMenu()">✕</button>
         <ul class="side-nav-links">
-            <li><a href="home.html">HOME</a></li>
+            <li><a href="index.html">HOME</a></li>
             <li><a href="news.html">NEWS</a></li>
             <li><a href="schedule.html">SCHEDULE</a></li>
             <li><a href="profile.html">PROFILE</a></li>
