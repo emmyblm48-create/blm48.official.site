@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+  <!-- Header ที่มีปุ่ม Hamburger -->
+    <header class="main-header">
+        <button class="menu-trigger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- พื้นที่ Backdrop สำหรับกดปิดข้างนอก -->
+    <div class="menu-backdrop" id="menuBackdrop" onclick="toggleMenu()"></div>
+
+    <!-- แถบเมนูสีชมพู -->
+    <div class="side-menu" id="sideMenu">
+        <button class="close-menu-btn" onclick="toggleMenu()">✕</button>
+        <ul class="side-nav-links">
+            <li><a href="home.html">HOME</a></li>
+            <li><a href="news.html">NEWS</a></li>
+            <li><a href="schedule.html">SCHEDULE</a></li>
+            <li><a href="profile.html">PROFILE</a></li>
+            <li><a href="discography.html">DISCOGRAPHY</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+          <li><a href="theater.html">THEATER</a></li>
+          <li><a href="concert.html">CONCERT</a></li>
+          <li><a href="https://blm48-membership.vercel.app/">MEMBERSHIP</a></li>
+        </ul>
+    </div>
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+
+    /* --- New Header & Side Menu --- */
+    .main-header {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%;
+        height: 70px;
+        display: flex;
+        justify-content: flex-end; /* ดันปุ่มไปขวาสุด */
+        align-items: center;
+        padding: 0 30px;
+        z-index: 1000; /* ให้อยู่เหนือทุกอย่าง */
+        background: transparent;
+    }
+
+    .menu-trigger {
+        background: none; border: none; cursor: pointer;
+        display: flex; flex-direction: column; gap: 6px;
+    }
+
+    .menu-trigger span {
+        display: block; width: 28px; height: 1.5px;
+        background-color: #333; transition: 0.3s;
+    }
+
+    /* Backdrop พื้นหลังตอนเปิดเมนู */
+    .menu-backdrop {
+        position: fixed; top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.2);
+        opacity: 0; visibility: hidden;
+        transition: 0.4s; z-index: 2000;
+        backdrop-filter: blur(2px);
+    }
+
+    /* ตัวเมนูเฉียงสีชมพู */
+    .side-menu {
+        position: fixed; top: 0; right: -100%; /* ซ่อนไว้ขวาสุด */
+        width: 80%; max-width: 400px; height: 100%;
+        background-color: #ff8da1; /* สีชมพูแบบ =LOVE */
+        z-index: 2001;
+        transition: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        /* ตัดทรงเฉียง */
+        clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+        padding: 60px 40px;
+        display: flex; flex-direction: column;
+    }
+
+    /* เมื่อเมนูทำงาน */
+    .menu-active .menu-backdrop { opacity: 1; visibility: visible; }
+    .menu-active .side-menu { right: 0; }
+
+    .close-menu-btn {
+        align-self: flex-end;
+        background: none; border: none;
+        color: white; font-size: 30px; cursor: pointer;
+        margin-bottom: 30px;
+    }
+
+    .side-nav-links { list-style: none; padding: 0; margin: 0; }
+    .side-nav-links li { margin: 20px 0; text-align: right; }
+    .side-nav-links a {
+        text-decoration: none; color: white;
+        font-size: 18px; font-weight: 500;
+        letter-spacing: 2px; transition: 0.3s;
+    }
+    .side-nav-links a:hover { color: #fff9e6; padding-right: 10px; }
+
+    /* ปรับปุ่มเมนูให้เห็นชัดขึ้นบนรูป Banner */
+    .menu-trigger span { background-color: #ffffff; box-shadow: 0 0 5px rgba(0,0,0,0.2); }
+    :root { --main-pink: #ff85a2; --light-pink: #ffdae3; --text-dark: #333; --social-black: #000; --yellow-line: #fddc5a; }
+    body { font-family: 'Quicksand', 'Kanit', sans-serif; background: #fff; margin: 0; padding: 0; overflow-x: hidden; }
+    
+    /* --- Header Style --- */
+    .site-header { text-align: center; padding: 60px 20px 20px 20px; position: relative; z-index: 10; }
+    .header-title { font-size: 42px; font-weight: 700; color: #444; margin: 0; letter-spacing: 2px; text-transform: uppercase; }
+    .header-subtitle { font-size: 16px; font-weight: 500; color: #e2a0b3; margin-top: 10px; letter-spacing: 4px; text-transform: uppercase; }
+    .header-line { width: 50px; height: 2px; background-color: var(--yellow-line); margin: 20px auto; }
+
+    /* Decoration */
+    .petal { position: fixed; top: -10%; z-index: 1; animation: fall linear infinite; color: var(--light-pink); pointer-events: none; }
+    @keyframes fall { to { transform: translateY(110vh) translateX(100px) rotate(360deg); } }
+
+    #loading-overlay { text-align: center; padding: 100px 0; color: var(--main-pink); }
+    .loader-icon { font-size: 60px; animation: spin 2s linear infinite; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+    .filter-tabs { 
+        display: flex; 
+        justify-content: center; 
+        gap: clamp(15px, 5vw, 40px); 
+        border-bottom: 1px solid #eee; 
+        padding-bottom: 10px; 
+        margin: 10px 0 30px 0;
+        overflow-x: auto; /* ให้เลื่อนได้ถ้าปุ่มเยอะเกินจอ */
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+    /* ซ่อน scrollbar สำหรับสายสวยงาม */
+    .filter-tabs::-webkit-scrollbar { display: none; }
+
+    .tab-btn { 
+        background: none; border: none; 
+        font-family: 'Quicksand', sans-serif; 
+        font-size: clamp(14px, 3vw, 16px); 
+        font-weight: 700; color: #bbb; 
+        cursor: pointer; text-transform: uppercase; 
+        letter-spacing: 1px; padding: 10px 5px; 
+        position: relative; transition: 0.3s; 
+        flex-shrink: 0;
+    }
+    .tab-btn.active { color: var(--main-pink); }
+    .tab-btn.active::after { 
+        content: ''; position: absolute; bottom: -11px; left: 0; 
+        width: 100%; height: 2.5px; background: var(--main-pink); 
+    }
+
+   /* Main Grid - ปรับจำนวน Column ตามขนาดจอ */
+    #main-view { 
+        display: none; 
+        max-width: 1200px; 
+        width: 95%;
+        margin: 0 auto; 
+        text-align: center; 
+        padding: 0 10px; 
+    }
+    .members-grid { 
+        display: grid; 
+        /* มือถือ 2 คอลัมน์, แท็บเล็ต 3, คอม 4-5 */
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
+        gap: clamp(15px, 4vw, 40px); 
+        margin-bottom: 60px; 
+    }
+    
+    @media (max-width: 400px) {
+        .members-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    }
+
+    .member-card { text-align: center; cursor: pointer; transition: 0.4s ease; }
+    .member-card:hover { transform: translateY(-8px); }
+    
+    .photo-box { 
+        width: 100%; aspect-ratio: 1/1; 
+        overflow: hidden; border-radius: 12px; 
+        margin-bottom: 12px; border: 1px solid #f0f0f0; 
+        background: #f9f9f9; 
+    }
+    .member-photo { width: 100%; height: 100%; object-fit: cover; }
+    .member-name-label { font-size: clamp(16px, 4vw, 22px); font-weight: 700; color: var(--text-dark); margin: 0; }
+    .team-label { font-size: 11px; color: var(--main-pink); font-weight: 600; text-transform: uppercase; margin-top: 3px; display: block; }
+    
+    /* Birthday Style on Main Page */
+    .main-birthday-info { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 10px; color: #888; font-size: 14px; font-weight: 500; }
+    .main-birthday-info i { color: var(--main-pink); font-size: 16px; }
+
+    /* Detail View */
+    #detail-view { 
+        display: none; 
+        max-width: 1000px; 
+        width: 90%;
+        margin: 20px auto; 
+        padding: 0; 
+        animation: fadeIn 0.5s ease; 
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--main-pink); cursor: pointer; font-weight: 600; margin-bottom: 30px; }
+    .detail-layout { 
+        display: flex; 
+        flex-direction: row; /* ปกติเรียงแนวนอน */
+        gap: 30px; 
+        text-align: left; 
+    }
+    .detail-image-box { flex: 1; min-width: 320px; }
+    .detail-image { width: 100%; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); }
+    .detail-content { flex: 1.5; min-width: 320px; }
+    .info-header { border-bottom: 1px solid #eee; padding-bottom: 20px; margin-bottom: 25px; }
+    .info-row { display: grid; grid-template-columns: 140px 1fr; padding: 12px 0; border-bottom: 1px solid #f9f9f9; }
+    .info-label { color: #bbb; font-size: 13px; text-transform: uppercase; }
+    .info-value { color: #444; font-size: 16px; }
+    .social-section { display: flex; gap: 20px; margin-top: 30px; }
+    .social-link { font-size: 28px; color: var(--social-black); text-decoration: none; transition: 0.3s; }
+    .social-link:hover { color: var(--main-pink); transform: scale(1.1); }
+    
+    @media (max-width: 768px) {
+        .detail-layout { flex-direction: column; align-items: center; }
+        .detail-image-box, .detail-content { min-width: 100%; }
+        .info-header { text-align: center; }
+        .social-section { justify-content: center; }
+    }
+
+    .detail-image { width: 100%; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+    .info-row { 
+        display: grid; 
+        grid-template-columns: 100px 1fr; /* ปรับความกว้าง Label ให้เล็กลงหน่อย */
+        padding: 12px 0; 
+        border-bottom: 1px solid #f9f9f9; 
+    }
+    
+    @media (max-width: 480px) {
+        .info-row { grid-template-columns: 1fr; gap: 4px; } /* มือถือเล็กมากให้ Label อยู่บน Value */
+        .info-label { font-size: 11px; }
+    }
+
+    .social-section { display: flex; gap: 20px; margin-top: 25px; }
+    .social-link { font-size: 24px; color: var(--social-black); text-decoration: none; transition: 0.3s; }
+    
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <h1 class="header-title">PROFILE</h1>
+    <div class="header-line"></div>
+    <p class="header-subtitle">=</p>
+  </header>
+
+  <div id="loading-overlay">
+    <i class="fas fa-clover loader-icon"></i>
+    <div style="margin-top:20px; font-weight:600;">LOADING BLM48...</div>
+  </div>
+
+  <div id="main-view">
+    <div class="filter-tabs">
+      <button class="tab-btn active" onclick="filterByTeam(this, 'ALL')">ALL</button>
+      <button class="tab-btn" onclick="filterByTeam(this, 'Bloom')">Team Bloom</button>
+      <button class="tab-btn" onclick="filterByTeam(this, 'Trainee')">Trainee</button>
+    </div>
+    <div id="member-grid" class="members-grid"></div>
+  </div>
+
+  <div id="detail-view">
+    <div class="back-btn" onclick="goBack()"><i class="fas fa-chevron-left"></i> BACK</div>
+    <div class="detail-layout">
+      <div class="detail-image-box"><img id="m-img" class="detail-image"></div>
+      <div class="detail-content">
+        <div class="info-header">
+          <h1 id="m-name-th" style="font-size:32px; margin:0; color:var(--text-dark);"></h1>
+          <p id="m-name-en" style="color:var(--main-pink); font-size:18px; margin:5px 0 0 0;"></p>
+        </div>
+        <div id="m-info-table"></div>
+        <div class="social-section" id="m-social"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyKX1fncf8dJuPWadPk9w-4t0pPnkNPZlFDvUqllC1aJwbqQ4vVdepMcU6fjbTIOHqz/exec';
+    let membersData = [];
+
+    function getDirectImgLink(url) {
+      if (!url) return 'https://via.placeholder.com/400x400?text=BLM48';
+      if (url.includes('drive.google.com')) {
+        const fileId = url.match(/[-\w]{25,}/);
+        return fileId ? `https://lh3.googleusercontent.com/u/0/d/${fileId}` : url;
+      }
+      return url;
+    }
+
+    async function init() {
+      try {
+        const response = await fetch(scriptURL);
+        membersData = await response.json();
+        renderGrid('ALL');
+        document.getElementById('loading-overlay').style.display = 'none';
+        document.getElementById('main-view').style.display = 'block';
+      } catch (err) {
+        document.getElementById('loading-overlay').innerHTML = "ERROR LOADING DATA";
+      }
+    }
+
+    function filterByTeam(btn, team) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderGrid(team);
+    }
+
+    function renderGrid(team) {
+      const grid = document.getElementById('member-grid');
+      grid.innerHTML = '';
+      const filtered = team === 'ALL' ? membersData : membersData.filter(m => m.team === team);
+
+      filtered.forEach(m => {
+        // จัดการเรื่องคำว่า Team
+        let displayTeam = m.team || '';
+        if (displayTeam.toLowerCase() !== 'trainee' && displayTeam !== '') {
+            displayTeam = 'Team ' + displayTeam;
+        }
+
+        grid.innerHTML += `
+          <div class="member-card" onclick="viewDetail('${m.name}')">
+            <div class="photo-box">
+              <img src="${getDirectImgLink(m.image)}" class="member-photo" onerror="this.src='https://via.placeholder.com/400x400?text=BLM48'">
+            </div>
+            <div class="member-name-label">${m.name}</div>
+            <span class="team-label">${displayTeam}</span>
+            <div class="main-birthday-info">
+              <i class="fas fa-birthday-cake"></i>
+              <span>${m.birthday || '-'}</span>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function viewDetail(nickname) {
+      const m = membersData.find(item => item.name === nickname);
+      if(!m) return;
+      document.getElementById('m-img').src = getDirectImgLink(m.image);
+      document.getElementById('m-name-th').innerText = m.fullNameTH || m.name;
+      document.getElementById('m-name-en').innerText = m.fullNameEN || '';
+      
+      const infoList = [
+        { label: 'Generation', value: m.generation },
+        { label: 'Team', value: m.team },
+        { label: 'Birthday', value: m.birthday },
+        { label: 'Oshimark', value: m.oshiMark },
+        { label: 'Province', value: m.province },
+        { label: 'Blood Type', value: m.bloodType },
+        { label: 'MBTI', value: m.mbti },
+        { label: 'Like', value: m.like },
+        { label: 'Hobby', value: m.hobby }
+      ];
+
+      document.getElementById('m-info-table').innerHTML = infoList.map(item => `
+        <div class="info-row">
+          <div class="info-label">${item.label}</div>
+          <div class="info-value">${item.value || '-'}</div>
+        </div>
+      `).join('');
+
+      let sHTML = '';
+      if(m.instagram && m.instagram !== '-') sHTML += `<a href="${m.instagram}" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>`;
+      if(m.tiktok && m.tiktok !== '-') sHTML += `<a href="${m.tiktok}" class="social-link" target="_blank"><i class="fab fa-tiktok"></i></a>`;
+      if(m.twitter && m.twitter !== '-') sHTML += `<a href="${m.twitter}" class="social-link" target="_blank"><i class="fab fa-x-twitter"></i></a>`;
+      document.getElementById('m-social').innerHTML = sHTML;
+
+      document.getElementById('main-view').style.display = 'none';
+      document.getElementById('detail-view').style.display = 'block';
+      window.scrollTo(0,0);
+    }
+
+    function goBack() {
+      document.getElementById('detail-view').style.display = 'none';
+      document.getElementById('main-view').style.display = 'block';
+      window.scrollTo(0,0);
+    }
+
+    function createPetal() {
+      const p = document.createElement('i');
+      p.className = 'fas fa-clover petal';
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.fontSize = Math.random() * 15 + 10 + 'px';
+      p.style.animationDuration = (Math.random() * 5 + 6) + 's';
+      p.style.opacity = Math.random() * 0.6 + 0.3;
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 10000);
+    }
+    setInterval(createPetal, 300);
+    init();
+
+        function toggleMenu() {
+        document.body.classList.toggle('menu-active');
+    }
+    // ฟังก์ชันสั่งปิดหน้า Landing
+    function exitLanding() {
+      document.getElementById('landing-overlay').classList.add('fade-out');
+    }
+
+  </script>
+</body>
+</html>
