@@ -478,75 +478,86 @@
     @media (max-width: 600px) {
       .video-grid { grid-template-columns: 1fr; }
     }
-    /* --- New Header & Side Menu --- */
-    .main-header {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%;
-        height: 70px;
-        display: flex;
-        justify-content: flex-end; /* ดันปุ่มไปขวาสุด */
-        align-items: center;
-        padding: 0 30px;
-        z-index: 1000; /* ให้อยู่เหนือทุกอย่าง */
-        background: transparent;
-    }
+   /* --- Menu System (Updated Colors) --- */
+.main-header {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 30px;
+    z-index: 1000;
+    box-sizing: border-box;
+}
 
-    .menu-trigger {
-        background: none; border: none; cursor: pointer;
-        display: flex; flex-direction: column; gap: 6px;
-    }
+/* ปุ่มเมนู (Hamburger) เปลี่ยนเป็นสีดำ */
+.menu-trigger {
+    background: rgba(0, 0, 0, 0.8); /* พื้นหลังปุ่มสีดำโปร่งแสง */
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
 
-    .menu-trigger span {
-        display: block; width: 28px; height: 1.5px;
-        background-color: #333; transition: 0.3s;
-    }
+.menu-trigger span {
+    display: block; 
+    width: 28px; 
+    height: 2px;
+    background-color: #fddc5a; /* ขีดในปุ่มใช้สีเหลืองเพื่อตัดกับพื้นหลังดำ */
+    transition: 0.3s;
+}
 
-    /* Backdrop พื้นหลังตอนเปิดเมนู */
-    .menu-backdrop {
-        position: fixed; top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0,0,0,0.2);
-        opacity: 0; visibility: hidden;
-        transition: 0.4s; z-index: 2000;
-        backdrop-filter: blur(2px);
-    }
+/* Side Menu เปลี่ยนเป็นสีเหลือง ตัวอักษรดำ */
+.side-menu {
+    position: fixed; 
+    top: 0; 
+    right: -100%;
+    width: 80%; 
+    max-width: 400px; 
+    height: 100%;
+    background-color: #fddc5a; /* เปลี่ยนเป็นสีเหลืองตามรูปตัวอย่าง */
+    z-index: 2001;
+    transition: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+    padding: 60px 40px;
+    display: flex; 
+    flex-direction: column;
+}
 
-    /* ตัวเมนูเฉียงสีชมพู */
-    .side-menu {
-        position: fixed; top: 0; right: -100%; /* ซ่อนไว้ขวาสุด */
-        width: 80%; max-width: 400px; height: 100%;
-        background-color: #ff8da1; /* สีชมพูแบบ =LOVE */
-        z-index: 2001;
-        transition: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-        /* ตัดทรงเฉียง */
-        clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
-        padding: 60px 40px;
-        display: flex; flex-direction: column;
-    }
+/* ปุ่มกากบาทปิดเมนู */
+.close-menu-btn {
+    align-self: flex-end;
+    background: none; 
+    border: none;
+    color: #000; /* เปลี่ยนเป็นสีดำ */
+    font-size: 30px; 
+    cursor: pointer;
+    margin-bottom: 30px;
+}
 
-    /* เมื่อเมนูทำงาน */
-    .menu-active .menu-backdrop { opacity: 1; visibility: visible; }
-    .menu-active .side-menu { right: 0; }
+/* รายการเมนู */
+.side-nav-links li { 
+    margin: 20px 0; 
+    text-align: right; 
+}
 
-    .close-menu-btn {
-        align-self: flex-end;
-        background: none; border: none;
-        color: white; font-size: 30px; cursor: pointer;
-        margin-bottom: 30px;
-    }
+.side-nav-links a {
+    text-decoration: none; 
+    color: #000; /* ตัวอักษรสีดำ */
+    font-size: 18px; 
+    font-weight: 500;
+    letter-spacing: 2px;
+    transition: 0.3s;
+}
 
-    .side-nav-links { list-style: none; padding: 0; margin: 0; }
-    .side-nav-links li { margin: 20px 0; text-align: right; }
-    .side-nav-links a {
-        text-decoration: none; color: white;
-        font-size: 18px; font-weight: 500;
-        letter-spacing: 2px; transition: 0.3s;
-    }
-    .side-nav-links a:hover { color: #fff9e6; padding-right: 10px; }
-
-    /* ปรับปุ่มเมนูให้เห็นชัดขึ้นบนรูป Banner */
-    .menu-trigger span { background-color: #ffffff; box-shadow: 0 0 5px rgba(0,0,0,0.2); }
+.side-nav-links a:hover {
+    opacity: 0.6; /* เอฟเฟกต์เวลาเอาเมาส์ไปชี้ */
+}
     
   </style>
 </head>
