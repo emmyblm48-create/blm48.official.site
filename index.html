@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BLM48 Official</title>
+  <title>BLM48 Official Home</title>
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -479,24 +479,28 @@
       .video-grid { grid-template-columns: 1fr; }
     }
     /* --- New Header & Side Menu --- */
-       .menu-trigger {
-    background: none; /* เอาพื้นหลังสีชมพู/ดำออก ให้เหลือแค่ตัวเส้น */
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    gap: 6px; /* ระยะห่างระหว่างเส้น */
-    z-index: 1001;
-}
+    .main-header {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%;
+        height: 70px;
+        display: flex;
+        justify-content: flex-end; /* ดันปุ่มไปขวาสุด */
+        align-items: center;
+        padding: 0 30px;
+        z-index: 1000; /* ให้อยู่เหนือทุกอย่าง */
+        background: transparent;
+    }
+
+    .menu-trigger {
+        background: none; border: none; cursor: pointer;
+        display: flex; flex-direction: column; gap: 6px;
+    }
 
     .menu-trigger span {
-    display: block;
-    width: 30px;      /* ความยาวของเส้น */
-    height: 2px;      /* ความหนาของเส้น */
-    background-color: #000000; /* เปลี่ยนเป็นสีดำสนิท */
-    transition: 0.3s;
-}
+        display: block; width: 28px; height: 1.5px;
+        background-color: #333; transition: 0.3s;
+    }
 
     /* Backdrop พื้นหลังตอนเปิดเมนู */
     .menu-backdrop {
@@ -510,81 +514,113 @@
 
     /* ตัวเมนูเฉียงสีชมพู */
     .side-menu {
-    position: fixed; 
-    top: 0; 
-    right: -100%;
-    width: 80%; 
-    max-width: 400px; 
-    height: 100%;
-    background-color: #fddc5a; /* เปลี่ยนเป็นสีเหลืองตามรูปตัวอย่าง */
-    z-index: 2001;
-    transition: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-    clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
-    padding: 60px 40px;
-    display: flex; 
-    flex-direction: column;
-}
+        position: fixed; top: 0; right: -100%; /* ซ่อนไว้ขวาสุด */
+        width: 80%; max-width: 400px; height: 100%;
+        background-color: #ff8da1; /* สีชมพูแบบ =LOVE */
+        z-index: 2001;
+        transition: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        /* ตัดทรงเฉียง */
+        clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+        padding: 60px 40px;
+        display: flex; flex-direction: column;
+    }
 
     /* เมื่อเมนูทำงาน */
     .menu-active .menu-backdrop { opacity: 1; visibility: visible; }
     .menu-active .side-menu { right: 0; }
 
     .close-menu-btn {
-    align-self: flex-end;
-    background: none; 
-    border: none;
-    color: #000; /* เปลี่ยนเป็นสีดำ */
-    font-size: 30px; 
-    cursor: pointer;
-    margin-bottom: 30px;
-}
+        align-self: flex-end;
+        background: none; border: none;
+        color: white; font-size: 30px; cursor: pointer;
+        margin-bottom: 30px;
+    }
 
     .side-nav-links { list-style: none; padding: 0; margin: 0; }
     .side-nav-links li { margin: 20px 0; text-align: right; }
     .side-nav-links a {
-    text-decoration: none; 
-    color: #000; /* ตัวอักษรสีดำ */
-    font-size: 18px; 
-    font-weight: 500;
-    letter-spacing: 2px;
-    transition: 0.3s;
-}
-    .side-nav-links a:hover {
-    opacity: 0.6; /* เอฟเฟกต์เวลาเอาเมาส์ไปชี้ */
-}
+        text-decoration: none; color: white;
+        font-size: 18px; font-weight: 500;
+        letter-spacing: 2px; transition: 0.3s;
+    }
+    .side-nav-links a:hover { color: #fff9e6; padding-right: 10px; }
 
     /* ปรับปุ่มเมนูให้เห็นชัดขึ้นบนรูป Banner */
     .menu-trigger span { background-color: #ffffff; box-shadow: 0 0 5px rgba(0,0,0,0.2); }
     
+    .idol-group-container {
+  text-align: center;
+  padding: 20px;
+  font-family: 'Inter', sans-serif; /* หรือฟอนต์ที่ดูสะอาดตา */
+}
+
+.idol-group-container h3 {
+  color: #ff99cc; /* สีชมพูอ่อนแบบ Cute & Dreamy */
+  margin-bottom: 20px;
+}
+    
+    .idol-group-title {
+  /* ใช้ฟอนต์แนวเรียบหรูสไตล์ Minimalist */
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; 
+  
+  /* ปรับความหนาให้บางลงเพื่อให้เหมือนตัวอย่าง YouTube */
+  font-weight: 300; 
+  
+  /* เพิ่มระยะห่างระหว่างตัวอักษร (หัวใจสำคัญของสไตล์นี้) */
+  letter-spacing: 0.15em; 
+  
+  /* ปรับขนาดให้พอเหมาะ */
+  font-size: 1.2rem;
+  
+  /* ใช้สีเทาเข้มเพื่อให้ดูพรีเมียม ไม่แข็งจนเกินไป */
+  color: #555; 
+  
+  text-align: center; /* ปรับเป็น center ได้ตามความชอบครับ */
+  margin-bottom: 25px;
+  text-transform: none; /* YouTube ในรูปใช้ตัวพิมพ์เล็ก-ใหญ่ตามปกติ */
+}
+.idol-group-container {
+  width: 100%;
+  max-width: 1200px; /* กำหนดความกว้างสูงสุดเพื่อให้ดู Aesthetic ไม่บานเกินไป */
+  margin: 0 auto;
+  padding: 50px 0;
+  text-align: center;
+}
+
+.logo-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; /* กระจายโลโก้ให้เต็มความกว้างพอดี */
+  align-items: center;
+  gap: 5px; /* ระยะห่างเล็กน้อยเพื่อให้ดูเป็นระเบียบ */
+  width: 100%;
+  overflow: hidden; /* ป้องกันไม่ให้มีแถบเลื่อนโผล่มา */
+}
+
+.logo-grid a {
+  /* หัวใจสำคัญ: แบ่งสัดส่วนให้โลโก้ทุกอันกว้างเท่าๆ กัน */
+  flex: 1; 
+  display: flex;
+  justify-content: center;
+}
+
+.logo-grid img {
+  /* ทำให้โลโก้ขยายเต็มพื้นที่ของช่องตัวเอง แต่ไม่ล้น */
+  width: 100%;
+  height: auto;
+  max-width: 80px; /* ปรับขนาดความใหญ่ของโลโก้แต่ละอันตามความชอบ */
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.05)); /* เพิ่มมิติเบาๆ */
+}
+
+.logo-grid img:hover {
+  transform: scale(1.1);
+  filter: brightness(1.1);
+}
+    
   </style>
 </head>
 <body>
-  <!-- Header ที่มีปุ่ม Hamburger -->
-    <header class="main-header">
-        <button class="menu-trigger" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-        </button>
-    </header>
-
-    <!-- พื้นที่ Backdrop สำหรับกดปิดข้างนอก -->
-    <div class="menu-backdrop" id="menuBackdrop" onclick="toggleMenu()"></div>
-
-    <!-- แถบเมนูสีชมพู -->
-    <div class="side-menu" id="sideMenu">
-        <button class="close-menu-btn" onclick="toggleMenu()">✕</button>
-        <ul class="side-nav-links">
-            <li><a href="index.html">HOME</a></li>
-            <li><a href="news.html">NEWS</a></li>
-            <li><a href="schedule.html">SCHEDULE</a></li>
-            <li><a href="profile.html">PROFILE</a></li>
-            <li><a href="discography.html">DISCOGRAPHY</a></li>
-            <li><a href="about.html">ABOUT</a></li>
-          <li><a href="theater.html">THEATER</a></li>
-          <li><a href="concert.html">CONCERT</a></li>
-          <li><a href="https://blm48-membership.vercel.app/">MEMBERSHIP</a></li>
-        </ul>
-    </div>
   <div id="landing-overlay">
     <div class="container">
       <div class="logo-text">BLM48</div>
@@ -638,6 +674,20 @@
   <div class="slider-outer">
     <div class="slider-container">
       <div class="slides" id="slideTrack">
+        
+         <div class="slide">
+          <a href="" target="_parent">
+            <img src="https://lh3.googleusercontent.com/d/1DVIvIJCErbS-6sOaRaxwNECmI_JyoL6Z=s1000" alt="NatsuExpo2026">  
+          </a>
+        </div>
+        
+        <div class="slide">
+          <a href="https://blm48-membership.vercel.app/" target="_parent">
+            <img src="https://lh3.googleusercontent.com/d/18uYCE0CJ6nuTdyYN7MUHO7EwIXGyq7o2=s1000" alt="WebApp">  
+          </a>
+        </div>
+        
+        
         <div class="slide active">
           <a href="https://sites.google.com/view/blm48/theater?authuser=0" target="_parent">
             <img src="https://lh3.googleusercontent.com/d/1LZI0qhipMuvEm6mbRIwP2y895OzHviQr=s1000" alt="Theater">
@@ -726,6 +776,18 @@
           <div class="news-title">BLM48 Concert This Letter Says "Marry Me"</div>
         </div>
       </a>
+      
+      <a href="https://www.instagram.com/p/DYHYTQECesS/" class="schedule-item">
+        <div class="date-box">
+          <span class="date-main">05.17</span>
+          <span class="date-sub">THU.2026</span>
+        </div>
+        <div class="event-info">
+          <div class="tag-row"><span class="tag-box status-live">LIVE</span><span class="news-new" style="margin-left:5px">NEW</span></div>
+          <div class="news-title">BLM48 x NTL48 Natsu Expo 2026</div>
+        </div>
+      </a>
+      
       <a href="https://www.youtube.com/live/VkRC5AJcxO0" class="schedule-item">
         <div class="date-box">
           <span class="date-main">04.25</span>
@@ -734,16 +796,6 @@
         <div class="event-info">
           <div class="tag-row"><span class="tag-box status-live">LIVE</span><span class="news-new" style="margin-left:5px">NEW</span></div>
           <div class="news-title">BLM48 10th Single "Sustainable" First Performance</div>
-        </div>
-      </a>
-            <a href="https://www.youtube.com/live/0bPwvSigE8s?si=RPZ9RAnOtl_UlF8b" class="schedule-item">
-        <div class="date-box">
-          <span class="date-main">04.11</span>
-          <span class="date-sub">SAT.2026</span>
-        </div>
-        <div class="event-info">
-          <div class="tag-row"><span class="tag-box status-live">LIVE</span><span class="news-new" style="margin-left:5px">NEW</span></div>
-          <div class="news-title">ประกวดหนูน้อยสงแกรนด์ Universe ประจำปี ๒๕๖๙</div>
         </div>
       </a>
     </div>
@@ -783,6 +835,28 @@
         </div>
       </a>
     </div>
+    
+    <div class="idol-group-container">
+  <h3 class="idol-group-title">AKB48 Group</h3>
+  <div class="logo-grid">
+    <!-- วงในญี่ปุ่น -->
+    <a href="https://www.akb48.co.jp/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_akb48.png?ver=53" alt="AKB48"></a>
+    <a href="https://www.ske48.co.jp/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_ske48.png?ver=53" alt="SKE48"></a>
+    <a href="https://nmb48.com/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_nmb48.png?ver=53" alt="NMB48"></a>
+    <a href="http://www.hkt48.jp/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_hkt48.png?ver=53" alt="HKT48"></a>
+    <a href="https://ngt48.jp/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_ngt48.png?ver=53" alt="NGT48"></a>
+    <a href="https://www.stu48.com/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_stu48.png?ver=53" alt="STU48"></a>
+    
+    <!-- วงต่างประเทศและในไทย -->
+    <a href="https://www.jkt48.com/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_jkt48.png?ver=53" alt="JKT48"></a>
+    <a href="https://www.bnk48.com/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_bnk48.png?ver=53" alt="BNK48"></a>
+    <a href="https://mnl48.ph/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_mnl48.png?ver=53" alt="MNL48"></a>
+    <a href="https://weibo.com/akb48teamsh" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_tsh48.png?ver=53" alt="TSH48"></a>
+    <a href="https://www.tpe48.tw/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_tpe48.png" alt="TPE48"></a>
+    <a href="https://www.cgm48official.com/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_cgm48.png?ver=53" alt="CGM48"></a>
+    <a href="https://klp48.my/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_klp48.png?ver=53" alt="KLP48"></a>
+  </div>
+</div>
 
   <footer class="main-footer">
     <div class="footer-blossom">
@@ -801,10 +875,6 @@
         <a href="https://x.com/BLM48_OFFICIAL" class="icon-btn">
           <svg class="x-icon" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         </a>
-      </div>
-
-      <div class="logo-only">
-        <img src="https://lh3.googleusercontent.com/d/1MFJqEvwB_nSMkCjhwv1999KtUMe_L8NU=s1000" alt="BLM48 Logo">
       </div>
 
       <div class="copyright">
