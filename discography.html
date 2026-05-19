@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="th">
+  <header class="site-header">
+    <h1 class="header-title">DISCOGRAPHY</h1>
+    <div class="header-line"></div>
+    <p class="header-subtitle">=</p>
+</header>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,91 +15,84 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
 
     <style>
-      .site-header {
-        text-align: center;
-        padding: clamp(30px, 10vw, 60px) 20px 20px 20px;
-        position: relative;
-        z-index: 10;
-    }
+      /* --- Header Style --- */
+        .site-header {
+            text-align: center;
+            padding: 60px 20px 20px 20px;
+            position: relative;
+            z-index: 10;
+        }
 
-    .header-title {
-        font-size: clamp(28px, 8vw, 42px);
-        font-weight: 700;
-        color: #444;
-        margin: 0;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-    }
+        .header-title {
+            font-size: 42px; 
+            font-weight: 700;
+            color: #444;
+            margin: 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
 
-    .header-subtitle {
-        font-size: clamp(12px, 3vw, 16px);
-        font-weight: 500;
-        color: #e2a0b3;
-        margin-top: 10px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-    }
+        .header-subtitle {
+            font-size: 16px;
+            font-weight: 500;
+            color: #e2a0b3; 
+            margin-top: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
 
-    .header-line {
-        width: 50px;
-        height: 2px;
-        background-color: #fddc5a;
-        margin: 20px auto;
-    }
+        .header-line {
+            width: 50px;
+            height: 2px;
+            background-color: #fddc5a; 
+            margin: 20px auto;
+        }
       
-     /* --- Gallery Section --- */
-    .gallery-container {
+      .gallery-container {
         display: flex;
-        flex-wrap: wrap; /* ให้รูปลงมาบรรทัดใหม่เมื่อจอแคบ */
-        gap: 15px;
+        gap: 20px; /* ระยะห่างระหว่างรูป */
         justify-content: center;
         padding: 20px;
     }
 
     .image-window {
-        width: 300px;
-        max-width: 100%; /* ป้องกันรูปกว้างเกินจอ */
+        /* กำหนดขนาดหน้าต่างที่ต้องการให้เท่ากันตรงนี้ */
+        width: 300px; 
         height: 400px;
-        overflow: hidden;
-        border-radius: 15px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    }
-      
-      /* ปรับขนาดรูป Gallery ในมือถือให้เล็กลงหน่อยเพื่อให้เห็นครบ */
-    @media (max-width: 600px) {
-        .image-window {
-            width: 100%; /* เต็มจอในมือถือ */
-            height: 350px;
-        }
+        
+        overflow: hidden; /* ตัดส่วนที่เกินหน้าต่างออก */
+        border-radius: 15px; /* เพิ่มความโค้งมนแบบ Cute & Cozy */
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* เงาบางๆ แบบ Minimal */
     }
 
     .image-window img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: cover; /* หัวใจสำคัญ: ทำให้รูปเต็มหน้าต่างโดยไม่เสียสัดส่วน */
         display: block;
         transition: transform 0.3s ease;
     }
-      
+
     /* แถม: เอฟเฟกต์ตอนเอาเมาส์วางให้ดูมีลูกเล่น */
     .image-window:hover img {
         transform: scale(1.05);
     }
         /* --- CSS ส่วนพื้นฐานจาก style.css --- */
-       body {
-        font-family: 'Quicksand', sans-serif;
-        background-color: #ffffff;
-        margin: 0;
-        padding: 10px; /* ลด padding ลงในมือถือ */
-        color: #333;
-        overflow-x: hidden;
-    }
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 20px; /* ลด padding จาก 50px เพื่อให้เหมาะกับ Google Sites */
+            color: #333;
+            -webkit-font-smoothing: antialiased;
+        }
 
-    .blm48-container {
-        max-width: 1100px;
-        margin: 0 auto;
-        width: 100%;
-    }
+        .blm48-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
 
         /* --- ระบบ Filter --- */
         .disco-filter {
@@ -244,66 +242,6 @@
             opacity: 0;
             animation: dreamyFall infinite linear;
         }
-      
-      /* ปรับแต่งสำหรับมือถือจอเล็กมาก */
-    @media (max-width: 380px) {
-        .disco-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-    }
-
-    .cover-box {
-        width: 100%;
-        aspect-ratio: 1 / 1;
-        overflow: hidden;
-        border-radius: 12px;
-    }
-
-    /* ปรับปรุง Overlay ในมือถือ (ให้เห็นชื่อชัดขึ้นโดยไม่ต้อง Hover) */
-    @media (hover: none) {
-        .overlay { opacity: 1; background: rgba(0,0,0,0.1); }
-        .overlay span { display: none; } /* ซ่อนปุ่ม "View" ในมือถือเพื่อไม่ให้บังรูป */
-    }
-
-    /* --- Footer --- */
-    .main-footer {
-        margin-top: 60px;
-        padding: 40px 20px;
-        border-top: 1px solid #f5f5f5;
-        text-align: center;
-    }
-
-    .social-icons {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        margin-bottom: 25px;
-    }
-
-    .icon-btn {
-        width: 40px;
-        height: 40px;
-        background-color: #fddc5a;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-decoration: none;
-        color: #000;
-        transition: 0.3s;
-    }
-
-    .copyright {
-        font-size: 10px;
-        line-height: 1.6;
-    }
-
-    /* --- Performance: ซ่อนกลีบดอกไม้บางส่วนในมือถือ --- */
-    @media (max-width: 768px) {
-        .p4, .p6, .p8, .p10 { display: none; }
-    }
-      
 
         @keyframes dreamyFall {
             0% { top: -10%; opacity: 0; transform: translateX(0) rotate(0deg); }
@@ -382,123 +320,9 @@
             letter-spacing: 1px;
             text-transform: uppercase;
         }
-
-       /* --- New Header & Side Menu --- */
-   .main-header {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%;
-    height: 70px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 0 30px;
-    z-index: 1000;
-    box-sizing: border-box;
-}
-
-    .menu-trigger {
-        background: none; border: none; cursor: pointer;
-        display: flex; flex-direction: column; gap: 6px;
-    }
-
-    .menu-trigger span {
-    display: block; 
-    width: 28px; 
-    height: 2px;
-    background-color: #000000;
-    transition: 0.3s;
-}
-
-    /* Backdrop พื้นหลังตอนเปิดเมนู */
-    .menu-backdrop {
-        position: fixed; top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0,0,0,0.2);
-        opacity: 0; visibility: hidden;
-        transition: 0.4s; z-index: 2000;
-        backdrop-filter: blur(2px);
-    }
-
-    /* ตัวเมนูเฉียงสีชมพู */
-    .side-menu {
-    position: fixed; 
-    top: 0; 
-    right: -100%;
-    width: 80%; 
-    max-width: 400px; 
-    height: 100%;
-    background-color: #fddc5a; /* เปลี่ยนเป็นสีเหลืองตามรูปตัวอย่าง */
-    z-index: 2001;
-    transition: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-    clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
-    padding: 60px 40px;
-    display: flex; 
-    flex-direction: column;
-}
-
-    /* เมื่อเมนูทำงาน */
-    .menu-active .menu-backdrop { opacity: 1; visibility: visible; }
-    .menu-active .side-menu { right: 0; }
-
-    .close-menu-btn {
-    align-self: flex-end;
-    background: none; 
-    border: none;
-    color: #000; /* เปลี่ยนเป็นสีดำ */
-    font-size: 30px; 
-    cursor: pointer;
-    margin-bottom: 30px;
-}
-
-    .side-nav-links { list-style: none; padding: 0; margin: 0; }
-    .side-nav-links li { margin: 20px 0; text-align: right; }
-    .side-nav-links a {
-    text-decoration: none; 
-    color: #000; /* ตัวอักษรสีดำ */
-    font-size: 18px; 
-    font-weight: 500;
-    letter-spacing: 2px;
-    transition: 0.3s;
-}
-    .side-nav-links a:hover {
-    opacity: 0.6; /* เอฟเฟกต์เวลาเอาเมาส์ไปชี้ */
-}
-
-    /* ปรับปุ่มเมนูให้เห็นชัดขึ้นบนรูป Banner */
-    .menu-trigger span { background-color: #ffffff; box-shadow: 0 0 5px rgba(0,0,0,0.2); }
+    </style>
 </head>
 <body>
- <header class="site-header">
-    <h1 class="header-title">DISCOGRAPHY</h1>
-    <div class="header-line"></div>
-    <p class="header-subtitle">=</p>
-</header>
- <header class="main-header">
-        <button class="menu-trigger" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-        </button>
-    </header>
-
-    <!-- พื้นที่ Backdrop สำหรับกดปิดข้างนอก -->
-    <div class="menu-backdrop" id="menuBackdrop" onclick="toggleMenu()"></div>
-
-    <!-- แถบเมนูสีชมพู -->
-    <div class="side-menu" id="sideMenu">
-        <button class="close-menu-btn" onclick="toggleMenu()">✕</button>
-        <ul class="side-nav-links">
-            <li><a href="index.html">HOME</a></li>
-            <li><a href="news.html">NEWS</a></li>
-            <li><a href="schedule.html">SCHEDULE</a></li>
-            <li><a href="profile.html">PROFILE</a></li>
-            <li><a href="discography.html">DISCOGRAPHY</a></li>
-            <li><a href="about.html">ABOUT</a></li>
-          <li><a href="theater.html">THEATER</a></li>
-          <li><a href="concert.html">CONCERT</a></li>
-          <li><a href="https://blm48-membership.vercel.app/">MEMBERSHIP</a></li>
-        </ul>
-    </div>
 
     <div class="blossom-background">
         <div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div>
@@ -982,14 +806,4 @@
     </div>
   </div>
 </body>
-<script>
-    
-    function toggleMenu() {
-        document.body.classList.toggle('menu-active');
-    }
-    // ฟังก์ชันสั่งปิดหน้า Landing
-    function exitLanding() {
-      document.getElementById('landing-overlay').classList.add('fade-out');
-    }
-</script> 
 </html>
