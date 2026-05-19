@@ -119,123 +119,290 @@
             .text-content { text-align: center; }
             .side-menu { width: 90%; clip-path: none; } /* มือถือเล็กมากไม่ต้องเฉียงก็ได้จะได้ไม่อึดอัด */
         }
-           /* --- New Header & Side Menu --- */
-   .main-header {
+/* --- ปรับแต่งส่วน Header ด้านบนสุดใหม่ --- */
+.main-header {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%;
-    height: 70px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 0 30px;
-    z-index: 1000;
-    box-sizing: border-box;
-}
-
-    .menu-trigger {
-    background: none; /* เอาพื้นหลังสีชมพู/ดำออก ให้เหลือแค่ตัวเส้น */
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    gap: 6px; /* ระยะห่างระหว่างเส้น */
-    z-index: 1001;
-}
-
-    .menu-trigger span {
-    display: block;
-    width: 30px;      /* ความยาวของเส้น */
-    height: 2px;      /* ความหนาของเส้น */
-    background-color: #000000; /* เปลี่ยนเป็นสีดำสนิท */
-    transition: 0.3s;
-}
-
-    /* Backdrop พื้นหลังตอนเปิดเมนู */
-    .menu-backdrop {
-        position: fixed; top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0,0,0,0.2);
-        opacity: 0; visibility: hidden;
-        transition: 0.4s; z-index: 2000;
-        backdrop-filter: blur(2px);
-    }
-
-    /* ตัวเมนูเฉียงสีชมพู */
-    .side-menu {
-    position: fixed; 
     top: 0; 
-    right: -100%;
-    width: 80%; 
-    max-width: 400px; 
-    height: 100%;
-    background-color: #fddc5a; /* เปลี่ยนเป็นสีเหลืองตามรูปตัวอย่าง */
-    z-index: 2001;
-    transition: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-    clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
-    padding: 60px 40px;
+    left: 0; 
+    width: 100%; 
+    height: 65px;
+    
+    /* เปลี่ยนจากฝ้าขาว เป็นฝ้าสีเหลืองพาสเทลโปร่งแสง (ใส่น้ำหนักความโปร่ง 0.4 หรือ 40%) */
+    background: rgba(253, 220, 90, 0.4); 
+    
+    /* เอฟเฟกต์เบลอฉากหลังเป็นกระจกฝ้า (เปิดไว้เพื่อให้รูปภาพด้านหลังเบลอสวยๆ) */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    
+    /* เปลี่ยนเส้นขอบล่างเป็นสีชมพูวงแบบบางๆ ให้ตัดกันอย่างน่ารัก */
+    border-bottom: 2px solid rgba(255, 141, 161, 0.4); 
+    
+    /* เพิ่มเงาฟุ้งๆ เพื่อให้มิติด้านบนดูลอยออกมา */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    
     display: flex; 
-    flex-direction: column;
+    align-items: center;
+    z-index: 1000;
+    padding: 0 30px;
 }
-
-    /* เมื่อเมนูทำงาน */
-    .menu-active .menu-backdrop { opacity: 1; visibility: visible; }
-    .menu-active .side-menu { right: 0; }
-
-    .close-menu-btn {
-    align-self: flex-end;
-    background: none; 
-    border: none;
-    color: #000; /* เปลี่ยนเป็นสีดำ */
-    font-size: 30px; 
-    cursor: pointer;
-    margin-bottom: 30px;
+.header-container-blm {
+    width: 100%; display: flex; justify-content: space-between; align-items: center;
 }
-
-    .side-nav-links { list-style: none; padding: 0; margin: 0; }
-    .side-nav-links li { margin: 20px 0; text-align: right; }
-    .side-nav-links a {
-    text-decoration: none; 
-    color: #000; /* ตัวอักษรสีดำ */
-    font-size: 18px; 
+.blm-nav-logo {
+    font-family: 'Quicksand', sans-serif; 
+    font-size: 26px; 
     font-weight: 500;
-    letter-spacing: 2px;
-    transition: 0.3s;
+    color: #ff8da1; /* เปลี่ยนโลโก้เป็นสีชมพูวง เพื่อให้ตัดกับพื้นหลังฝ้าสีเหลืองอย่างชัดเจน */
+    text-decoration: none; 
+    letter-spacing: 3px;
+    text-shadow: none;
 }
-    .side-nav-links a:hover {
-    opacity: 0.6; /* เอฟเฟกต์เวลาเอาเมาส์ไปชี้ */
+.header-right-tools { display: flex; align-items: center; gap: 20px; }
+.blm-top-login-btn {
+    background-color: #ff8da1; color: #ffffff; text-decoration: none;
+    font-size: 11px; font-weight: bold; padding: 7px 16px; border-radius: 20px;
+    letter-spacing: 1px; transition: 0.3s;
+}
+.blm-top-login-btn:hover { background-color: #fddc5a; color: #333; }
+.blm-top-lang { 
+    color: #555555; /* เปลี่ยนเป็นสีเทาเข้มเพื่อให้ไม่กลืนกับสีเหลือง */
+    font-size: 13px; 
+    font-weight: 600; 
 }
 
-    /* ปรับปุ่มเมนูให้เห็นชัดขึ้นบนรูป Banner */
-    .menu-trigger span { background-color: #ffffff; box-shadow: 0 0 5px rgba(0,0,0,0.2); }
+/* ปุ่มสามขีดสำหรับเปิดเมนูสไตล์มินิมอล */
+.menu-trigger-stu { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; padding: 5px; }
+.menu-trigger-stu span { 
+    display: block; 
+    width: 24px; 
+    height: 2px; 
+    background-color: #ff8da1; /* เปลี่ยนเป็นสีชมพู */
+    transition: 0.3s; 
+}
+
+.hero-banner {
+    margin-top: 65px; 
+}
+
+/* --- หน้าต่างเมนูสไลด์เต็มจอ (Full Screen Overlay) --- */
+.full-screen-menu-overlay {
+    position: fixed;
+    top: -100%; /* ซ่อนไว้ด้านบน */
+    left: 0; width: 100%; height: 100%;
+    background-color: #ffffff;
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    overflow-y: auto;
+}
+
+/* เมื่อสั่งทำงานผ่านคลาส active */
+body.menu-active .full-screen-menu-overlay {
+    top: 0; opacity: 1;
+}
+
+/* ปุ่มปิดเมนูกากบาท */
+.close-overlay-btn {
+    position: absolute; top: 15px; right: 30px;
+    background: none; border: none;
+    font-size: 42px; color: #ff8da1;
+    cursor: pointer; z-index: 10005;
+    transition: 0.2s;
+}
+.close-overlay-btn:hover { transform: rotate(90deg); color: #fddc5a; }
+
+/* โครงสร้างตัวจัดการ Grid แบ่งหน้าจอสองฝั่ง */
+.stu-grid-wrapper {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    width: 100%; min-height: 100vh;
+}
+
+/* === ตกแต่งฝั่งซ้าย (รายการเมนูหลัก) === */
+.stu-left-content {
+    padding: 80px 60px 40px 80px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    background-color: #ffffff;
+}
+.blm-brand-title {
+    font-size: 48px; font-weight: 300;
+    color: #ff8da1; letter-spacing: 5px;
+    margin-bottom: 40px;
+}
+
+/* ตารางเมนูกระจายแบบคู่ 2 คอลัมน์สไตล์ญี่ปุ่น */
+.blm-menu-grid-links {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 35px 40px;
+}
+.blm-menu-grid-links a {
+    text-decoration: none;
+    color: #555555; /* สีเทาเข้มพรีเมียมดูสบายตา */
+    font-size: 20px; font-weight: 600;
+    letter-spacing: 1px; display: inline-block;
+    transition: 0.2s ease;
+}
+.blm-menu-grid-links a:hover {
+    color: #ff8da1; transform: translateX(6px);
+}
+
+.blm-menu-socials { display: flex; gap: 22px; margin-top: 40px; }
+.blm-menu-socials a { color: #ff8da1; font-size: 22px; transition: 0.2s; }
+.blm-menu-socials a:hover { color: #fddc5a; transform: scale(1.1); }
+
+/* === ตกแต่งฝั่งขวา (Fan Club และ คลื่นดีไซน์ STU48 Style) === */
+.stu-right-content {
+    background-color: #fff9e6; /* ใช้สีเหลืองอ่อนของหน้า Landing เป็นพื้นหลังฝั่งขวา */
+    position: relative;
+    display: flex; justify-content: center; align-items: center;
+    padding: 40px;
+}
+
+/* เส้นคลื่นแนวตั้งกั้นแบ่งฝั่งแบบในรูปตัวอย่างเว็บ STU48 */
+.wave-divider {
+    position: absolute; left: -15px; top: 0;
+    width: 30px; height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 100' preserveAspectRatio='none'%3E%3Cpath d='M0,0 C10,20 10,30 0,50 C10,70 10,80 0,100 L20,100 L20,0 Z' fill='%23fff9e6'/%3E%3Cpath d='M0,0 C10,20 10,30 0,50 C10,70 10,80 0,100' fill='none' stroke='%23fddc5a' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    z-index: 10;
+}
+
+/* กล่องการ์ดแฟนคลับ ปรับเป็นสีชมพูหลักของวง */
+.blm-fc-card-box {
+    background-color: #ff8da1;
+    width: 100%; max-width: 380px;
+    padding: 55px 35px;
+    border-radius: 30px; /* ดีไซน์มนโค้งสวยงาม */
+    text-align: center; color: #ffffff;
+    box-shadow: 0 15px 35px rgba(255, 141, 161, 0.35);
+    position: relative; z-index: 12;
+}
+.blm-fc-icon { font-size: 32px; margin-bottom: 12px; color: #fff9e6; }
+.blm-fc-heading {
+    font-size: 22px; font-weight: 400;
+    letter-spacing: 2px; margin: 0 0 35px 0;
+    color: #ffffff;
+}
+
+/* เซ็ตปุ่มคู่สไตล์น่ารักยอดนิยม */
+.blm-fc-action-btns { display: flex; gap: 15px; justify-content: center; margin-bottom: 35px; }
+.fc-action-btn {
+    flex: 1; text-decoration: none;
+    padding: 12px 0; border-radius: 25px;
+    font-size: 14px; font-weight: bold;
+    letter-spacing: 1px; transition: 0.3s ease;
+}
+
+/* ปุ่ม JOIN ใช้สีเหลืองพาสเทลเพื่อดึงดูดสายตา */
+.btn-fc-join { background-color: #fddc5a; color: #444444; }
+.btn-fc-join:hover { background-color: #ffffff; color: #ff8da1; transform: translateY(-3px); }
+
+.btn-fc-login { background-color: #ffffff; color: #ff8da1; }
+.btn-fc-login:hover { background-color: #fddc5a; color: #444444; transform: translateY(-3px); }
+
+/* ลิงก์ย่อยภายในสไลด์เมนูแฟนคลับ */
+.blm-fc-sub-navigation {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 20px 10px;
+}
+.blm-fc-sub-navigation a {
+    text-decoration: none; color: #ffffff;
+    font-size: 13px; font-weight: 500;
+    opacity: 0.85; transition: 0.2s;
+}
+.blm-fc-sub-navigation a:hover { opacity: 1; text-decoration: underline; color: #fff9e6; }
+
+/* --- รองรับการแสดงผลบนสมาร์ตโฟน (Responsive) --- */
+@media (max-width: 868px) {
+    .stu-grid-wrapper { grid-template-columns: 1fr; } /* ยุบรวมเหลือคอลัมน์เดียวแนวตั้ง */
+    .stu-left-content { padding: 70px 30px 40px 30px; }
+    .blm-brand-title { font-size: 36px; margin-bottom: 25px; }
+    .blm-menu-grid-links { gap: 20px; }
+    .blm-menu-grid-links a { font-size: 18px; }
+    
+    .stu-right-content { padding: 50px 20px 70px 20px; }
+    .wave-divider {
+        top: -15px; left: 0; width: 100%; height: 30px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'%3E%3Cpath d='M0,20 C20,10 30,10 50,20 C70,10 80,10 100,20 L100,0 L0,0 Z' fill='%23ffffff'/%3E%3C/svg%3E");
+    }
+    .blm-fc-card-box { padding: 40px 25px; }
+}
+      
     </style>
 </head>
 <body>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Header & Menu (ต้องอยู่ใน body) -->
     <header class="main-header">
-        <button class="menu-trigger" onclick="toggleMenu()">
-            <span></span><span></span><span></span>
-        </button>
-    </header>
-
-    <div class="menu-backdrop" id="menuBackdrop" onclick="toggleMenu()"></div>
-
-    <div class="side-menu" id="sideMenu">
-        <button class="close-menu-btn" onclick="toggleMenu()">✕</button>
-        <ul class="side-nav-links">
-            <li><a href="index.html">HOME</a></li>
-            <li><a href="news.html">NEWS</a></li>
-            <li><a href="schedule.html">SCHEDULE</a></li>
-            <li><a href="profile.html">PROFILE</a></li>
-            <li><a href="discography.html">DISCOGRAPHY</a></li>
-            <li><a href="about.html">ABOUT</a></li>
-            <li><a href="theater.html">THEATER</a></li>
-            <li><a href="concert.html">CONCERT</a></li>
-            <li><a href="https://blm48-membership.vercel.app/">MEMBERSHIP</a></li>
-        </ul>
+  <div class="header-container-blm">
+    <a href="index.html" class="blm-nav-logo">BLM48</a>
+    <div class="header-right-tools">
+      <a href="#" class="blm-top-login-btn">LOGIN <i class="fas fa-sign-in-alt"></i></a>
+      <button class="menu-trigger-stu" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
+  </div>
+</header>
+
+<nav class="full-screen-menu-overlay">
+  <button class="close-overlay-btn" onclick="toggleMenu()">&times;</button>
+  
+  <div class="stu-grid-wrapper">
+    
+    <div class="stu-left-content">
+      <div class="blm-brand-title">BLM48</div>
+      
+      <ul class="blm-menu-grid-links">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="news.html">NEWS</a></li>
+        <li><a href="schedule.html">SCHEDULE</a></li>
+        <li><a href="profile.html">PROFILE</a></li>
+        <li><a href="theater.html">THEATER</a></li>
+        <li><a href="concert.html">CONCERT</a></li>
+        <li><a href="discography.html">DISCOGRAPHY</a></li>
+        <li><a href="about.html">ABOUT</a></li>
+      </ul>
+      
+      <div class="blm-menu-socials">
+        <a href="https://www.youtube.com/@blm48official" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.facebook.com/Blm48official" class="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/blm48.official" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/@blm48_official" class="_blank"><i class="fab fa-tiktok"></i></a>
+        <a href="https://x.com/BLM48_OFFICIAL" target="_blank">
+          <svg class="x-menu-icon" viewBox="0 0 24 24" style="width:18px; height:18px; fill:currentColor; vertical-align:middle;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+      </div>
+    </div>
+    
+    <div class="stu-right-content">
+      <div class="wave-divider"></div>
+      
+      <div class="blm-fc-card-box">
+        <div class="blm-fc-icon"><i class="fas fa-heart"></i></div>
+        <h3 class="blm-fc-heading">BLM48 FAN CLUB</h3>
+        
+        <div class="blm-fc-action-btns">
+          <a href="#" class="fc-action-btn btn-fc-join">JOIN</a>
+          <a href="#" class="fc-action-btn btn-fc-login">LOGIN</a>
+        </div>
+        
+        <ul class="blm-fc-sub-navigation">
+          <li><a href="#">MEMBER BLOG</a></li>
+          <li><a href="#">MOVIE</a></li>
+          <li><a href="#">Q&A</a></li>
+          <li><a href="#">ARCHIVE</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</nav>
 
     <!-- Blossom Container -->
     <div class="blossom-container">
