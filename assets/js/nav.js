@@ -13,13 +13,14 @@
 
   var LANGS = [
     { code: 'en', label: 'English' },    
-    { code: 'th', label: 'ไทย' },
+    { code: 'th', label: 'Thai' },
     { code: 'ja', label: '日本語' }
   ];
 
   var TICKER_ITEMS = [
     { href: 'https://youtu.be/rdWq9BKqpBU?si=LefsrZ5m9pwW8N0T', text: 'BLM48 3rd Album C/W Senbatsu Announcement' },
     { href: 'https://www.instagram.com/p/DXj_bnLiYls/', text: 'New Logo BLM48 The Campus' },
+    { href: 'https://www.instagram.com/p/DaXTGLEvLuL/', text: 'Jih BLM48 - Champ of The Month' },
     { href: 'https://www.instagram.com/p/DXj-1-EiaBr/', text: 'BLM48 Concert This Letter Says "Marry Me"' }
   ];
 
