@@ -85,7 +85,7 @@
       nav_profile: "PROFILE",
       nav_theater: "THEATER",
       nav_discography: "DISCOGRAPHY",
-      nav_membership: "BLM48 MEMBERSHIP",      
+      nav_membership: "BLM48 MEMBERSHIP",
       nav_news: "NEWS",
       nav_schedule: "SCHEDULE",
       badge_release: "RELEASE",

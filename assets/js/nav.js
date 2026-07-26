@@ -27,7 +27,7 @@
   ];
 
   function currentPage() {
-    var path = window.location.pathname.split('/').pop() || 'index.html';S
+    var path = window.location.pathname.split('/').pop() || 'index.html';
     var name = path.replace('.html', '');
     return name === '' ? 'index' : name;
   }
