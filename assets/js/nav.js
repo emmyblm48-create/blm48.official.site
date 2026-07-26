@@ -3,9 +3,9 @@
    ========================================================= */
 (function () {
   var NAV_LINKS = [
+    { href: 'index.html', page: 'index', key: 'nav_home' },
     { href: 'news.html', page: 'news', key: 'nav_news' },
     { href: 'schedule.html', page: 'schedule', key: 'nav_schedule' },
-    { href: 'index.html', page: 'index', key: 'nav_home' },
     { href: 'profile.html', page: 'profile', key: 'nav_profile' },
     { href: 'discography.html', page: 'discography', key: 'nav_discography' },
     { href: 'about.html', page: 'about', key: 'nav_about' }
@@ -19,7 +19,6 @@
 
   var TICKER_ITEMS = [
     { href: 'https://youtu.be/rdWq9BKqpBU?si=LefsrZ5m9pwW8N0T', text: 'BLM48 3rd Album C/W Senbatsu Special Stream' },
-    { href: 'https://www.instagram.com/p/DZKrI_FCRZM/?img_index=2', text: 'BLM48 "My Last Letter" – Hero’s Graduation Ceremony' },
     { href: 'https://www.instagram.com/p/DXj_bnLiYls/', text: 'New Logo BLM48 The Campus Special Exhibition' },
     { href: 'https://www.instagram.com/p/DXj-1-EiaBr/', text: 'BLM48 Concert This Letter Says "Marry Me"' }
   ];
