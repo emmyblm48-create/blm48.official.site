@@ -13,6 +13,9 @@
       nav_profile: "โปรไฟล์สมาชิก",
       nav_theater: "โรงละคร",
       nav_discography: "ผลงานเพลง",
+      nav_news: "ข่าวสาร",
+      nav_schedule: "ตารางกิจกรรม",
+      badge_release: "วางจำหน่าย",
 
       footer_privacy: "นโยบายความเป็นส่วนตัว",
       footer_terms: "ข้อกำหนดการใช้งาน",
@@ -81,6 +84,9 @@
       nav_profile: "PROFILE",
       nav_theater: "THEATER",
       nav_discography: "DISCOGRAPHY",
+      nav_news: "NEWS",
+      nav_schedule: "SCHEDULE",
+      badge_release: "RELEASE",
 
       footer_privacy: "Privacy Policy",
       footer_terms: "Terms of Service",
@@ -149,6 +155,9 @@
       nav_profile: "メンバー",
       nav_theater: "劇場",
       nav_discography: "ディスコグラフィー",
+      nav_news: "ニュース",
+      nav_schedule: "スケジュール",
+      badge_release: "リリース",
 
       footer_privacy: "プライバシーポリシー",
       footer_terms: "利用規約",

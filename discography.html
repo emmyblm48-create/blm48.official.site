@@ -5,142 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BLM48 Official - DISCOGRAPHY</title>
   
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Kanit:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="assets/css/site.css">
 
   <style>
-    /* --- Global Styles --- */
-    * { 
-      box-sizing: border-box; 
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Quicksand', 'Kanit', sans-serif;
-      background-color: #fffef8;
-      background-image: radial-gradient(#f3e5ab 18%, transparent 18%), radial-gradient(#f3e5ab 18%, transparent 18%);
-      background-size: 16px 16px;
-      background-position: 0 0, 8px 8px;
-      color: #333333;
+      font-family: var(--font-body);
+      background: #fffefb;
+      color: var(--blm-ink);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* --- Main Container --- */
-    .main-wrapper {
-      max-width: 1500px;
-      width: 96%;
-      margin: 20px auto;
-      background: #ffffff;
-      padding: 35px 30px;
-      border-radius: 4px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-      border: 1px solid #ebd99f;
-    }
+    /* --- Filter --- */
+    .disco-filter { width: 100%; }
+    .disco-filter input[type="radio"] { display: none; }
 
-    /* --- Section Header --- */
-    .section-header-banner {
-      width: 100%;
-      background-color: #fffef8;
-      background-image: radial-gradient(#f3e5ab 18%, transparent 18%), radial-gradient(#f3e5ab 18%, transparent 18%);
-      background-size: 16px 16px;
-      background-position: 0 0, 8px 8px;
-      border-top: 2px solid #f2ab00;
-      border-bottom: 2px solid #f2ab00;
-      padding: 12px 20px;
-      margin-bottom: 35px;
+    .filter-tabs {
       display: flex;
-      align-items: center;
       justify-content: center;
-    }
-    
-    .section-header-title {
-      font-size: 32px;
-      font-weight: 800;
-      color: #f2ab00;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin: 0;
-    }
-
-    /* --- ระบบ Filter เดิม (แต่ปรับสไตล์ตามหน้า Profile) --- */
-    .disco-filter {
-      width: 100%;
-    }
-
-    .disco-filter input[type="radio"] {
-      display: none;
-    }
-
-    .filter-tabs { 
-      display: flex; 
-      justify-content: center; 
-      gap: 15px; 
-      margin-bottom: 40px;
+      gap: 12px;
+      margin-bottom: 44px;
       flex-wrap: wrap;
     }
 
-    .filter-tabs label { 
-      background: #ffffff; 
-      border: 1px solid #f2ab00; 
-      font-family: 'Quicksand', 'Kanit', sans-serif; 
-      font-size: 15px; 
-      font-weight: 700; 
-      color: #f2ab00; 
-      cursor: pointer; 
-      text-transform: uppercase; 
-      letter-spacing: 0.5px; 
-      padding: 10px 35px; 
-      transition: all 0.2s ease; 
-      min-width: 140px;
-      border-radius: 2px;
+    .filter-tabs label {
+      background: var(--blm-cream);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--blm-ink);
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      padding: 11px 30px;
+      transition: all 0.2s ease;
+      border-radius: var(--radius-pill);
       text-align: center;
     }
 
-    .filter-tabs label:hover { 
-      background: #f2ab00; 
-      color: #ffffff; 
-      box-shadow: 0 4px 10px rgba(242, 171, 0, 0.2);
-    }
+    .filter-tabs label:hover { background: var(--blm-gold); }
 
-    /* เมื่อกดเลือกหมวดหมู่ */
     #all:checked ~ .filter-tabs label[for="all"],
     #single:checked ~ .filter-tabs label[for="single"],
     #album:checked ~ .filter-tabs label[for="album"],
     #special:checked ~ .filter-tabs label[for="special"],
     #concert:checked ~ .filter-tabs label[for="concert"] {
-      background: #f2ab00;
-      color: #ffffff;
-      box-shadow: 0 4px 10px rgba(242, 171, 0, 0.2);
+      background: var(--blm-gold);
     }
 
     /* --- Main Grid View --- */
-    .disco-grid { 
-      display: grid; 
-      grid-template-columns: repeat(4, 1fr); 
-      gap: 35px 25px; 
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px 24px;
     }
-    
-    @media (max-width: 1024px) {
-      .disco-grid { grid-template-columns: repeat(3, 1fr); }
-    }
+
+    @media (max-width: 1024px) { .disco-grid { grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 680px) {
-      .disco-grid { grid-template-columns: repeat(2, 1fr); gap: 20px 12px; }
-      .main-wrapper { padding: 20px 12px; width: 98%; }
-      .filter-tabs label { min-width: auto; padding: 8px 15px; font-size: 13px; }
+      .disco-grid { grid-template-columns: repeat(2, 1fr); gap: 20px 14px; }
+      .filter-tabs label { min-width: auto; padding: 9px 18px; font-size: 13px; }
     }
     @media (max-width: 380px) {
       .disco-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
     }
 
-    /* การแสดงผลตาม Filter แบบเดิมเป๊ะ */
     .disco-item { display: none; }
     #all:checked ~ .disco-grid .disco-item { display: flex; }
     #single:checked ~ .disco-grid .cat-single { display: flex; }
@@ -148,125 +86,104 @@
     #special:checked ~ .disco-grid .cat-special { display: flex; }
     #concert:checked ~ .disco-grid .cat-concert { display: flex; }
 
-    /* --- Item & Card Design (ดีไซน์ใหม่สไตล์ Profile) --- */
-    .disco-item { 
-      background: #ffffff;
+    /* --- Item & Card Design --- */
+    .disco-item {
       flex-direction: column;
       align-items: center;
       text-align: center;
       transition: transform 0.3s ease;
     }
-    
-    .disco-item:hover { 
-      transform: translateY(-5px); 
-    }
-    
-    .cover-link {
-        width: 100%;
-        text-decoration: none;
-        color: inherit;
-    }
+    .disco-item:hover { transform: translateY(-6px); }
+
+    .cover-link { width: 100%; text-decoration: none; color: inherit; }
 
     .cover-box {
-        width: 100%;
-        aspect-ratio: 1 / 1;
-        overflow: hidden;
-        background: #f7f5ec;
-        margin-bottom: 12px;
-        cursor: pointer;
-        border: 1px solid #f0e6c8;
-        border-radius: 2px;
-        position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background: var(--blm-cream);
+      margin-bottom: 14px;
+      cursor: pointer;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      position: relative;
     }
 
-    .cover-box img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        transition: transform 0.4s ease;
-    }
+    .cover-box img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+    .disco-item:hover .cover-box img { transform: scale(1.05); }
 
-    .disco-item:hover .cover-box img {
-        transform: scale(1.05);
-    }
-
-    /* Overlay "WATCH MV" แบบเดิม */
+    /* Overlay "WATCH MV" */
     .overlay {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(242, 171, 0, 0.7); /* ปรับโทนเป็นสีเหลืองทองตามธีมใหม่ */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        opacity: 0;
-        transition: all 0.4s ease;
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(0deg, rgba(51,44,32,0.7) 0%, transparent 60%);
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding-bottom: 18px;
+      opacity: 0;
+      transition: all 0.4s ease;
     }
 
     .overlay span {
-        font-weight: 700;
-        color: white;
-        border: 2px solid white;
-        padding: 10px 25px;
-        font-size: 13px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        border-radius: 30px;
-        transform: translateY(20px);
-        transition: all 0.5s ease;
+      font-weight: 700;
+      color: var(--blm-on-gold);
+      background: var(--blm-gold);
+      padding: 8px 22px;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: var(--radius-pill);
+      transform: translateY(10px);
+      transition: all 0.4s ease;
     }
 
     .disco-item:hover .overlay { opacity: 1; }
     .disco-item:hover .overlay span { transform: translateY(0); }
 
-    /* ปรับปรุง Overlay ในมือถือ */
     @media (hover: none) {
-        .overlay { opacity: 1; background: rgba(0,0,0,0.1); }
-        .overlay span { display: none; }
+      .overlay { opacity: 1; background: linear-gradient(0deg, rgba(51,44,32,0.35) 0%, transparent 60%); }
+      .overlay span { display: none; }
     }
 
     /* --- Tags & Meta --- */
-    .item-info {
-      width: 100%;
-      margin-bottom: 12px;
-    }
-    
+    .item-info { width: 100%; margin-bottom: 12px; }
+
     .meta {
-        font-size: 11px;
-        font-weight: 600;
-        color: #777777;
-        margin-bottom: 8px;
-        display: flex;
-        justify-content: center;
-        gap: 8px;
-        align-items: center;
-        flex-wrap: wrap;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blm-ink-faint);
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
     }
 
     .tag-single, .tag-special, .tag-album, .tag-concert {
-        font-size: 10px;
-        padding: 2px 8px;
-        border: 1px solid;
-        border-radius: 2px;
-        text-transform: uppercase;
-        font-weight: 700;
+      font-size: 10px;
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      text-transform: uppercase;
+      font-weight: 700;
     }
 
-    .tag-single { color: #5bc0de; border-color: #5bc0de; }
-    .tag-special { color: #f2ab00; border-color: #f2ab00; } /* ปรับสีเหลือง */
-    .tag-album { color: var(--blm-navy); border-color: var(--blm-navy); }
-    .tag-concert { color: #9900ff; border-color: #9900ff; }
-    .date { color: #888; font-family: 'Quicksand', sans-serif; }
+    .tag-single { color: var(--blm-ink); background: var(--blm-cream-deep); }
+    .tag-special { color: var(--blm-on-gold); background: var(--blm-gold); }
+    .tag-album { color: var(--blm-ink); background: var(--blm-pink); }
+    .tag-concert { color: var(--blm-ink); background: var(--blm-cream); border: 1.5px solid var(--blm-line); }
+    .date { color: var(--blm-ink-faint); }
 
     .title {
-        font-size: 15px;
-        font-weight: 700;
-        margin: 0;
-        color: #333333;
-        line-height: 1.4;
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 500;
+      margin: 0;
+      color: var(--blm-ink);
+      line-height: 1.4;
     }
-
   </style>
 </head>
 <body>
@@ -276,12 +193,12 @@
   <script src="assets/js/nav.js"></script>
 
   <!-- Main Container Overlay -->
-  <main class="main-wrapper">
-    
-    <!-- Header Banner -->
-    <header class="section-header-banner">
-      <h1 class="section-header-title" data-i18n="disco_header">DISCOGRAPHY</h1>
-    </header>
+  <main class="page-shell">
+
+    <div class="page-hero">
+      <h1 class="page-hero-title" data-i18n="disco_header">DISCOGRAPHY</h1>
+      <div class="page-hero-underline"></div>
+    </div>
 
     <!-- ระบบ Filter และ Grid แบบเดิมของ Discography -->
     <nav class="disco-filter">

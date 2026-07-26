@@ -4,87 +4,39 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BLM48 Official - THEATER</title>
-  
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Kanit:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="assets/css/site.css">
 
   <style>
-    /* --- Global Styles --- */
-    * { 
-      box-sizing: border-box; 
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Quicksand', 'Kanit', sans-serif;
-      background-color: #fffef8;
-      background-image: radial-gradient(#f3e5ab 18%, transparent 18%), radial-gradient(#f3e5ab 18%, transparent 18%);
-      background-size: 16px 16px;
-      background-position: 0 0, 8px 8px;
-      color: #333333;
+      font-family: var(--font-body);
+      background: #fffefb;
+      color: var(--blm-ink);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* --- Main Container --- */
-    .main-wrapper {
-      max-width: 1500px;
-      width: 96%;
-      margin: 20px auto;
-      background: #ffffff;
-      padding: 35px 30px;
-      border-radius: 4px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-      border: 1px solid #ebd99f;
-      min-height: 70vh;
-    }
-
-    /* --- Section Header --- */
-    .section-header-banner {
-      width: 100%;
-      background-color: #fffef8;
-      background-image: radial-gradient(#f3e5ab 18%, transparent 18%), radial-gradient(#f3e5ab 18%, transparent 18%);
-      background-size: 16px 16px;
-      background-position: 0 0, 8px 8px;
-      border-top: 2px solid #f2ab00;
-      border-bottom: 2px solid #f2ab00;
-      padding: 12px 20px;
-      margin-bottom: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .section-header-title {
-      font-size: 32px;
-      font-weight: 800;
-      color: #f2ab00;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin: 0;
-    }
-
     /* --- Theater Logo --- */
-    .theater-logo-container {
-      text-align: center;
-      margin-bottom: 40px;
-    }
+    .theater-logo-container { text-align: center; margin-bottom: 44px; }
     .theater-logo {
       width: clamp(150px, 30vw, 220px);
       display: inline-block;
-      filter: drop-shadow(0 4px 10px rgba(242, 171, 0, 0.2));
+      filter: drop-shadow(0 6px 16px rgba(253, 222, 92, 0.35));
       animation: pulse 3s infinite ease-in-out;
     }
     @keyframes pulse {
-      0%, 100% { transform: scale(1); filter: drop-shadow(0 4px 10px rgba(242, 171, 0, 0.2)); }
-      50% { transform: scale(1.05); filter: drop-shadow(0 6px 15px rgba(242, 171, 0, 0.4)); }
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
     }
 
     /* --- Management Section --- */
@@ -92,103 +44,94 @@
       display: flex;
       justify-content: center;
       gap: clamp(15px, 4vw, 40px);
-      margin: 0 0 60px;
+      margin: 0 0 64px;
       flex-wrap: wrap;
     }
 
     .admin-card {
-      background: #fffdf6;
-      border: 1px solid #f2ab00;
-      border-radius: 4px;
-      padding: 25px 20px;
+      background: var(--blm-cream);
+      border-radius: var(--radius-xl);
+      padding: 30px 24px 24px;
       width: clamp(240px, 80vw, 280px);
       text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
       position: relative;
     }
 
-    .admin-card::before {
-      content: 'OFFICIAL';
+    .admin-card .pill {
       position: absolute;
       top: -12px;
       left: 50%;
       transform: translateX(-50%);
-      background: #f2ab00;
-      color: #fff;
-      font-size: 0.75rem;
-      font-weight: 800;
-      padding: 3px 15px;
-      border-radius: 20px;
-      letter-spacing: 1px;
     }
 
     .admin-card img {
-      width: 120px; 
-      height: 120px; 
-      border-radius: 50%; 
-      border: 3px solid #f2ab00; 
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 4px solid var(--blm-gold);
       object-fit: cover;
-      margin-bottom: 15px;
+      margin-bottom: 16px;
     }
+    .admin-card:nth-child(2) img { border-color: var(--blm-pink); }
 
     .admin-card .name {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: #333333;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--blm-ink);
     }
 
     .admin-card .pos {
-      font-size: 0.85rem;
-      color: #f2ab00;
+      font-size: 0.82rem;
+      color: var(--blm-ink-soft);
       font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
     }
 
     /* --- Members Section --- */
     .section-label {
-      font-size: 24px;
-      font-weight: 800;
-      color: #333333;
-      border-bottom: 2px solid #f2ab00;
-      margin: 40px 0 25px;
-      padding-bottom: 10px;
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--blm-ink);
+      margin: 46px 0 24px;
+      padding-bottom: 12px;
+      border-bottom: 3px solid var(--blm-cream);
       display: flex;
       align-items: center;
       gap: 10px;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
     }
-    
-    .section-label i {
-      color: #f2ab00;
+    .section-label::before {
+      content: '';
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--blm-gold);
+      flex-shrink: 0;
     }
+    .section-label.pink::before { background: var(--blm-pink); }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
       gap: clamp(15px, 3vw, 25px);
     }
-
     @media (min-width: 768px) {
       .grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
     }
 
     .card {
       position: relative;
-      background: #ffffff;
-      border-radius: 4px;
+      background: var(--blm-white);
+      border-radius: var(--radius-lg);
       overflow: hidden;
-      border: 1px solid #f0e6c8;
+      box-shadow: var(--shadow-soft);
       transition: 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
     }
-
     @media (hover: hover) {
-      .card:hover {
-        transform: translateY(-8px);
-        border-color: #f2ab00;
-        box-shadow: 0 10px 20px rgba(242, 171, 0, 0.15);
-      }
+      .card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
     }
 
     .card img {
@@ -196,37 +139,31 @@
       aspect-ratio: 3/4;
       object-fit: cover;
       display: block;
-      transition: 0.4s;
-      background-color: #f7f5ec;
+      background-color: var(--blm-cream);
     }
 
     .info {
-      padding: 15px 10px;
-      background: #ffffff;
-      border-top: 1px solid #f0e6c8;
+      padding: 14px 10px;
+      background: var(--blm-white);
       text-align: center;
       width: 100%;
       box-sizing: border-box;
     }
 
-    .card:hover .info {
-      border-top-color: #f2ab00;
-    }
-
-    .name { 
-      font-size: clamp(0.95rem, 3vw, 1.1rem); 
-      font-weight: 700; 
-      color: #333333; 
+    .name {
+      font-family: var(--font-display);
+      font-size: clamp(0.9rem, 3vw, 1.02rem);
+      font-weight: 500;
+      color: var(--blm-ink);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    
-    .pos { 
-      font-size: clamp(0.65rem, 2vw, 0.75rem); 
-      color: #f2ab00; 
-      text-transform: uppercase; 
-      letter-spacing: 1px; 
+
+    .pos {
+      font-size: clamp(0.65rem, 2vw, 0.72rem);
+      color: var(--blm-ink-faint);
+      letter-spacing: 0.5px;
       margin-top: 4px;
       font-weight: 600;
     }
@@ -235,22 +172,19 @@
       position: absolute;
       top: 10px;
       right: 10px;
-      background: #f2ab00;
-      color: #fff;
+      background: var(--blm-gold);
+      color: var(--blm-on-gold);
       padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 0.65rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.63rem;
       font-weight: 800;
       letter-spacing: 1px;
       z-index: 10;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
 
     @media (max-width: 680px) {
-      .main-wrapper { padding: 20px 15px; width: 98%; }
       .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
     }
-
   </style>
 </head>
 <body>
@@ -259,13 +193,11 @@
   <script src="assets/js/i18n.js"></script>
   <script src="assets/js/nav.js"></script>
 
-  <!-- Main Container -->
-  <main class="main-wrapper">
-    
-    <!-- Header Banner -->
-    <header class="section-header-banner">
-      <h1 class="section-header-title" data-i18n="theater_header">THEATER</h1>
-    </header>
+  <main class="page-shell">
+    <div class="page-hero">
+      <h1 class="page-hero-title" data-i18n="theater_header">THEATER</h1>
+      <div class="page-hero-underline"></div>
+    </div>
 
     <!-- โลโก้เธียร์เตอร์ -->
     <div class="theater-logo-container">
@@ -275,11 +207,13 @@
     <!-- Shihainin Section -->
     <div class="management-zone">
       <div class="admin-card">
+        <span class="pill pill-gold">OFFICIAL</span>
         <img src="https://lh3.googleusercontent.com/d/1zXgJmp6jmNjMcnZbc_f4gU9qisrrz0Jq=s400" alt="Gino">
         <div class="name">Gino</div>
         <div class="pos" data-i18n="pos_shihainin">Shihainin</div>
       </div>
       <div class="admin-card">
+        <span class="pill pill-gold">OFFICIAL</span>
         <img src="https://lh3.googleusercontent.com/d/1FZNJQWvzZxUi4ZfCdTmhWLMTfDtUTZ3p=s400" alt="Emmy">
         <div class="name">Emmy</div>
         <div class="pos" data-i18n="pos_vice_shihainin">Vice Shihainin</div>
@@ -287,11 +221,11 @@
     </div>
 
     <!-- Team Bloom -->
-    <div class="section-label"><i class="fas fa-seedling"></i> <span data-i18n="team_bloom_label">TEAM BLOOM</span></div>
+    <div class="section-label"><span data-i18n="team_bloom_label">TEAM BLOOM</span></div>
     <div class="grid" id="teamBloom"></div>
 
     <!-- Trainee -->
-    <div class="section-label"><i class="far fa-gem"></i> <span data-i18n="trainee_label">TRAINEE</span></div>
+    <div class="section-label pink"><span data-i18n="trainee_label">TRAINEE</span></div>
     <div class="grid" id="trainee"></div>
 
   </main>
@@ -312,7 +246,7 @@
       { name: 'Mushroom', team: 'Bloom', pos: '3rd Gen', img: '1h1eW8OP8UOaJm8kRK-13t-1Z_WhNluy9' },
       { name: 'Noel', team: 'Bloom', pos: '2nd Gen', img: '1nVIgsUPv5jr0SaAlbbaw4YM8dPgLneuD' },
       { name: 'Quantum', team: 'Bloom', pos: '4th Gen', img: '19zL2mLOrLhHOUHMc94ZM7Vmc57Mut97D' },
-      
+
       // Trainees
       { name: 'Arlua', team: 'Trainee', pos: '4th Gen', img: '1rzP_iY1akOLolmDYJ5r1RSIFbz1tiuvj' },
       { name: 'Bug', team: 'Trainee', pos: '5th Gen', img: '1mubCc0QONHdoRyhFVhFg3wv74jNZXPMy' },

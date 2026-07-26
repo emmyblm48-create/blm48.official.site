@@ -7,7 +7,9 @@
     { href: 'about.html', page: 'about', key: 'nav_about' },
     { href: 'profile.html', page: 'profile', key: 'nav_profile' },
     { href: 'theater.html', page: 'theater', key: 'nav_theater' },
-    { href: 'discography.html', page: 'discography', key: 'nav_discography' }
+    { href: 'discography.html', page: 'discography', key: 'nav_discography' },
+    { href: 'news.html', page: 'news', key: 'nav_news' },
+    { href: 'schedule.html', page: 'schedule', key: 'nav_schedule' }
   ];
 
   var LANGS = [
@@ -54,6 +56,7 @@
     if (!mount) return;
 
     mount.innerHTML =
+      '<div class="blm-bg-decor"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>' +
       '<div class="site-ticker">' +
         '<span class="ticker-label" data-i18n="ticker_label">TODAY\'S SCHEDULE</span>' +
         '<div class="ticker-track-wrap"><div class="ticker-track">' + tickerTrackHTML() + '</div></div>' +
@@ -61,14 +64,14 @@
       '<header class="site-header">' +
         '<div class="site-header-inner">' +
           '<a href="index.html" class="site-logo">' +
-            '<span class="logo-mark">BLM48</span>' +
+            '<span class="logo-mark">BLM48</span><span class="logo-dot"></span>' +
             '<span class="logo-sub">OFFICIAL SITE</span>' +
           '</a>' +
           '<nav class="site-nav" aria-label="Main navigation">' + navLinksHTML('') + '</nav>' +
           '<div class="header-actions">' +
             '<div class="lang-switch" id="langSwitch">' +
               '<button type="button" class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false">' +
-                '<i class="fas fa-globe"></i><span id="langBtnLabel">TH</span><i class="fas fa-chevron-down lang-caret"></i>' +
+                '<span id="langBtnLabel">TH</span><span class="lang-caret">▾</span>' +
               '</button>' +
               '<div class="lang-menu" id="langMenu" role="menu">' + langMenuHTML('lang-menu-item') + '</div>' +
             '</div>' +
@@ -80,7 +83,7 @@
       '</header>' +
       '<div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>' +
       '<aside class="mobile-nav-panel" id="mobileNavPanel">' +
-        '<button type="button" class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu"><i class="fas fa-times"></i></button>' +
+        '<button type="button" class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">&times;</button>' +
         '<nav class="mobile-nav-links" aria-label="Mobile navigation">' + navLinksHTML('') + '</nav>' +
         '<div class="mobile-lang-row">' + langMenuHTML('') + '</div>' +
       '</aside>';
@@ -117,8 +120,7 @@
               '<div class="copyright-text">&copy; 2026 BLM48, Inc. <span data-i18n="footer_rights">All Rights Reserved.</span></div>' +
             '</div>' +
             '<button type="button" class="page-top-btn" id="pageTopBtn">' +
-              '<i class="fas fa-arrow-up"></i>' +
-              '<span data-i18n="footer_pagetop">PAGE TOP</span>' +
+              '<span data-i18n="footer_pagetop">PAGE TOP</span><span aria-hidden="true">↑</span>' +
             '</button>' +
           '</div>' +
         '</div>' +
