@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BLM48 Official - PROFILE</title>
+  <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1flevUZLFmIodF1RHG0QgRJkCMpgW1KM7=s1000">
 
   <!-- Fonts & Icons (FA kept only for social brand icons in member detail) -->
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Kanit:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -100,8 +101,9 @@
       box-shadow: var(--shadow-soft);
       border: 3px solid var(--blm-gold);
     }
-    .member-card:nth-child(3n+2) .photo-box { border-color: var(--blm-pink); }
-    .member-card:nth-child(3n) .photo-box { border-color: var(--blm-cream-deep); }
+    .member-card:nth-child(4n+2) .photo-box { border-color: var(--blm-pink); }
+    .member-card:nth-child(4n+3) .photo-box { border-color: var(--blm-mint-deep); }
+    .member-card:nth-child(4n) .photo-box { border-color: var(--blm-cream-deep); }
     .member-photo { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
     .member-card:hover .member-photo { transform: scale(1.05); }
 
@@ -155,7 +157,7 @@
       font-size: 14px;
       letter-spacing: 0.5px;
     }
-    .back-btn::before { content: '←'; }
+    .back-btn::before { content: '\f060'; font-family: 'Font Awesome 6 Free'; font-weight: 900; font-size: 12px; }
     .back-btn:hover { gap: 12px; color: var(--blm-gold-deep); }
 
     .detail-layout { display: flex; flex-direction: row; gap: 44px; text-align: left; }

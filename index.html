@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BLM48 Official Home</title>
+  <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1flevUZLFmIodF1RHG0QgRJkCMpgW1KM7=s1000">
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Kanit:wght@300;400;500;600&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -34,7 +35,7 @@
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: linear-gradient(160deg, var(--blm-cream) 0%, var(--blm-pink) 100%);
+      background: linear-gradient(160deg, var(--blm-cream) 0%, var(--blm-mint) 50%, var(--blm-pink) 100%);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -70,6 +71,7 @@
     }
     .petal.gold { background-color: var(--blm-gold); }
     .petal.pink { background-color: #ffffff; }
+    .petal.mint { background-color: var(--blm-mint); }
     @keyframes falling {
       0% { top: -10%; opacity: 0; transform: rotate(0deg); }
       10% { opacity: 0.9; }
@@ -97,6 +99,7 @@
     }
     .bg-petal.gold { background-color: var(--blm-gold); }
     .bg-petal.pink { background-color: var(--blm-pink); }
+    .bg-petal.mint { background-color: var(--blm-mint); }
     @keyframes fallDown {
       0% { top: -10%; opacity: 0; transform: translateX(0) rotate(0deg); }
       10% { opacity: 0.55; }
@@ -326,8 +329,9 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       border: 3px solid var(--blm-gold);
     }
-    .member-mini:nth-child(3n+2) .member-mini-photo { border-color: var(--blm-pink); }
-    .member-mini:nth-child(3n) .member-mini-photo { border-color: var(--blm-cream-deep); }
+    .member-mini:nth-child(4n+2) .member-mini-photo { border-color: var(--blm-pink); }
+    .member-mini:nth-child(4n+3) .member-mini-photo { border-color: var(--blm-mint-deep); }
+    .member-mini:nth-child(4n) .member-mini-photo { border-color: var(--blm-cream-deep); }
     .member-mini:hover .member-mini-photo {
       transform: translateY(-8px);
       box-shadow: var(--shadow-hover);
@@ -450,10 +454,14 @@
     }
 
     .video-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       font-size: 0.9rem;
       font-weight: 700;
       color: var(--blm-ink-soft);
     }
+    .video-tag .fa-youtube { color: #ff0000; font-size: 1.1rem; }
 
     .video-swiper-container { position: relative; width: 100%; height: auto; }
     .video-swiper { width: 100%; height: auto !important; overflow: hidden; }
@@ -574,56 +582,23 @@
       margin-bottom: 26px;
       text-transform: uppercase;
     }
-    .logo-grid-wrap { position: relative; padding: 0 6px; }
+    .logo-grid-wrap { position: relative; }
     .logo-grid {
       display: flex;
       flex-direction: row;
-      align-items: center;
-      gap: clamp(12px, 2.5vw, 20px);
-      width: 100%;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      padding-bottom: 14px;
-    }
-    .logo-grid::-webkit-scrollbar { height: 6px; }
-    .logo-grid::-webkit-scrollbar-track { background: var(--blm-white); border-radius: 3px; }
-    .logo-grid::-webkit-scrollbar-thumb { background: var(--blm-gold); border-radius: 3px; }
-    .logo-grid a { flex: 0 0 auto; display: flex; justify-content: center; }
-    .logo-grid img {
-      width: clamp(52px, 7vw, 84px);
-      height: auto;
-      transition: transform 0.3s ease;
-      opacity: 0.75;
-    }
-    .logo-grid img:hover { transform: scale(1.1); opacity: 1; }
-    .group-nav-btn {
-      position: absolute;
-      top: 40%;
-      transform: translateY(-50%);
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: var(--blm-white);
-      border: none;
-      color: var(--blm-ink);
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      z-index: 5;
-      box-shadow: var(--shadow-soft);
-      display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      transition: background 0.2s;
+      gap: clamp(14px, 2.5vw, 26px);
+      width: 100%;
     }
-    .group-nav-btn:hover { background: var(--blm-gold); }
-    .group-nav-btn.prev { left: -14px; }
-    .group-nav-btn.next { right: -14px; }
-    @media (max-width: 600px) {
-      .group-nav-btn { width: 32px; height: 32px; font-size: 14px; }
-      .group-nav-btn.prev { left: -8px; }
-      .group-nav-btn.next { right: -8px; }
+    .logo-grid a { flex: 0 0 auto; display: flex; justify-content: center; }
+    .logo-grid img {
+      width: clamp(56px, 7vw, 84px);
+      height: auto;
+      transition: transform 0.3s ease;
     }
+    .logo-grid img:hover { transform: scale(1.1); }
 
   </style>
 </head>
@@ -644,7 +619,7 @@
   <!-- Background Petals -->
   <div class="bg-blossom-container">
     <div class="bg-petal bp1 gold"></div><div class="bg-petal bp2 pink"></div>
-    <div class="bg-petal bp3 gold"></div><div class="bg-petal bp4 pink"></div>
+    <div class="bg-petal bp3 mint"></div><div class="bg-petal bp4 pink"></div>
     <div class="bg-petal bp5 gold"></div>
   </div>
 
@@ -668,7 +643,7 @@
 
           <div class="todays-list">
             <a href="https://youtu.be/rdWq9BKqpBU?si=LefsrZ5m9pwW8N0T" class="todays-item">
-              <span class="pill pill-gold" data-i18n="badge_media">MEDIA</span>
+              <span class="pill pill-mint" data-i18n="badge_media">MEDIA</span>
               <span class="todays-title-text">BLM48 3rd Album C/W Senbatsu Announcement</span>
             </a>
 
@@ -695,8 +670,8 @@
   <!-- SECTION 2: SLIDER SECTION -->
   <section class="slider-section">
     <div class="slider-wrapper" id="bannerSliderWrapper">
-      <button class="slider-nav-btn prev" onclick="prevBannerSlide()" aria-label="Previous">‹</button>
-      <button class="slider-nav-btn next" onclick="nextBannerSlide()" aria-label="Next">›</button>
+      <button class="slider-nav-btn prev" onclick="prevBannerSlide()" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+      <button class="slider-nav-btn next" onclick="nextBannerSlide()" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
       <div class="slider-track" id="bannerTrack">
 
         <div class="slide-item">
@@ -975,6 +950,7 @@
     <div class="video-header">
       <h2 class="video-title" data-i18n="video_title">VIDEO</h2>
       <div class="video-tag">
+        <i class="fab fa-youtube" aria-hidden="true"></i>
         <span data-i18n="video_tag">BLM48 Official Channel</span>
       </div>
     </div>
@@ -1097,7 +1073,7 @@
       <div class="video-pagination">
         <span id="videoCurrentSlide">1</span> — <span>6</span>
       </div>
-      <a href="https://www.youtube.com/@BLM48Official" target="_blank" class="video-more-btn"><span data-i18n="more_label">MORE</span> →</a>
+      <a href="https://www.youtube.com/@BLM48Official" target="_blank" class="video-more-btn"><span data-i18n="more_label">MORE</span> <i class="fas fa-arrow-right"></i></a>
     </div>
   </section>
 
@@ -1106,8 +1082,6 @@
   <div class="idol-group-container">
     <h3 class="idol-group-title" data-i18n="group_title">AKB48 Group</h3>
     <div class="logo-grid-wrap">
-      <button class="group-nav-btn prev" onclick="prevGroupSlide()" aria-label="Previous">‹</button>
-      <button class="group-nav-btn next" onclick="nextGroupSlide()" aria-label="Next">›</button>
       <div class="logo-grid" id="groupTrack">
         <!-- Japan Groups -->
         <a href="https://www.akb48.co.jp/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_akb48.png?ver=53" alt="AKB48"></a>
@@ -1147,7 +1121,8 @@
       if (!overlay || overlay.classList.contains('fade-out')) return;
 
       const petal = document.createElement('div');
-      petal.classList.add('petal', Math.random() > 0.5 ? 'gold' : 'pink');
+      const petalColors = ['gold', 'pink', 'mint'];
+      petal.classList.add('petal', petalColors[Math.floor(Math.random() * petalColors.length)]);
       const size = Math.random() * 12 + 8 + 'px';
       petal.style.width = size;
       petal.style.height = size;
@@ -1267,14 +1242,6 @@
 
     function nextBannerSlide() { if(bannerSlider) bannerSlider.next(); }
     function prevBannerSlide() { if(bannerSlider) bannerSlider.prev(); }
-
-    // --- AKB48 Group Logo Row Scroll ---
-    function scrollGroupBy(amount) {
-      const track = document.getElementById('groupTrack');
-      if (track) track.scrollBy({ left: amount, behavior: 'smooth' });
-    }
-    function nextGroupSlide() { scrollGroupBy(200); }
-    function prevGroupSlide() { scrollGroupBy(-200); }
 
     // Initialize Video Swiper Slider
     const videoSwiper = new Swiper('.video-swiper', {

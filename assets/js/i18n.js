@@ -4,7 +4,7 @@
    ========================================================= */
 (function (window) {
   var STORAGE_KEY = 'blm48_lang';
-  var DEFAULT_LANG = 'th';
+  var DEFAULT_LANG = 'en';
 
   var translations = {
     th: {
