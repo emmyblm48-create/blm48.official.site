@@ -47,12 +47,12 @@
     }
     
     .landing-container { text-align: center; }
-    .logo-text { font-size: clamp(32px, 10vw, 52px); color: #ff85a2; letter-spacing: 8px; font-weight: 300; margin-bottom: 10px; }
-    .sub-text { font-size: clamp(14px, 4vw, 18px); color: #ffb6c1; letter-spacing: 4px; }
+    .logo-text { font-size: clamp(32px, 10vw, 52px); color: var(--blm-navy); letter-spacing: 8px; font-weight: 300; margin-bottom: 10px; }
+    .sub-text { font-size: clamp(14px, 4vw, 18px); color: var(--blm-gold); letter-spacing: 4px; }
 
     /* Petal Animation */
     .petal {
-      position: absolute; background-color: #ffb6c1;
+      position: absolute; background-color: var(--blm-rose);
       border-radius: 150% 0 150% 150%;
       pointer-events: none;
       animation: falling linear infinite;
@@ -78,7 +78,7 @@
     }
     .bg-petal {
       position: absolute;
-      background-color: #ffb6c1;
+      background-color: var(--blm-rose);
       border-radius: 50% 0 50% 50%;
       opacity: 0;
       animation: fallDown infinite linear;
@@ -180,9 +180,9 @@
       flex-shrink: 0;
       margin-top: 2px;
     }
-    .badge-media { color: #2db3a0; border: 1px solid #2db3a0; }
-    .badge-live { color: #ff6b81; border: 1px solid #ff6b81; }
-    .badge-event { color: #f2ab00; border: 1px solid #f2ab00; }
+    .badge-media { color: var(--blm-navy); border: 1px solid var(--blm-navy); }
+    .badge-live { color: var(--blm-rose); border: 1px solid var(--blm-rose); }
+    .badge-event { color: var(--blm-gold); border: 1px solid var(--blm-gold); }
     .todays-title-text { color: #444; transition: color 0.2s; }
     .schedule-top-link {
       align-self: flex-end;
@@ -281,6 +281,114 @@
       color: #ffffff;
     }
 
+
+    /* --- SECTION 2.5: MEMBERS --- */
+    .members-section {
+      max-width: 96%;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+    }
+    .members-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .members-title {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 800;
+      color: #222222;
+      letter-spacing: 1px;
+      margin: 0;
+      position: relative;
+      padding-left: 16px;
+    }
+    .members-title::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 4px; bottom: 4px;
+      width: 5px;
+      background: var(--blm-navy);
+      border-radius: 3px;
+    }
+    .members-cta {
+      text-decoration: none;
+      color: var(--blm-navy);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.2s;
+      white-space: nowrap;
+    }
+    .members-cta:hover { transform: translateX(4px); }
+
+    .members-scroll {
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+    }
+    .members-scroll::-webkit-scrollbar { height: 6px; }
+    .members-scroll::-webkit-scrollbar-thumb { background: #f0e6c8; border-radius: 3px; }
+
+    .members-track {
+      display: flex;
+      gap: 18px;
+    }
+    .member-mini {
+      flex: 0 0 auto;
+      width: clamp(110px, 22vw, 150px);
+      scroll-snap-align: start;
+      text-decoration: none;
+      text-align: center;
+      display: block;
+    }
+    .member-mini-photo {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      border-radius: 6px;
+      border: 2px solid var(--blm-gold);
+      background: #f7f5ec;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .member-mini:hover .member-mini-photo {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 20px rgba(51, 65, 143, 0.18);
+      border-color: var(--blm-navy);
+    }
+    .member-mini-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .member-mini-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: var(--blm-gold);
+      color: #ffffff;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      padding: 3px 8px;
+      border-radius: 20px;
+    }
+    .member-mini-name {
+      margin-top: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #333333;
+    }
 
     /* --- SECTION 3: NEWS & SCHEDULE --- */
     .content-box-section {
@@ -685,6 +793,80 @@
       <div class="slider-arrows">
         <button class="slider-btn" onclick="prevBannerSlide()"><i class="fas fa-chevron-left"></i></button>
         <button class="slider-btn" onclick="nextBannerSlide()"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SECTION 2.5: MEMBERS -->
+  <section class="members-section">
+    <div class="members-header">
+      <h2 class="members-title" data-i18n="members_title">MEMBERS</h2>
+      <a href="profile.html" class="members-cta"><span data-i18n="members_cta">SEE ALL MEMBERS</span> <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="members-scroll">
+      <div class="members-track">
+        <a href="profile.html" class="member-mini">
+          <div class="member-mini-photo">
+            <span class="member-mini-badge" data-i18n="captain_badge">CAPTAIN</span>
+            <img src="https://lh3.googleusercontent.com/d/1ysFvMrzMwcN8aucRDUK5Hxn0ZqkKO7AC=s600" alt="Kuea" loading="lazy">
+          </div>
+          <div class="member-mini-name">Kuea</div>
+        </a>
+        <a href="profile.html" class="member-mini">
+          <div class="member-mini-photo">
+            <img src="https://lh3.googleusercontent.com/d/1zXgJmp6jmNjMcnZbc_f4gU9qisrrz0Jq=s600" alt="Gino" loading="lazy">
+          </div>
+          <div class="member-mini-name">Gino</div>
+        </a>
+        <a href="profile.html" class="member-mini">
+          <div class="member-mini-photo">
+            <img src="https://lh3.googleusercontent.com/d/1FZNJQWvzZxUi4ZfCdTmhWLMTfDtUTZ3p=s600" alt="Emmy" loading="lazy">
+          </div>
+          <div class="member-mini-name">Emmy</div>
+        </a>
+        <a href="profile.html" class="member-mini">
+          <div class="member-mini-photo">
+            <img src="https://lh3.googleusercontent.com/d/1zY3vgMGMaWb3Kqx9IXIQcaeKBt8JhTaY=s600" alt="Gavin" loading="lazy">
+          </div>
+          <div class="member-mini-name">Gavin</div>
+        </a>
+        <a href="profile.html" class="member-mini">
+          <div class="member-mini-photo">
+            <img src="https://lh3.googleusercontent.com/d/1SMotb8tFKbIDC74i_dbPS1Bx5IdBKBK8=s600" alt="Hana" loading="lazy">
+          </div>
+          <div class="member-mini-name">Hana</div>
+        </a>
+        <a href="profile.html" class="member-mini">
+          <div class="member-mini-photo">
+            <img src="https://lh3.googleusercontent.com/d/17zGGHiIOP7PvdsqUuKq3MRpHhL8hgsn8=s600" alt="Jayden" loading="lazy">
+          </div>
+          <div class="member-mini-name">Jayden</div>
+        </a>
+        <a href="profile.html" class="member-mini">
+          <div class="member-mini-photo">
+            <img src="https://lh3.googleusercontent.com/d/1_S-fWsZZwjkXfmdTj3jpDA4XdJeQixLs=s600" alt="Mayfie" loading="lazy">
+          </div>
+          <div class="member-mini-name">Mayfie</div>
+        </a>
+        <a href="profile.html" class="member-mini">
+          <div class="member-mini-photo">
+            <img src="https://lh3.googleusercontent.com/d/1h1eW8OP8UOaJm8kRK-13t-1Z_WhNluy9=s600" alt="Mushroom" loading="lazy">
+          </div>
+          <div class="member-mini-name">Mushroom</div>
+        </a>
+        <a href="profile.html" class="member-mini">
+          <div class="member-mini-photo">
+            <img src="https://lh3.googleusercontent.com/d/1nVIgsUPv5jr0SaAlbbaw4YM8dPgLneuD=s600" alt="Noel" loading="lazy">
+          </div>
+          <div class="member-mini-name">Noel</div>
+        </a>
+        <a href="profile.html" class="member-mini">
+          <div class="member-mini-photo">
+            <img src="https://lh3.googleusercontent.com/d/19zL2mLOrLhHOUHMc94ZM7Vmc57Mut97D=s600" alt="Quantum" loading="lazy">
+          </div>
+          <div class="member-mini-name">Quantum</div>
+        </a>
       </div>
     </div>
   </section>

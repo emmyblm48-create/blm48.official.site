@@ -6,22 +6,82 @@
 :root {
   --blm-gold: #f2ab00;
   --blm-gold-dark: #d89600;
-  --blm-pink: #ff8da1;
-  --blm-pink-soft: #ff85a2;
+  --blm-navy: #33418f;
+  --blm-navy-deep: #232c63;
+  --blm-rose: #ff6f81;
   --blm-cream: #fffef8;
   --blm-text: #333333;
   --header-h: 68px;
+  --ticker-h: 34px;
 }
 
-/* Offset every page's content below the fixed header */
+/* Offset every page's content below the fixed ticker + header */
 body {
-  padding-top: var(--header-h);
+  padding-top: calc(var(--header-h) + var(--ticker-h));
+}
+
+/* ---------------- Ticker ---------------- */
+.site-ticker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--ticker-h);
+  background: var(--blm-navy);
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  z-index: 3200;
+}
+.ticker-label {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  background: var(--blm-gold);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 0 16px;
+  white-space: nowrap;
+}
+.ticker-track-wrap {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+.ticker-track {
+  display: inline-flex;
+  align-items: center;
+  height: var(--ticker-h);
+  gap: 46px;
+  white-space: nowrap;
+  padding-left: 46px;
+  animation: blmTickerScroll 28s linear infinite;
+}
+.site-ticker:hover .ticker-track { animation-play-state: paused; }
+.ticker-track a {
+  color: #ffffff;
+  opacity: 0.9;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+.ticker-track a:hover { opacity: 1; text-decoration: underline; }
+@keyframes blmTickerScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (max-width: 480px) {
+  .ticker-label { font-size: 10px; padding: 0 10px; }
+  .ticker-track a { font-size: 11px; }
 }
 
 /* ---------------- Header ---------------- */
 .site-header {
   position: fixed;
-  top: 0;
+  top: var(--ticker-h);
   left: 0;
   width: 100%;
   height: var(--header-h);
@@ -211,7 +271,7 @@ body {
   width: 82%;
   max-width: 360px;
   height: 100%;
-  background: var(--blm-pink);
+  background: linear-gradient(160deg, var(--blm-navy), var(--blm-navy-deep));
   z-index: 4000;
   padding: 90px 36px 40px;
   display: flex;
@@ -271,7 +331,7 @@ body {
 .mobile-lang-row button.active,
 .mobile-lang-row button:hover {
   background: #ffffff;
-  color: var(--blm-pink);
+  color: var(--blm-navy);
 }
 
 /* Breakpoint: collapse desktop nav into hamburger */

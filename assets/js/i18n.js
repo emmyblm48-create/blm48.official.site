@@ -19,6 +19,7 @@
       footer_contact: "ติดต่อเรา",
       footer_rights: "สงวนลิขสิทธิ์ทุกประการ",
       footer_pagetop: "กลับด้านบน",
+      ticker_label: "ตารางกิจกรรมวันนี้",
 
       today_label: "วันนี้ของ BLM48",
       schedule_top: "ดูตารางกิจกรรมทั้งหมด",
@@ -31,6 +32,8 @@
       video_title: "วิดีโอ",
       video_tag: "ช่องยูทูปทางการ BLM48",
       group_title: "เครือข่าย AKB48 Group",
+      members_title: "สมาชิก",
+      members_cta: "ดูสมาชิกทั้งหมด",
 
       about_header: "เกี่ยวกับเรา",
       about_p1: "BLM48 คือกลุ่มคัฟเวอร์ไอดอลชายและหญิงของเครือข่าย AKB48Group",
@@ -84,6 +87,7 @@
       footer_contact: "Contact Us",
       footer_rights: "All Rights Reserved.",
       footer_pagetop: "PAGE TOP",
+      ticker_label: "TODAY'S SCHEDULE",
 
       today_label: "TODAY'S BLM48",
       schedule_top: "SCHEDULE TOP",
@@ -96,6 +100,8 @@
       video_title: "VIDEO",
       video_tag: "BLM48 Official Channel",
       group_title: "AKB48 Group",
+      members_title: "MEMBERS",
+      members_cta: "SEE ALL MEMBERS",
 
       about_header: "ABOUT",
       about_p1: "BLM48 is The Male & Female Cover Group of AKB48Group.",
@@ -149,6 +155,7 @@
       footer_contact: "お問い合わせ",
       footer_rights: "無断複写・転載を禁じます。",
       footer_pagetop: "ページトップ",
+      ticker_label: "本日のスケジュール",
 
       today_label: "本日のBLM48",
       schedule_top: "スケジュール一覧",
@@ -161,6 +168,8 @@
       video_title: "ビデオ",
       video_tag: "BLM48公式チャンネル",
       group_title: "AKB48グループ",
+      members_title: "メンバー",
+      members_cta: "メンバー一覧を見る",
 
       about_header: "概要",
       about_p1: "BLM48は、AKB48グループの男女混合カバーグループです。",
