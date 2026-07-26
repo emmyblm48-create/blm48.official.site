@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLM48 Official - ABOUT</title>
+  
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+
+  <style>
+    /* --- Global Styles --- */
+    * { 
+      box-sizing: border-box; 
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Quicksand', 'Kanit', sans-serif;
+      background-color: #fffef8;
+      background-image: radial-gradient(#f3e5ab 18%, transparent 18%), radial-gradient(#f3e5ab 18%, transparent 18%);
+      background-size: 16px 16px;
+      background-position: 0 0, 8px 8px;
+      color: #333333;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --- Main Container --- */
+    .main-wrapper {
+      max-width: 1500px;
+      width: 96%;
+      margin: 20px auto;
+      background: #ffffff;
+      padding: 35px 30px;
+      border-radius: 4px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      border: 1px solid #ebd99f;
+      min-height: 70vh;
+    }
+
+    /* --- Section Header --- */
+    .section-header-banner {
+      width: 100%;
+      background-color: #fffef8;
+      background-image: radial-gradient(#f3e5ab 18%, transparent 18%), radial-gradient(#f3e5ab 18%, transparent 18%);
+      background-size: 16px 16px;
+      background-position: 0 0, 8px 8px;
+      border-top: 2px solid #f2ab00;
+      border-bottom: 2px solid #f2ab00;
+      padding: 12px 20px;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .section-header-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #f2ab00;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    /* --- About Content Box --- */
+    .about-box {
+      max-width: 800px;
+      margin: 0 auto 40px;
+      padding: clamp(30px, 6vw, 50px) clamp(20px, 5vw, 50px);
+      background: #fffdf6;
+      border: 1px solid #f9f0d3;
+      border-radius: 4px;
+      text-align: center;
+    }
+    
+    .about-title { 
+      color: #333333; 
+      letter-spacing: clamp(2px, 1vw, 4px); 
+      margin-bottom: 5px; 
+      font-weight: 800;
+      font-size: clamp(28px, 6vw, 40px);
+    }
+
+    .sub-title { 
+      color: #f2ab00; 
+      font-size: clamp(1rem, 2.5vw, 1.2rem); 
+      margin-bottom: 35px; 
+      letter-spacing: 2px; 
+      font-weight: 600;
+    }
+    
+    .text-content { 
+      line-height: 1.8; 
+      color: #555555; 
+      font-size: clamp(0.95rem, 2.8vw, 1.1rem); 
+      text-align: center;
+    }
+
+    .text-content p { 
+      margin-bottom: 20px; 
+    }
+    
+    .highlight {
+      color: #333333;
+      font-weight: 700;
+      border-bottom: 2px solid #f2ab00;
+      display: inline-block;
+      line-height: 1.3;
+      padding-bottom: 2px;
+    }
+
+    .slogan {
+      margin-top: 40px;
+      color: #f2ab00;
+      font-style: italic;
+      font-size: clamp(1.05rem, 3vw, 1.25rem);
+      font-weight: 600;
+      padding-top: 20px;
+      border-top: 1px dashed #f9f0d3;
+    }
+
+    @media (max-width: 680px) {
+      .main-wrapper { padding: 20px 12px; width: 98%; }
+      .text-content { text-align: left; }
+      .text-content p { text-align: justify; text-justify: inter-word; }
+      .slogan { text-align: center; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="site-header"></div>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/nav.js"></script>
+
+  <!-- Main Container -->
+  <main class="main-wrapper">
+    
+    <!-- Header Banner -->
+    <header class="section-header-banner">
+      <h1 class="section-header-title" data-i18n="about_header">ABOUT</h1>
+    </header>
+
+    <!-- About Content -->
+    <div class="about-box">
+      <h2 class="about-title">BLM48</h2>
+      <div class="sub-title">( BLOOMING48 )</div>
+
+      <div class="text-content">
+        <p><span class="highlight" data-i18n="about_p1">BLM48 is The Male & Female Cover Group of AKB48Group.</span></p>
+
+        <p data-i18n="about_p2">BLM48 (Blooming48) is a virtual idol cover group inspired by the AKB48 Group,
+        bringing the charm and spirit of 48Group songs to life through the virtual platform ZEPETO.</p>
+
+        <p data-i18n="about_p3">The word “Blooming” represents growth, development, and the moment when dreams begin to blossom.
+        BLM48 serves as a creative space where members can learn, express themselves, and grow together alongside their fans.</p>
+
+        <p data-i18n="about_p4">The group focuses on delivering cover performances that respect the original works,
+        while presenting them in a fresh, accessible, and modern style. By connecting Japanese idol culture
+        with a digital community, BLM48 aims to share positive energy, dreams, and smiles with audiences everywhere.</p>
+
+        <div class="slogan" data-i18n="about_slogan">
+          BLM48 – Where idols bloom in the virtual world.
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <div id="site-footer"></div>
+
+</body>
+</html>

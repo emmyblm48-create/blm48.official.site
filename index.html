@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLM48 Official Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="assets/css/site.css">
+
+  <style>
+    /* --- Global Styles --- */
+    * { 
+      box-sizing: border-box; 
+      margin: 0;
+      padding: 0;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Quicksand', 'Kanit', sans-serif;
+      background-color: #fffef8;
+      background-image: radial-gradient(#f3e5ab 18%, transparent 18%), radial-gradient(#f3e5ab 18%, transparent 18%);
+      background-size: 16px 16px;
+      background-position: 0 0, 8px 8px;
+      color: #333333;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --- Landing Overlay --- */
+    #landing-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: #fff9e6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999; 
+      transition: opacity 1.5s ease-out, visibility 1.5s;
+      overflow: hidden;
+    }
+    
+    .landing-container { text-align: center; }
+    .logo-text { font-size: clamp(32px, 10vw, 52px); color: #ff85a2; letter-spacing: 8px; font-weight: 300; margin-bottom: 10px; }
+    .sub-text { font-size: clamp(14px, 4vw, 18px); color: #ffb6c1; letter-spacing: 4px; }
+
+    /* Petal Animation */
+    .petal {
+      position: absolute; background-color: #ffb6c1;
+      border-radius: 150% 0 150% 150%;
+      pointer-events: none;
+      animation: falling linear infinite;
+    }
+    @keyframes falling {
+      0% { top: -10%; opacity: 0; transform: rotate(0deg); }
+      10% { opacity: 0.8; }
+      100% { top: 110%; opacity: 0; transform: rotate(720deg) translateX(100px); }
+    }
+
+    .fade-out {
+      opacity: 0 !important;
+      visibility: hidden !important;
+    }
+
+    /* --- Background Petals --- */
+    .bg-blossom-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .bg-petal {
+      position: absolute;
+      background-color: #ffb6c1;
+      border-radius: 50% 0 50% 50%;
+      opacity: 0;
+      animation: fallDown infinite linear;
+    }
+    @keyframes fallDown {
+      0% { top: -10%; opacity: 0; transform: translateX(0) rotate(0deg); }
+      10% { opacity: 0.5; }
+      90% { opacity: 0.5; }
+      100% { top: 110%; opacity: 0; transform: translateX(150px) rotate(720deg); }
+    }
+    .bp1 { width: 15px; height: 15px; left: 5%; animation-duration: 10s; animation-delay: 0s; }
+    .bp2 { width: 10px; height: 10px; left: 25%; animation-duration: 14s; animation-delay: 2s; }
+    .bp3 { width: 20px; height: 20px; left: 45%; animation-duration: 12s; animation-delay: 5s; }
+    .bp4 { width: 12px; height: 12px; left: 65%; animation-duration: 16s; animation-delay: 1s; }
+    .bp5 { width: 18px; height: 18px; left: 85%; animation-duration: 13s; animation-delay: 4s; }
+
+    /* --- SECTION 1: TOP SECTION --- */
+    .top-section {
+      max-width: 96%;
+      margin: 20px auto 50px;
+      padding: 0 20px;
+    }
+    .top-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      align-items: stretch;
+    }
+    @media (max-width: 860px) {
+      .top-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .top-left-card {
+      background: #ffffff;
+      border: 2px solid #e2c044;
+      padding: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+    .top-left-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      max-height: 600px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .top-right-card {
+      background: #ffffff;
+      border: 2px solid #e2c044;
+      padding: 25px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+    .todays-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background-color: #f2ab00;
+      color: #ffffff;
+      padding: 6px 14px;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 1px;
+      width: fit-content;
+      margin-bottom: 25px;
+      border-radius: 2px;
+    }
+    .todays-date { font-weight: 400; }
+    .todays-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+    .todays-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      text-decoration: none;
+      color: inherit;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    .todays-item:hover .todays-title-text { color: #f2ab00; }
+    .badge-tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 2px;
+      font-weight: 600;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .badge-media { color: #2db3a0; border: 1px solid #2db3a0; }
+    .badge-live { color: #ff6b81; border: 1px solid #ff6b81; }
+    .badge-event { color: #f2ab00; border: 1px solid #f2ab00; }
+    .todays-title-text { color: #444; transition: color 0.2s; }
+    .schedule-top-link {
+      align-self: flex-end;
+      text-decoration: none;
+      color: #f2ab00;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.2s;
+    }
+    .schedule-top-link:hover { transform: translateX(4px); }
+
+
+    /* --- SECTION 2: SLIDE BAR --- */
+    .slider-section {
+      max-width: 96%;
+      margin: 40px auto 60px;
+      padding: 0 20px;
+    }
+    .slider-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      touch-action: pan-y;
+      user-select: none;
+    }
+    .slider-track {
+      display: flex;
+      transition: transform 0.4s ease-out;
+      gap: 15px;
+    }
+    .slide-item {
+      min-width: calc(26% - 12px);
+      flex-shrink: 0;
+      transition: transform 0.3s;
+    }
+    @media (max-width: 1024px) {
+      .slide-item {
+        min-width: calc(35% - 10px);
+      }
+    }
+    @media (max-width: 768px) {
+      .slide-item {
+        min-width: calc(55% - 10px);
+      }
+    }
+    @media (max-width: 480px) {
+      .slide-item {
+        min-width: 70%;
+      }
+    }
+    .slide-item img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 617 / 304;
+      object-fit: cover;
+      border-radius: 4px;
+      display: block;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+    }
+    .slider-nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+    }
+    .slide-counter {
+      font-size: 16px;
+      color: #f2ab00;
+      font-weight: 700;
+      font-style: italic;
+      letter-spacing: 2px;
+    }
+    .slider-arrows {
+      display: flex;
+      gap: 10px;
+    }
+    .slider-btn {
+      background: #ffffff;
+      border: 1px solid #f2ab00;
+      color: #f2ab00;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+    }
+    .slider-btn:hover {
+      background: #f2ab00;
+      color: #ffffff;
+    }
+
+
+    /* --- SECTION 3: NEWS & SCHEDULE --- */
+    .content-box-section {
+      max-width: 96%;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+    .white-container-box {
+      background: #ffffff;
+      border: 1px solid #ebd99f;
+      padding: 40px 50px;
+      position: relative;
+      margin-bottom: 50px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    }
+    @media (max-width: 600px) {
+      .white-container-box { padding: 25px 20px; }
+    }
+    .yellow-top-line {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 2px;
+      background-color: #f2ab00;
+    }
+    .section-title-badge {
+      position: absolute;
+      top: -18px; left: 40px;
+      background-color: #fffef8;
+      padding: 0 10px;
+      font-size: 28px;
+      font-weight: 700;
+      color: #f2ab00;
+      letter-spacing: 2px;
+    }
+    
+    .data-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 10px;
+      margin-bottom: 25px;
+    }
+    .data-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      text-decoration: none;
+      color: inherit;
+      padding-bottom: 14px;
+      border-bottom: 1px dashed #f5e9c9;
+      transition: background 0.2s;
+    }
+    .data-row:last-child { border-bottom: none; }
+    .data-row:hover .data-title { color: #f2ab00; }
+    @media (max-width: 600px) {
+      .data-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+    }
+    .data-date-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 180px;
+      flex-shrink: 0;
+    }
+    .data-date { font-size: 14px; color: #555; font-weight: 600; }
+    .new-flag { color: #f2ab00; font-size: 11px; font-weight: 800; }
+    .data-title { font-size: 15px; color: #333; line-height: 1.4; transition: color 0.2s; }
+    .more-link-wrapper { display: flex; justify-content: flex-end; }
+    .more-link {
+      text-decoration: none;
+      color: #f2ab00;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.2s;
+    }
+    .more-link:hover { transform: translateX(4px); }
+
+
+    /* ================= SECTION 4: VIDEO SECTION (แก้ไขความสูงปูดเรียบร้อย) ================= */
+    .video-section {
+      width: 100%;
+      max-width: 96%;
+      margin: 0 auto;
+      padding: 40px 20px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .video-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .video-title {
+      font-size: 2.4rem; 
+      font-weight: 800;
+      color: #222;
+      margin: 0;
+      line-height: 1;
+      letter-spacing: 0.5px;
+    }
+
+    .video-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .video-tag .fa-youtube { color: #f3a812; font-size: 1.2rem; }
+
+    /* Wrapper สไลด์ + ปุ่มกดลูกศร */
+    .video-swiper-container {
+      position: relative;
+      width: 100%;
+      height: auto;
+    }
+
+    .video-swiper { 
+      width: 100%; 
+      height: auto !important;
+      overflow: hidden; 
+    }
+    
+    .video-swiper .swiper-wrapper {
+      height: auto !important;
+      align-items: flex-start !important;
+    }
+
+    .video-swiper .swiper-slide {
+      height: auto !important;
+    }
+
+    .video-card { 
+      width: 100%; 
+      height: auto;
+    }
+
+    .video-item {
+      display: block;
+      width: 100%;
+      text-decoration: none;
+    }
+
+    .video-thumb-box {
+      position: relative;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9; 
+      overflow: hidden;
+      background-color: #000;
+      border-radius: 2px;
+    }
+
+    .video-thumb-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    /* Overlay เมื่อเมาส์ชี้ */
+    .video-hover-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      padding: 15px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    .video-hover-text {
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.6;
+      letter-spacing: 0.5px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    }
+
+    .video-card:hover .video-hover-overlay {
+      opacity: 1;
+    }
+    .video-card:hover img {
+      transform: scale(1.04);
+    }
+
+    /* ปุ่มลูกศร ซ้าย-ขวา สำหรับ VIDEO */
+    .video-nav-prev, .video-nav-next {
+      color: #f2ab00 !important;
+      font-weight: bold;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      top: 50% !important;
+      transform: translateY(-50%) !important;
+      margin-top: 0 !important;
+    }
+    .video-nav-prev::after, .video-nav-next::after {
+      font-size: 24px !important;
+      font-weight: bold;
+    }
+    .video-nav-prev { left: -25px !important; }
+    .video-nav-next { right: -25px !important; }
+    @media (max-width: 768px) {
+      .video-nav-prev { left: -10px !important; }
+      .video-nav-next { right: -10px !important; }
+      .video-hover-text { font-size: 11px; }
+    }
+
+    .video-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .video-pagination {
+      font-size: 1.6rem; 
+      font-weight: 900;
+      font-style: italic;
+      color: #f3a812;
+      letter-spacing: 2px;
+    }
+
+    .video-more-btn {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #222;
+      text-decoration: none;
+      letter-spacing: 1px;
+      transition: color 0.2s ease;
+    }
+
+    .video-more-btn:hover { color: #f3a812; }
+
+
+    /* --- SECTION 5: AKB48 GROUP --- */
+    .idol-group-container {
+      max-width: 96%;
+      margin: 60px auto 40px;
+      padding: 30px 40px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 8px;
+    }
+    .idol-group-title {
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; 
+      font-weight: 400; 
+      letter-spacing: 0.15em; 
+      font-size: 1.4rem;
+      color: #555; 
+      text-align: center; 
+      margin-bottom: 25px;
+    }
+    .logo-grid {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+    .logo-grid a {
+      flex: 1; 
+      display: flex;
+      justify-content: center;
+      min-width: 70px;
+    }
+    .logo-grid img {
+      width: 100%;
+      height: auto;
+      max-width: 90px;
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.05));
+    }
+    .logo-grid img:hover {
+      transform: scale(1.1);
+      filter: brightness(1.1);
+    }
+
+
+  </style>
+</head>
+<body>
+
+  <div id="site-header"></div>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/nav.js"></script>
+
+  <!-- Landing Overlay -->
+  <div id="landing-overlay">
+    <div class="landing-container">
+      <div class="logo-text">BLM48</div>
+      <div class="sub-text">Official Site</div>
+    </div>
+  </div>
+
+  <!-- Background Petals -->
+  <div class="bg-blossom-container">
+    <div class="bg-petal bp1"></div><div class="bg-petal bp2"></div>
+    <div class="bg-petal bp3"></div><div class="bg-petal bp4"></div>
+    <div class="bg-petal bp5"></div>
+  </div>
+
+  <!-- SECTION 1: TOP SECTION -->
+  <section class="top-section">
+    <div class="top-grid">
+      <!-- Left: Visual Frame -->
+      <div class="top-left-card">
+        <img src="https://lh3.googleusercontent.com/d/1_bEVYmqNwCpnRKAGjhFUN-YcECH1RL1G=s1000" alt="BLM48 Main Banner">
+      </div>
+      
+      <!-- Right: TODAY'S BLM48 Box -->
+      <div class="top-right-card">
+        <div>
+          <div class="todays-header">
+            <span data-i18n="today_label">TODAY'S BLM48</span>
+            <span class="todays-date">/ 2026.07.23</span>
+          </div>
+          
+          <div class="todays-list">
+            <a href="https://youtu.be/rdWq9BKqpBU?si=LefsrZ5m9pwW8N0T" class="todays-item">
+              <span class="badge-tag badge-media" data-i18n="badge_media">MEDIA</span>
+              <span class="todays-title-text">BLM48 3rd Album C/W Senbatsu Special Stream</span>
+            </a>
+            
+            <a href="https://www.instagram.com/p/DZKrI_FCRZM/?img_index=2" class="todays-item">
+              <span class="badge-tag badge-live" data-i18n="badge_live">LIVE</span>
+              <span class="todays-title-text">BLM48 “My Last Letter” –Hero’s Graduation Ceremony–</span>
+            </a>
+            
+            <a href="https://www.instagram.com/p/DXj_bnLiYls/" class="todays-item">
+              <span class="badge-tag badge-event" data-i18n="badge_event">EVENT</span>
+              <span class="todays-title-text">New Logo BLM48 The Campus Special Exhibition</span>
+            </a>
+          </div>
+        </div>
+
+        <a href="https://sites.google.com/view/blm48/schedule" class="schedule-top-link">
+          <span data-i18n="schedule_top">SCHEDULE TOP</span> <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SECTION 2: SLIDER SECTION -->
+  <section class="slider-section">
+    <div class="slider-wrapper" id="bannerSliderWrapper">
+      <div class="slider-track" id="bannerTrack">
+        
+        <div class="slide-item">
+          <a href="https://www.instagram.com/blm48thecampus/" target="_blank">
+            <img src="https://lh3.googleusercontent.com/d/1rxMRZ8CUVrUHU_LWlY1hS-3mQsnzSSBf=s1000" alt="Champ">
+          </a>
+        </div>
+        
+        <div class="slide-item">
+          <a href="https://www.instagram.com/blm48thecampus/" target="_blank">
+            <img src="https://lh3.googleusercontent.com/d/1NEJFa-E70hHX8_Snix_lxTC9GxiAIpFv=s1000" alt="TopStream">
+          </a>
+        </div>
+        
+        <div class="slide-item">
+          <a href="https://blm48-membership.vercel.app/" target="_blank">
+            <img src="https://lh3.googleusercontent.com/d/1mT4ayLmbwj3b8eRhExBfSTz6Q_GOsSZs=s1000" alt="Campus">
+          </a>
+        </div>
+
+        <div class="slide-item">
+          <a href="https://www.instagram.com/blm48thecampus/" target="_blank">
+            <img src="https://lh3.googleusercontent.com/d/1_lNVPxmfBoc7ir9WmPAdVHqxjYLDCJFO=s1000" alt="WebApp">
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Bottom Counter & Navigation -->
+    <div class="slider-nav-bar">
+      <div class="slide-counter" id="bannerCounter">1 — 4</div>
+      <div class="slider-arrows">
+        <button class="slider-btn" onclick="prevBannerSlide()"><i class="fas fa-chevron-left"></i></button>
+        <button class="slider-btn" onclick="nextBannerSlide()"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SECTION 3: NEWS SECTION -->
+  <section class="content-box-section">
+    <div class="white-container-box">
+      <div class="yellow-top-line"></div>
+      <div class="section-title-badge" data-i18n="news_title">NEWS</div>
+      
+      <div class="data-list">
+        <a href="https://youtu.be/rdWq9BKqpBU?si=F7No4ZWUS4uWqodC" class="data-row">
+          <div class="data-date-group">
+            <span class="badge-tag badge-media">RELEASE</span>
+            <span class="data-date">2026.06.12</span>
+            <span class="new-flag">NEW</span>
+          </div>
+          <div class="data-title">「Rapsodi」 SENBATSU ANNOUNCEMENT</div>
+        </a>
+
+        <a href="https://youtu.be/R8Ha2Wx92mw?si=3S58mgUbK-jGIqWB" class="data-row">
+          <div class="data-date-group">
+            <span class="badge-tag badge-event" data-i18n="badge_event">EVENT</span>
+            <span class="data-date">2026.04.26</span>
+            <span class="new-flag">NEW</span>
+          </div>
+          <div class="data-title">BLM48 Original Stage Setlist Announcement</div>
+        </a>    
+        
+        <a href="https://youtu.be/-TLrLJW7AUc?si=y5OMGfWBl-Cx6VyY" class="data-row">
+          <div class="data-date-group">
+            <span class="badge-tag badge-event" data-i18n="badge_event">EVENT</span>
+            <span class="data-date">2026.04.26</span>
+            <span class="new-flag">NEW</span>
+          </div>
+          <div class="data-title">BLM48 Concert Line Up Senbatsu Members Announcement</div>
+        </a>  
+
+        <a href="https://youtu.be/rdWq9BKqpBU?si=LefsrZ5m9pwW8N0T" class="data-row">
+          <div class="data-date-group">
+            <span class="badge-tag badge-media">RELEASE</span>
+            <span class="data-date">2026.06.12</span>
+            <span class="new-flag">NEW</span>
+          </div>
+          <div class="data-title">BLM48 3rd Album C/W Senbatsu Announcement</div>
+        </a>
+
+        <a href="https://youtube.com/playlist?list=PLIZN3HRIc9-Bj8Cdm_Tdy9_KtZpkT0Za7" class="data-row">
+          <div class="data-date-group">
+            <span class="badge-tag badge-media">RELEASE</span>
+            <span class="data-date">2026.04.25</span>
+            <span class="new-flag">NEW</span>
+          </div>
+          <div class="data-title">BLM48 10th Single "Sustainable" MV Out Now!</div>
+        </a>
+
+        <a href="https://www.instagram.com/p/DXj_bnLiYls/" class="data-row">
+          <div class="data-date-group">
+            <span class="badge-tag badge-event" data-i18n="badge_event">EVENT</span>
+            <span class="data-date">2026.04.25</span>
+            <span class="new-flag">NEW</span>
+          </div>
+          <div class="data-title">New Logo BLM48 The Campus</div>
+        </a>
+      </div>
+
+      <div class="more-link-wrapper">
+        <a href="https://sites.google.com/view/blm48/news" class="more-link">
+          <span data-i18n="more_label">MORE</span> <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+
+
+    <!-- SCHEDULE SECTION -->
+    <div class="white-container-box">
+      <div class="yellow-top-line"></div>
+      <div class="section-title-badge" data-i18n="schedule_title">SCHEDULE</div>
+      
+      <div class="data-list">
+        <a href="https://www.instagram.com/p/DXj-1-EiaBr/" class="data-row">
+          <div class="data-date-group">
+            <span class="badge-tag badge-event" data-i18n="badge_event">EVENT</span>
+            <span class="data-date">2026.09.26</span>
+            <span class="new-flag">NEW</span>
+          </div>
+          <div class="data-title">BLM48 Concert This Letter Says "Marry Me"</div>
+        </a>
+
+        <a href="https://www.instagram.com/p/DaxCoscEYj4/?img_index=2" class="data-row">
+          <div class="data-date-group">
+            <span class="badge-tag badge-live" data-i18n="badge_live">LIVE</span>
+            <span class="data-date">2026.07.18</span>
+            <span class="new-flag">NEW</span>
+          </div>
+          <div class="data-title">BLM48 Hi-Live : Tanabata พรเอ๋ยจงเป็นจริง 🎋⭐️</div>
+        </a>         
+
+        <a href="https://www.instagram.com/p/DaqDerMCdv2/?img_index=2" class="data-row">
+          <div class="data-date-group">
+            <span class="badge-tag badge-live" data-i18n="badge_live">LIVE</span>
+            <span class="data-date">2026.07.12</span>
+            <span class="new-flag">NEW</span>
+          </div>
+          <div class="data-title">BLM48 Play Fest! EP.4</div>
+        </a>            
+
+        <a href="https://www.instagram.com/p/DalB4cKiUPt/?img_index=2" class="data-row">
+          <div class="data-date-group">
+            <span class="badge-tag badge-live" data-i18n="badge_live">LIVE</span>
+            <span class="data-date">2026.07.11</span>
+            <span class="new-flag">NEW</span>
+          </div>
+          <div class="data-title">BLM48 Hi-Live : เหลี่ยมทุกดอก แล้วบอกนักสืบ EP.2</div>
+        </a>               
+
+        <a href="https://www.instagram.com/p/DaXv8DyCTIv/?img_index=2" class="data-row">
+          <div class="data-date-group">
+            <span class="badge-tag badge-live" data-i18n="badge_live">LIVE</span>
+            <span class="data-date">2026.07.05</span>
+            <span class="new-flag">NEW</span>
+          </div>
+          <div class="data-title">BLM48 Hi-Live : ตอนเด็กชอบตุ๊กตา โตมาชอบเธอ 👉🏻👈🏻</div>
+        </a>          
+
+        <a href="https://www.instagram.com/p/DZu5r-eCWaK/?img_index=2" class="data-row">
+          <div class="data-date-group">
+            <span class="badge-tag badge-live" data-i18n="badge_live">LIVE</span>
+            <span class="data-date">2026.06.20</span>
+            <span class="new-flag">NEW</span>
+          </div>
+          <div class="data-title">BLM48 10th Single “ Sustainable “ Roadshow</div>
+        </a>          
+
+        <a href="https://www.instagram.com/p/DZXyMQFCYiC/?img_index=2" class="data-row">
+          <div class="data-date-group">
+            <span class="badge-tag badge-live" data-i18n="badge_live">LIVE</span>
+            <span class="data-date">2026.06.12</span>
+            <span class="new-flag">NEW</span>
+          </div>
+          <div class="data-title">BLM48 Hi-Live : เหลี่ยมทุกดอก แล้วบอกนักสืบ! EP.1</div>
+        </a>        
+
+        <a href="https://www.instagram.com/p/DZKrI_FCRZM/?img_index=2" class="data-row">
+          <div class="data-date-group">
+            <span class="badge-tag badge-live" data-i18n="badge_live">LIVE</span>
+            <span class="data-date">2026.06.07</span>
+            <span class="new-flag">NEW</span>
+          </div>
+          <div class="data-title">BLM48 “My Last Letter - "ยินดีที่ได้รู้จักนะ"” –Hero’s Graduation Ceremony–</div>
+        </a>
+
+        <a href="https://www.instagram.com/p/DYHYTQECesS/" class="data-row">
+          <div class="data-date-group">
+            <span class="badge-tag badge-live" data-i18n="badge_live">LIVE</span>
+            <span class="data-date">2026.05.17</span>
+            <span class="new-flag">NEW</span>
+          </div>
+          <div class="data-title">BLM48 x NTL48 Natsu Expo 2026</div>
+        </a>
+      </div>
+
+      <div class="more-link-wrapper">
+        <a href="https://sites.google.com/view/blm48/schedule" class="more-link">
+          <span data-i18n="more_label">MORE</span> <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SECTION 4: YOUTUBE / VIDEO SECTION -->
+  <section class="video-section">
+    <div class="video-header">
+      <h2 class="video-title" data-i18n="video_title">VIDEO</h2>
+      <div class="video-tag">
+        <span class="fab fa-youtube"></span>
+        <span data-i18n="video_tag">BLM48 Official Channel</span>
+      </div>
+    </div>
+
+    <div class="video-swiper-container">
+      <div class="swiper video-swiper">
+        <div class="swiper-wrapper">
+
+          <!-- Slide 1 -->
+          <div class="swiper-slide">
+            <div class="video-card">
+              <a href="https://youtu.be/bhbjo1UWOwU?si=bwjqCKaWuNP1g5tU" target="_blank" class="video-item">
+                <div class="video-thumb-box">
+                  <img src="https://lh3.googleusercontent.com/d/1yx9L-d9mNZlxuVJ-RMH93sLW0OtYY5mK=s1000" alt="Sustainable">
+                  <div class="video-hover-overlay">
+                    <div class="video-hover-text">
+                      BLM48 「Nagiichi」 Music Video /<br>
+                      2026.06.25 Special Song
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>                
+
+          <!-- Slide 2 -->
+          <div class="swiper-slide">
+            <div class="video-card">
+              <a href="https://youtu.be/f9t5C4K3Wk0?si=pq9u-E0zRNnhRW7H" target="_blank" class="video-item">
+                <div class="video-thumb-box">
+                  <img src="https://lh3.googleusercontent.com/d/12oY6a47NtLHsAyqsavAPUw6TSPbYYwRa=s1000" alt="Sustainable">
+                  <div class="video-hover-overlay">
+                    <div class="video-hover-text">
+                      BLM48 「Dakishimecha Ikenai」 Music Video /<br>
+                      2026.06.20 10th single C/W
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>            
+          
+          <!-- Slide 3 -->
+          <div class="swiper-slide">
+            <div class="video-card">
+              <a href="https://youtu.be/1Vwg1iQUDtc?si=MhOKdpthQEuVebdK" target="_blank" class="video-item">
+                <div class="video-thumb-box">
+                  <img src="https://lh3.googleusercontent.com/d/1WXp1ZbzQ8ib1gb3imrDGQ7KjnFJZUaOO=s1000" alt="Sustainable">
+                  <div class="video-hover-overlay">
+                    <div class="video-hover-text">
+                      BLM48 「Sustainable」 Music Video /<br>
+                      2026.04.25 10th single
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Slide 4 -->
+          <div class="swiper-slide">
+            <div class="video-card">
+              <a href="https://youtu.be/TAPlWWZMGFQ?si=__iqu3sD3ys8ORsh" target="_blank" class="video-item">
+                <div class="video-thumb-box">
+                  <img src="https://lh3.googleusercontent.com/d/11zU0OJFxJ9WFzqQvfrqPJrCUUyG-KJZJ=s1000" alt="Celebration">
+                  <div class="video-hover-overlay">
+                    <div class="video-hover-text">
+                      BLM48 「Celebration」  Music Video /<br>
+                      2026.02.14 9th single
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Slide 5 -->
+          <div class="swiper-slide">
+            <div class="video-card">
+              <a href="https://youtu.be/tqFr0QPgqR0?si=Tbdpd6Qz27KNgbXu" target="_blank" class="video-item">
+                <div class="video-thumb-box">
+                  <img src="https://lh3.googleusercontent.com/d/1wD34e9W6bHHuf9SJ_qBf6I_4e-c_oLen=s1000" alt="Sekai no Hito e">
+                  <div class="video-hover-overlay">
+                    <div class="video-hover-text">
+                      BLM48 「Sekai no Hito e」 Music Video /<br>
+                      2025.11.10 8th single
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Slide 6 -->
+          <div class="swiper-slide">
+            <div class="video-card">
+              <a href="https://youtu.be/-rhmBTZoZk0?si=sPfBNaZs5arpLAnn" target="_blank" class="video-item">
+                <div class="video-thumb-box">
+                  <img src="https://lh3.googleusercontent.com/d/1-GMwAgsjKBORWgEHNKPUyecvDRo1w-Gc=s1000" alt="Eien Pressure">
+                  <div class="video-hover-overlay">
+                    <div class="video-hover-text">
+                      BLM48 「Eien Pressure」 Music Video /<br>
+                      2025.08.01 7th single
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Arrow Navigation -->
+      <div class="swiper-button-prev video-nav-prev"></div>
+      <div class="swiper-button-next video-nav-next"></div>
+    </div>
+
+    <div class="video-footer">
+      <div class="video-pagination">
+        <span id="videoCurrentSlide">1</span> — <span>6</span>
+      </div>
+      <a href="https://www.youtube.com/@BLM48Official" target="_blank" class="video-more-btn"><span data-i18n="more_label">MORE</span> &rarr;</a>
+    </div>
+  </section>
+
+
+  <!-- SECTION 5: AKB48 GROUP -->
+  <div class="idol-group-container">
+    <h3 class="idol-group-title" data-i18n="group_title">AKB48 Group</h3>
+    <div class="logo-grid">
+      <!-- Japan Groups -->
+      <a href="https://www.akb48.co.jp/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_akb48.png?ver=53" alt="AKB48"></a>
+      <a href="https://www.ske48.co.jp/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_ske48.png?ver=53" alt="SKE48"></a>
+      <a href="https://nmb48.com/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_nmb48.png?ver=53" alt="NMB48"></a>
+      <a href="http://www.hkt48.jp/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_hkt48.png?ver=53" alt="HKT48"></a>
+      <a href="https://ngt48.jp/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_ngt48.png?ver=53" alt="NGT48"></a>
+      <a href="https://www.stu48.com/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_stu48.png?ver=53" alt="STU48"></a>
+      
+      <!-- International Groups -->
+      <a href="https://www.jkt48.com/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_jkt48.png?ver=53" alt="JKT48"></a>
+      <a href="https://www.bnk48.com/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_bnk48.png?ver=53" alt="BNK48"></a>
+      <a href="https://weibo.com/akb48teamsh" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_tsh48.png?ver=53" alt="TSH48"></a>
+      <a href="https://www.tpe48.tw/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_tpe48.png" alt="TPE48"></a>
+      <a href="https://www.cgm48official.com/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_cgm48.png?ver=53" alt="CGM48"></a>
+      <a href="https://klp48.my/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_klp48.png?ver=53" alt="KLP48"></a>
+    </div>
+  </div>
+
+
+  <!-- SECTION 6: FOOTER -->
+  <div id="site-footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <!-- JavaScript Functionalities -->
+  <script>
+    // --- Landing Overlay Auto Fade Out ---
+    setTimeout(() => {
+      const overlay = document.getElementById('landing-overlay');
+      if (overlay) overlay.classList.add('fade-out');
+    }, 3500);
+
+    // --- Floating Petals Creator ---
+    function createPetal() {
+      const overlay = document.getElementById('landing-overlay');
+      if (!overlay || overlay.classList.contains('fade-out')) return;
+      
+      const petal = document.createElement('div');
+      petal.classList.add('petal');
+      const size = Math.random() * 12 + 8 + 'px';
+      petal.style.width = size; 
+      petal.style.height = size;
+      petal.style.left = Math.random() * 100 + 'vw';
+      petal.style.animationDuration = Math.random() * 4 + 4 + 's';
+      overlay.appendChild(petal);
+      setTimeout(() => petal.remove(), 8000);
+    }
+    setInterval(createPetal, 200);
+
+    // --- Banner Slider Helper ---
+    function setupSlider(wrapperId, trackId, counterId, totalItems) {
+      const wrapper = document.getElementById(wrapperId);
+      const track = document.getElementById(trackId);
+      const counter = document.getElementById(counterId);
+      if (!wrapper || !track) return;
+
+      let currentIndex = 0;
+      let startX = 0;
+      let currentTranslate = 0;
+      let prevTranslate = 0;
+      let isDragging = false;
+
+      function updatePosition() {
+        const itemWidth = track.children[0].offsetWidth + 15;
+        let targetTranslate = -currentIndex * itemWidth;
+        
+        const maxTranslate = -(track.scrollWidth - wrapper.clientWidth);
+        if (maxTranslate < 0 && targetTranslate < maxTranslate) {
+          targetTranslate = maxTranslate;
+        }
+
+        currentTranslate = targetTranslate;
+        prevTranslate = currentTranslate;
+        track.style.transform = `translateX(${currentTranslate}px)`;
+        if (counter) {
+          counter.textContent = `${currentIndex + 1} — ${totalItems}`;
+        }
+      }
+
+      function goToIndex(idx) {
+        if (idx >= totalItems) {
+          currentIndex = 0;
+        } else if (idx < 0) {
+          currentIndex = totalItems - 1;
+        } else {
+          currentIndex = idx;
+        }
+        updatePosition();
+      }
+
+      wrapper.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+      }, { passive: true });
+
+      wrapper.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        const currentX = e.touches[0].clientX;
+        const diff = currentX - startX;
+        track.style.transform = `translateX(${prevTranslate + diff}px)`;
+      }, { passive: true });
+
+      wrapper.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        const endX = e.changedTouches[0].clientX;
+        const diff = endX - startX;
+        if (diff < -40) {
+          goToIndex(currentIndex + 1);
+        } else if (diff > 40) {
+          goToIndex(currentIndex - 1);
+        } else {
+          updatePosition();
+        }
+      });
+
+      wrapper.addEventListener('mousedown', (e) => {
+        startX = e.clientX;
+        isDragging = true;
+        wrapper.style.cursor = 'grabbing';
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const diff = e.clientX - startX;
+        track.style.transform = `translateX(${prevTranslate + diff}px)`;
+      });
+
+      window.addEventListener('mouseup', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        wrapper.style.cursor = 'grab';
+        const diff = e.clientX - startX;
+        if (diff < -50) {
+          goToIndex(currentIndex + 1);
+        } else if (diff > 50) {
+          goToIndex(currentIndex - 1);
+        } else {
+          updatePosition();
+        }
+      });
+
+      window.addEventListener('resize', updatePosition);
+
+      return {
+        next: () => goToIndex(currentIndex + 1),
+        prev: () => goToIndex(currentIndex - 1),
+        update: updatePosition
+      };
+    }
+
+    // Initialize Banner Slider
+    const trackElem = document.getElementById('bannerTrack');
+    const totalBannerItems = trackElem ? trackElem.children.length : 4;
+    const bannerSlider = setupSlider('bannerSliderWrapper', 'bannerTrack', 'bannerCounter', totalBannerItems);
+    
+    function nextBannerSlide() { if(bannerSlider) bannerSlider.next(); }
+    function prevBannerSlide() { if(bannerSlider) bannerSlider.prev(); }
+
+    // Initialize Video Swiper Slider
+    const videoSwiper = new Swiper('.video-swiper', {
+      slidesPerView: 2.3,
+      spaceBetween: 16,
+      grabCursor: true,
+      loop: false,
+      navigation: {
+        nextEl: '.video-nav-next',
+        prevEl: '.video-nav-prev',
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 1.2,
+          spaceBetween: 10
+        },
+        768: {
+          slidesPerView: 2.1,
+          spaceBetween: 14
+        },
+        1024: {
+          slidesPerView: 2.3,
+          spaceBetween: 16
+        }
+      },
+      on: {
+        slideChange: function () {
+          const counterElem = document.getElementById('videoCurrentSlide');
+          if (counterElem) {
+            counterElem.textContent = this.activeIndex + 1;
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

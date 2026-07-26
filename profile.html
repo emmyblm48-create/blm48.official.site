@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLM48 Official - PROFILE</title>
+  
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+
+  <style>
+    /* --- Global Styles --- */
+    * { 
+      box-sizing: border-box; 
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Quicksand', 'Kanit', sans-serif;
+      background-color: #fffef8;
+      background-image: radial-gradient(#f3e5ab 18%, transparent 18%), radial-gradient(#f3e5ab 18%, transparent 18%);
+      background-size: 16px 16px;
+      background-position: 0 0, 8px 8px;
+      color: #333333;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --- Main Container --- */
+    .main-wrapper {
+      max-width: 1500px;
+      width: 96%;
+      margin: 20px auto;
+      background: #ffffff;
+      padding: 35px 30px;
+      border-radius: 4px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      border: 1px solid #ebd99f;
+    }
+
+    /* --- Section Header --- */
+    .section-header-banner {
+      width: 100%;
+      background-color: #fffef8;
+      background-image: radial-gradient(#f3e5ab 18%, transparent 18%), radial-gradient(#f3e5ab 18%, transparent 18%);
+      background-size: 16px 16px;
+      background-position: 0 0, 8px 8px;
+      border-top: 2px solid #f2ab00;
+      border-bottom: 2px solid #f2ab00;
+      padding: 12px 20px;
+      margin-bottom: 35px;
+      display: flex;
+      align-items: center;
+    }
+    .section-header-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #f2ab00;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* --- Loading Overlay --- */
+    #loading-overlay { 
+      text-align: center; 
+      padding: 80px 0; 
+      color: #f2ab00; 
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .loader-icon { 
+      font-size: 50px; 
+      animation: spin 2s linear infinite; 
+      margin-bottom: 15px;
+      color: #ff85a2;
+    }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+    /* --- Filter Tabs Style --- */
+    .filter-tabs { 
+      display: flex; 
+      justify-content: center; 
+      gap: 15px; 
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .tab-btn { 
+      background: #ffffff; 
+      border: 1px solid #f2ab00; 
+      font-family: 'Quicksand', 'Kanit', sans-serif; 
+      font-size: 15px; 
+      font-weight: 700; 
+      color: #f2ab00; 
+      cursor: pointer; 
+      text-transform: uppercase; 
+      letter-spacing: 0.5px; 
+      padding: 10px 35px; 
+      transition: all 0.2s ease; 
+      min-width: 140px;
+      border-radius: 2px;
+    }
+    .tab-btn.active, .tab-btn:hover { 
+      background: #f2ab00; 
+      color: #ffffff; 
+      box-shadow: 0 4px 10px rgba(242, 171, 0, 0.2);
+    }
+
+    /* --- Main Grid View --- */
+    #main-view { 
+      display: none; 
+    }
+    .members-grid { 
+      display: grid; 
+      grid-template-columns: repeat(4, 1fr); 
+      gap: 35px 25px; 
+    }
+    
+    @media (max-width: 1024px) {
+      .members-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 680px) {
+      .members-grid { grid-template-columns: repeat(2, 1fr); gap: 20px 12px; }
+      .main-wrapper { padding: 20px 12px; width: 98%; }
+    }
+
+    .member-card { 
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .member-card:hover { 
+      transform: translateY(-5px); 
+    }
+    
+    .photo-box { 
+      width: 100%; 
+      aspect-ratio: 3 / 4; 
+      overflow: hidden; 
+      background: #f7f5ec; 
+      margin-bottom: 12px; 
+      cursor: pointer;
+      border: 1px solid #f0e6c8;
+      border-radius: 2px;
+    }
+    .member-photo { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+      transition: transform 0.4s ease;
+    }
+    .member-card:hover .member-photo {
+      transform: scale(1.05);
+    }
+
+    .card-info {
+      width: 100%;
+      margin-bottom: 12px;
+      cursor: pointer;
+    }
+    .member-name-main {
+      font-size: 16px;
+      font-weight: 700;
+      color: #333333;
+      line-height: 1.3;
+    }
+    .member-name-sub {
+      font-size: 12px;
+      font-weight: 600;
+      color: #777777;
+      letter-spacing: 0.5px;
+      margin-top: 3px;
+      text-transform: uppercase;
+    }
+
+    .card-actions {
+      width: 100%;
+      display: flex;
+      gap: 5px;
+    }
+    .card-btn {
+      flex: 1;
+      background: #ffffff;
+      border: 1px solid #ebd99f;
+      color: #f2ab00;
+      font-family: 'Quicksand', 'Kanit', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 7px 0;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-radius: 2px;
+      letter-spacing: 0.5px;
+    }
+    .card-btn:hover {
+      background: #f2ab00;
+      color: #ffffff;
+      border-color: #f2ab00;
+    }
+
+    /* --- Detail View Style --- */
+    #detail-view { 
+      display: none; 
+      animation: fadeIn 0.4s ease; 
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .detail-container-box {
+      background: #ffffff;
+      padding: 10px;
+      position: relative;
+    }
+
+    .back-btn { 
+      display: inline-flex; 
+      align-items: center; 
+      gap: 8px; 
+      color: #f2ab00; 
+      cursor: pointer; 
+      font-weight: 700; 
+      margin-bottom: 25px; 
+      transition: transform 0.2s;
+      font-size: 15px;
+      letter-spacing: 1px;
+    }
+    .back-btn:hover { transform: translateX(-4px); color: #d89600; }
+
+    .detail-layout { 
+      display: flex; 
+      flex-direction: row; 
+      gap: 40px; 
+      text-align: left; 
+    }
+    .detail-image-box { flex: 1; min-width: 280px; max-width: 450px; }
+    .detail-image { 
+      width: 100%; 
+      border-radius: 4px; 
+      border: 1px solid #ebd99f;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05); 
+    }
+    .detail-content { flex: 1.5; min-width: 280px; }
+    
+    .info-header { 
+      border-bottom: 2px solid #fcd874; 
+      padding-bottom: 15px; 
+      margin-bottom: 20px; 
+    }
+    .info-row { 
+      display: grid; 
+      grid-template-columns: 140px 1fr; 
+      padding: 12px 0; 
+      border-bottom: 1px dashed #f5e9c9; 
+    }
+    .info-label { color: #888888; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .info-value { color: #333333; font-size: 16px; font-weight: 600; }
+    
+    .social-section { display: flex; gap: 15px; margin-top: 25px; }
+    .social-link { 
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #fffef8;
+      color: #f2ab00;
+      border: 1.5px solid #ebd99f;
+      font-size: 20px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .social-link:hover { 
+      background: #f2ab00; 
+      color: #ffffff; 
+      transform: translateY(-3px);
+      box-shadow: 0 4px 10px rgba(242, 171, 0, 0.2);
+    }
+    
+    @media (max-width: 768px) {
+      .detail-layout { flex-direction: column; align-items: center; }
+      .detail-image-box, .detail-content { min-width: 100%; max-width: 100%; }
+      .info-header { text-align: center; }
+      .social-section { justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      .info-row { grid-template-columns: 1fr; gap: 4px; }
+      .info-label { font-size: 12px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="site-header"></div>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/nav.js"></script>
+
+  <!-- Main Container Overlay -->
+  <main class="main-wrapper">
+    
+    <!-- Header Banner -->
+    <header class="section-header-banner">
+      <h1 class="section-header-title" data-i18n="profile_header">PROFILE</h1>
+    </header>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay">
+      <i class="fas fa-clover loader-icon"></i>
+      <div data-i18n="loading_text">LOADING BLM48...</div>
+    </div>
+
+    <!-- Main View -->
+    <div id="main-view">
+      <div class="filter-tabs">
+        <button class="tab-btn active" onclick="filterByTeam(this, 'ALL')" data-i18n="tab_all">ALL</button>
+        <button class="tab-btn" onclick="filterByTeam(this, 'Bloom')" data-i18n="tab_bloom">Team Bloom</button>
+        <button class="tab-btn" onclick="filterByTeam(this, 'Trainee')" data-i18n="tab_trainee">Trainee</button>
+      </div>
+      <div id="member-grid" class="members-grid"></div>
+    </div>
+
+    <!-- Detail View -->
+    <div id="detail-view">
+      <div class="detail-container-box">
+        <div class="back-btn" onclick="goBack()"><i class="fas fa-chevron-left"></i> <span data-i18n="back_btn">BACK</span></div>
+        <div class="detail-layout">
+          <div class="detail-image-box"><img id="m-img" class="detail-image" alt="Member Photo"></div>
+          <div class="detail-content">
+            <div class="info-header">
+              <h1 id="m-name-th" style="font-size:32px; margin:0; color:#333333; font-weight:700;"></h1>
+              <p id="m-name-en" style="color:#ff85a2; font-size:16px; margin:5px 0 0 0; font-weight:600; letter-spacing:1px;"></p>
+            </div>
+            <div id="m-info-table"></div>
+            <div class="social-section" id="m-social"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <div id="site-footer"></div>
+
+  <!-- JavaScript Functionalities -->
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyKX1fncf8dJuPWadPk9w-4t0pPnkNPZlFDvUqllC1aJwbqQ4vVdepMcU6fjbTIOHqz/exec';
+    let membersData = [];
+
+    function getDirectImgLink(url) {
+      if (!url) return 'https://via.placeholder.com/400x533?text=BLM48';
+      if (url.includes('drive.google.com')) {
+        const fileId = url.match(/[-\w]{25,}/);
+        return fileId ? `https://lh3.googleusercontent.com/u/0/d/${fileId}` : url;
+      }
+      return url;
+    }
+
+    function T(key) {
+      return (window.BLM48_I18N && window.BLM48_I18N.t(key)) || key;
+    }
+
+    let currentTeamFilter = 'ALL';
+    let currentMemberName = null;
+
+    async function init() {
+      try {
+        const response = await fetch(scriptURL);
+        membersData = await response.json();
+        renderGrid('ALL');
+        document.getElementById('loading-overlay').style.display = 'none';
+        document.getElementById('main-view').style.display = 'block';
+      } catch (err) {
+        document.getElementById('loading-overlay').innerHTML = "ERROR LOADING DATA";
+      }
+    }
+
+    function filterByTeam(btn, team) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentTeamFilter = team;
+      renderGrid(team);
+    }
+
+    document.addEventListener('blm48:langchange', () => {
+      if (!membersData.length) return;
+      if (document.getElementById('detail-view').style.display === 'block' && currentMemberName) {
+        viewDetail(currentMemberName);
+      } else {
+        renderGrid(currentTeamFilter);
+      }
+    });
+
+    function renderGrid(team) {
+      const grid = document.getElementById('member-grid');
+      grid.innerHTML = '';
+      const filtered = team === 'ALL' ? membersData : membersData.filter(m => m.team === team);
+
+      filtered.forEach(m => {
+        let displayTeam = m.team || '';
+        if (displayTeam.toLowerCase() !== 'trainee' && displayTeam !== '') {
+            displayTeam = 'Team ' + displayTeam;
+        }
+
+        const nameMain = m.fullNameTH || m.name;
+        const nameSub = (m.fullNameEN || m.name).toUpperCase();
+
+        grid.innerHTML += `
+          <div class="member-card">
+            <div class="photo-box" onclick="viewDetail('${m.name}')">
+              <img src="${getDirectImgLink(m.image)}" class="member-photo" onerror="this.src='https://via.placeholder.com/400x533?text=BLM48'">
+            </div>
+            <div class="card-info" onclick="viewDetail('${m.name}')">
+              <div class="member-name-main">${nameMain}</div>
+              <div class="member-name-sub">${nameSub}</div>
+            </div>
+            <div class="card-actions">
+              <button class="card-btn" onclick="viewDetail('${m.name}')">${T('btn_profile')}</button>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function viewDetail(nickname) {
+      const m = membersData.find(item => item.name === nickname);
+      if(!m) return;
+      currentMemberName = nickname;
+      document.getElementById('m-img').src = getDirectImgLink(m.image);
+      document.getElementById('m-name-th').innerText = m.fullNameTH || m.name;
+      document.getElementById('m-name-en').innerText = m.fullNameEN || '';
+      
+      const infoList = [
+        { label: T('label_generation'), value: m.generation },
+        { label: T('label_team'), value: m.team },
+        { label: T('label_birthday'), value: m.birthday },
+        { label: T('label_oshimark'), value: m.oshiMark },
+        { label: T('label_province'), value: m.province },
+        { label: T('label_bloodtype'), value: m.bloodType },
+        { label: T('label_mbti'), value: m.mbti },
+        { label: T('label_like'), value: m.like },
+        { label: T('label_hobby'), value: m.hobby }
+      ];
+
+      document.getElementById('m-info-table').innerHTML = infoList.map(item => `
+        <div class="info-row">
+          <div class="info-label">${item.label}</div>
+          <div class="info-value">${item.value || '-'}</div>
+        </div>
+      `).join('');
+
+      let sHTML = '';
+      if(m.instagram && m.instagram !== '-') sHTML += `<a href="${m.instagram}" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>`;
+      if(m.tiktok && m.tiktok !== '-') sHTML += `<a href="${m.tiktok}" class="social-link" target="_blank"><i class="fab fa-tiktok"></i></a>`;
+      if(m.twitter && m.twitter !== '-') sHTML += `<a href="${m.twitter}" class="social-link" target="_blank"><i class="fab fa-x-twitter"></i></a>`;
+      document.getElementById('m-social').innerHTML = sHTML;
+
+      document.getElementById('main-view').style.display = 'none';
+      document.getElementById('detail-view').style.display = 'block';
+      window.scrollTo(0,0);
+    }
+
+    function goBack() {
+      document.getElementById('detail-view').style.display = 'none';
+      document.getElementById('main-view').style.display = 'block';
+      window.scrollTo(0,0);
+    }
+
+    init();
+  </script>
+</body>
+</html>

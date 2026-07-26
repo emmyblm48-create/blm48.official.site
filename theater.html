@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLM48 Official - THEATER</title>
+  
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+
+  <style>
+    /* --- Global Styles --- */
+    * { 
+      box-sizing: border-box; 
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Quicksand', 'Kanit', sans-serif;
+      background-color: #fffef8;
+      background-image: radial-gradient(#f3e5ab 18%, transparent 18%), radial-gradient(#f3e5ab 18%, transparent 18%);
+      background-size: 16px 16px;
+      background-position: 0 0, 8px 8px;
+      color: #333333;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --- Main Container --- */
+    .main-wrapper {
+      max-width: 1500px;
+      width: 96%;
+      margin: 20px auto;
+      background: #ffffff;
+      padding: 35px 30px;
+      border-radius: 4px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      border: 1px solid #ebd99f;
+      min-height: 70vh;
+    }
+
+    /* --- Section Header --- */
+    .section-header-banner {
+      width: 100%;
+      background-color: #fffef8;
+      background-image: radial-gradient(#f3e5ab 18%, transparent 18%), radial-gradient(#f3e5ab 18%, transparent 18%);
+      background-size: 16px 16px;
+      background-position: 0 0, 8px 8px;
+      border-top: 2px solid #f2ab00;
+      border-bottom: 2px solid #f2ab00;
+      padding: 12px 20px;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .section-header-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #f2ab00;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    /* --- Theater Logo --- */
+    .theater-logo-container {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .theater-logo {
+      width: clamp(150px, 30vw, 220px);
+      display: inline-block;
+      filter: drop-shadow(0 4px 10px rgba(242, 171, 0, 0.2));
+      animation: pulse 3s infinite ease-in-out;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 4px 10px rgba(242, 171, 0, 0.2)); }
+      50% { transform: scale(1.05); filter: drop-shadow(0 6px 15px rgba(242, 171, 0, 0.4)); }
+    }
+
+    /* --- Management Section --- */
+    .management-zone {
+      display: flex;
+      justify-content: center;
+      gap: clamp(15px, 4vw, 40px);
+      margin: 0 0 60px;
+      flex-wrap: wrap;
+    }
+
+    .admin-card {
+      background: #fffdf6;
+      border: 1px solid #f2ab00;
+      border-radius: 4px;
+      padding: 25px 20px;
+      width: clamp(240px, 80vw, 280px);
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      position: relative;
+    }
+
+    .admin-card::before {
+      content: 'OFFICIAL';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #f2ab00;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 3px 15px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+    }
+
+    .admin-card img {
+      width: 120px; 
+      height: 120px; 
+      border-radius: 50%; 
+      border: 3px solid #f2ab00; 
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+
+    .admin-card .name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #333333;
+    }
+
+    .admin-card .pos {
+      font-size: 0.85rem;
+      color: #f2ab00;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* --- Members Section --- */
+    .section-label {
+      font-size: 24px;
+      font-weight: 800;
+      color: #333333;
+      border-bottom: 2px solid #f2ab00;
+      margin: 40px 0 25px;
+      padding-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: 1px;
+    }
+    
+    .section-label i {
+      color: #f2ab00;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: clamp(15px, 3vw, 25px);
+    }
+
+    @media (min-width: 768px) {
+      .grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+    }
+
+    .card {
+      position: relative;
+      background: #ffffff;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid #f0e6c8;
+      transition: 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+
+    @media (hover: hover) {
+      .card:hover {
+        transform: translateY(-8px);
+        border-color: #f2ab00;
+        box-shadow: 0 10px 20px rgba(242, 171, 0, 0.15);
+      }
+    }
+
+    .card img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+      transition: 0.4s;
+      background-color: #f7f5ec;
+    }
+
+    .info {
+      padding: 15px 10px;
+      background: #ffffff;
+      border-top: 1px solid #f0e6c8;
+      text-align: center;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .card:hover .info {
+      border-top-color: #f2ab00;
+    }
+
+    .name { 
+      font-size: clamp(0.95rem, 3vw, 1.1rem); 
+      font-weight: 700; 
+      color: #333333; 
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .pos { 
+      font-size: clamp(0.65rem, 2vw, 0.75rem); 
+      color: #f2ab00; 
+      text-transform: uppercase; 
+      letter-spacing: 1px; 
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    .captain-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #f2ab00;
+      color: #fff;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      z-index: 10;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    @media (max-width: 680px) {
+      .main-wrapper { padding: 20px 15px; width: 98%; }
+      .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="site-header"></div>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/nav.js"></script>
+
+  <!-- Main Container -->
+  <main class="main-wrapper">
+    
+    <!-- Header Banner -->
+    <header class="section-header-banner">
+      <h1 class="section-header-title" data-i18n="theater_header">THEATER</h1>
+    </header>
+
+    <!-- โลโก้เธียร์เตอร์ -->
+    <div class="theater-logo-container">
+      <img src="https://lh3.googleusercontent.com/d/1ySjOhJgc8BPvx0raTaUdqRMZS2Ly4L6-=s1000" class="theater-logo" alt="BLM48 Theater Logo">
+    </div>
+
+    <!-- Shihainin Section -->
+    <div class="management-zone">
+      <div class="admin-card">
+        <img src="https://lh3.googleusercontent.com/d/1zXgJmp6jmNjMcnZbc_f4gU9qisrrz0Jq=s400" alt="Gino">
+        <div class="name">Gino</div>
+        <div class="pos" data-i18n="pos_shihainin">Shihainin</div>
+      </div>
+      <div class="admin-card">
+        <img src="https://lh3.googleusercontent.com/d/1FZNJQWvzZxUi4ZfCdTmhWLMTfDtUTZ3p=s400" alt="Emmy">
+        <div class="name">Emmy</div>
+        <div class="pos" data-i18n="pos_vice_shihainin">Vice Shihainin</div>
+      </div>
+    </div>
+
+    <!-- Team Bloom -->
+    <div class="section-label"><i class="fas fa-seedling"></i> <span data-i18n="team_bloom_label">TEAM BLOOM</span></div>
+    <div class="grid" id="teamBloom"></div>
+
+    <!-- Trainee -->
+    <div class="section-label"><i class="far fa-gem"></i> <span data-i18n="trainee_label">TRAINEE</span></div>
+    <div class="grid" id="trainee"></div>
+
+  </main>
+
+  <!-- Footer -->
+  <div id="site-footer"></div>
+
+  <script>
+    const members = [
+      // Team Bloom
+      { name: 'Kuea', team: 'Bloom', pos: 'Captain', img: '1ysFvMrzMwcN8aucRDUK5Hxn0ZqkKO7AC' },
+      { name: 'Gino', team: 'Bloom', pos: '1st Gen', img: '1zXgJmp6jmNjMcnZbc_f4gU9qisrrz0Jq' },
+      { name: 'Emmy', team: 'Bloom', pos: '3rd Gen', img: '1FZNJQWvzZxUi4ZfCdTmhWLMTfDtUTZ3p' },
+      { name: 'Gavin', team: 'Bloom', pos: '4th Gen', img: '1zY3vgMGMaWb3Kqx9IXIQcaeKBt8JhTaY' },
+      { name: 'Hana', team: 'Bloom', pos: '3rd Gen', img: '1SMotb8tFKbIDC74i_dbPS1Bx5IdBKBK8' },
+      { name: 'Jayden', team: 'Bloom', pos: '3rd Gen', img: '17zGGHiIOP7PvdsqUuKq3MRpHhL8hgsn8' },
+      { name: 'Mayfie', team: 'Bloom', pos: '4th Gen', img: '1_S-fWsZZwjkXfmdTj3jpDA4XdJeQixLs' },
+      { name: 'Mushroom', team: 'Bloom', pos: '3rd Gen', img: '1h1eW8OP8UOaJm8kRK-13t-1Z_WhNluy9' },
+      { name: 'Noel', team: 'Bloom', pos: '2nd Gen', img: '1nVIgsUPv5jr0SaAlbbaw4YM8dPgLneuD' },
+      { name: 'Quantum', team: 'Bloom', pos: '4th Gen', img: '19zL2mLOrLhHOUHMc94ZM7Vmc57Mut97D' },
+      
+      // Trainees
+      { name: 'Arlua', team: 'Trainee', pos: '4th Gen', img: '1rzP_iY1akOLolmDYJ5r1RSIFbz1tiuvj' },
+      { name: 'Bug', team: 'Trainee', pos: '5th Gen', img: '1mubCc0QONHdoRyhFVhFg3wv74jNZXPMy' },
+      { name: 'Bumblebee', team: 'Trainee', pos: '5th Gen', img: '1AJp8h8U7n9l83HXe3CCcEww91oA-KHn9' },
+      { name: 'Chathai', team: 'Trainee', pos: '5th Gen', img: '1qzYwjz4JuNbAVx67eSgZvKZM17vBv2ju' },
+      { name: 'Chimunk', team: 'Trainee', pos: '5th Gen', img: '1AHPSbBq1nAbiW-KCGVhu0MH15OP6X9FJ' },
+      { name: 'Chuu', team: 'Trainee', pos: '5th Gen', img: '1L_NBLXW6J7pLpNUu3r4FVSZXhFdev8up' },
+      { name: 'Earn', team: 'Trainee', pos: '4th Gen', img: '119ilVi1MoS37YXfZlKD1cjyDnV47gH-j' },
+      { name: 'Jaiun', team: 'Trainee', pos: '5th Gen', img: '1YFjYvkk3p2AE7wza8t9RUirVkq7vz8kW' },
+      { name: 'Jih', team: 'Trainee', pos: '5th Gen', img: '18vKL61xUhi97V2fut6AxXDfaPv204UMG' },
+      { name: 'Khawjao', team: 'Trainee', pos: '5th Gen', img: '10umEKnG3GWLXEAr5wVlhEkGt8EzImhD1' },
+      { name: 'Kirin', team: 'Trainee', pos: '4th Gen', img: '175iyBWUgTY8TQQBiXrizoJxBAubLotgA' },
+      { name: 'Krystal', team: 'Trainee', pos: '5th Gen', img: '1FW77dvas2awPKzJMROwV6N4o2LDj1M5Y' },
+      { name: 'Mashi', team: 'Trainee', pos: '4th Gen', img: '1cIM8MSwNeUCR4r9W8DQNQc_MsOiaFeja' },
+      { name: 'Nina', team: 'Trainee', pos: '5th Gen', img: '1XWJGyACYotuu5Z5HW-x7xWO4NyNL8oUz' },
+      { name: 'Porpieow', team: 'Trainee', pos: '4th Gen', img: '1W5DE2xoyDvBUWEI80GTxqqPmOtBLEE04' },
+      { name: 'Salty', team: 'Trainee', pos: '4th Gen', img: '1FiU5r8KzDeLAKPfwHGLboIFUpOMP1tlT' },
+      { name: 'Sora', team: 'Trainee', pos: '5th Gen', img: '1xVmHCDTvDHMMYd8GI0Mc-lEpgFrKvxQ9' },
+      { name: 'Sunrise', team: 'Trainee', pos: '4th Gen', img: '1Fa6tkRtmNUBqHvKMuRzEM7Od8M7TprNb' },
+      { name: 'Tine', team: 'Trainee', pos: '5th Gen', img: '1i0jRXb_Zmi8Rt3q7PVfRbJ4T-jMGjkPw' }
+    ];
+
+    function T(key) {
+      return (window.BLM48_I18N && window.BLM48_I18N.t(key)) || key;
+    }
+
+    function init() {
+      const bloomContainer = document.getElementById('teamBloom');
+      const traineeContainer = document.getElementById('trainee');
+      bloomContainer.innerHTML = '';
+      traineeContainer.innerHTML = '';
+
+      members.forEach(m => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          ${m.pos === 'Captain' ? `<div class="captain-badge">${T('captain_badge')}</div>` : ''}
+          <img src="https://lh3.googleusercontent.com/d/${m.img}=s600" loading="lazy" alt="${m.name}">
+          <div class="info">
+            <div class="name">${m.name}</div>
+            <div class="pos">${m.pos}</div>
+          </div>
+        `;
+
+        if(m.team === 'Bloom') bloomContainer.appendChild(card);
+        else traineeContainer.appendChild(card);
+      });
+    }
+
+    init();
+    document.addEventListener('blm48:langchange', init);
+  </script>
+</body>
+</html>
