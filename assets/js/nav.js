@@ -3,18 +3,17 @@
    ========================================================= */
 (function () {
   var NAV_LINKS = [
-    { href: 'index.html', page: 'index', key: 'nav_home' },
-    { href: 'about.html', page: 'about', key: 'nav_about' },
-    { href: 'profile.html', page: 'profile', key: 'nav_profile' },
-    { href: 'theater.html', page: 'theater', key: 'nav_theater' },
-    { href: 'discography.html', page: 'discography', key: 'nav_discography' },
     { href: 'news.html', page: 'news', key: 'nav_news' },
-    { href: 'schedule.html', page: 'schedule', key: 'nav_schedule' }
+    { href: 'schedule.html', page: 'schedule', key: 'nav_schedule' },
+    { href: 'index.html', page: 'index', key: 'nav_home' },
+    { href: 'profile.html', page: 'profile', key: 'nav_profile' },
+    { href: 'discography.html', page: 'discography', key: 'nav_discography' },
+    { href: 'about.html', page: 'about', key: 'nav_about' }
   ];
 
   var LANGS = [
+    { code: 'en', label: 'English' },    
     { code: 'th', label: 'ไทย' },
-    { code: 'en', label: 'English' },
     { code: 'ja', label: '日本語' }
   ];
 
