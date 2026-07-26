@@ -4,6 +4,7 @@
      Gold  #fdde5c  — primary
      Pink  #fadbe1  — secondary
      Cream #fbf4cd  — tertiary / surface
+   Mint (#dffbf8) is an added accent used sparingly for variety.
    Neutrals (ink/white) exist only for text contrast, not as
    brand colors.
    ========================================================= */
@@ -15,6 +16,8 @@
   --blm-pink-deep: #f3bfca;
   --blm-cream: #fbf4cd;
   --blm-cream-deep: #f5e9ab;
+  --blm-mint: #dffbf8;
+  --blm-mint-deep: #c7f0eb;
   --blm-white: #ffffff;
 
   --blm-ink: #332c20;
@@ -90,6 +93,7 @@ h1, h2, h3, .font-display {
 .pill-gold { background: var(--blm-gold); color: var(--blm-on-gold); }
 .pill-pink { background: var(--blm-pink); color: var(--blm-on-pink); }
 .pill-cream { background: var(--blm-cream-deep); color: var(--blm-ink); }
+.pill-mint { background: var(--blm-mint); color: var(--blm-ink); }
 .pill-outline { background: transparent; color: var(--blm-ink-soft); border: 1.5px solid var(--blm-line); }
 
 /* ---------------- Shared: arrow link (replaces icon-font arrows) ---------------- */

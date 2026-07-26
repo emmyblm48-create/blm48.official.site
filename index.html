@@ -208,13 +208,21 @@
       gap: 16px;
     }
     .slide-item {
+      width: calc(26% - 12px);
       min-width: calc(26% - 12px);
+      max-width: calc(26% - 12px);
       flex-shrink: 0;
       transition: transform 0.3s;
     }
-    @media (max-width: 1024px) { .slide-item { min-width: calc(35% - 10px); } }
-    @media (max-width: 768px) { .slide-item { min-width: calc(55% - 10px); } }
-    @media (max-width: 480px) { .slide-item { min-width: 70%; } }
+    @media (max-width: 1024px) {
+      .slide-item { width: calc(35% - 10px); min-width: calc(35% - 10px); max-width: calc(35% - 10px); }
+    }
+    @media (max-width: 768px) {
+      .slide-item { width: calc(55% - 10px); min-width: calc(55% - 10px); max-width: calc(55% - 10px); }
+    }
+    @media (max-width: 480px) {
+      .slide-item { width: 78%; min-width: 78%; max-width: 78%; }
+    }
     .slide-item img {
       width: 100%;
       height: auto;
@@ -224,9 +232,37 @@
       display: block;
       box-shadow: var(--shadow-soft);
     }
+    .slider-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--blm-mint);
+      border: none;
+      color: var(--blm-ink);
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      z-index: 5;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .slider-nav-btn:hover { background: var(--blm-gold); }
+    .slider-nav-btn.prev { left: 10px; }
+    .slider-nav-btn.next { right: 10px; }
+    @media (max-width: 600px) {
+      .slider-nav-btn { width: 36px; height: 36px; font-size: 15px; }
+      .slider-nav-btn.prev { left: 6px; }
+      .slider-nav-btn.next { right: 6px; }
+    }
     .slider-nav-bar {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       margin-top: 18px;
     }
@@ -237,23 +273,6 @@
       font-weight: 600;
       letter-spacing: 2px;
     }
-    .slider-arrows { display: flex; gap: 10px; }
-    .slider-btn {
-      background: var(--blm-cream);
-      border: none;
-      color: var(--blm-ink);
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      font-weight: 700;
-      transition: 0.2s;
-    }
-    .slider-btn:hover { background: var(--blm-gold); }
 
     /* --- SECTION 2.5: MEMBERS --- */
     .members-section {
@@ -318,13 +337,19 @@
       position: absolute;
       top: 8px;
       left: 8px;
+      right: 8px;
       background: var(--blm-gold);
       color: var(--blm-on-gold);
-      font-size: 9px;
+      font-size: 8.5px;
       font-weight: 800;
-      letter-spacing: 0.5px;
-      padding: 3px 9px;
+      letter-spacing: 0.2px;
+      padding: 3px 8px;
       border-radius: var(--radius-pill);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: fit-content;
+      max-width: calc(100% - 16px);
     }
     .member-mini-name {
       margin-top: 12px;
@@ -535,8 +560,9 @@
       margin: 40px auto 60px;
       padding: 36px 40px;
       text-align: center;
-      background: var(--blm-cream);
+      background: var(--blm-mint);
       border-radius: var(--radius-xl);
+      position: relative;
     }
     .idol-group-title {
       font-family: var(--font-display);
@@ -548,25 +574,56 @@
       margin-bottom: 26px;
       text-transform: uppercase;
     }
+    .logo-grid-wrap { position: relative; padding: 0 6px; }
     .logo-grid {
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
       align-items: center;
-      gap: 15px;
+      gap: clamp(12px, 2.5vw, 20px);
       width: 100%;
       overflow-x: auto;
-      padding-bottom: 10px;
+      scroll-behavior: smooth;
+      padding-bottom: 14px;
     }
-    .logo-grid a { flex: 1; display: flex; justify-content: center; min-width: 70px; }
+    .logo-grid::-webkit-scrollbar { height: 6px; }
+    .logo-grid::-webkit-scrollbar-track { background: var(--blm-white); border-radius: 3px; }
+    .logo-grid::-webkit-scrollbar-thumb { background: var(--blm-gold); border-radius: 3px; }
+    .logo-grid a { flex: 0 0 auto; display: flex; justify-content: center; }
     .logo-grid img {
-      width: 100%;
+      width: clamp(52px, 7vw, 84px);
       height: auto;
-      max-width: 84px;
       transition: transform 0.3s ease;
       opacity: 0.75;
     }
     .logo-grid img:hover { transform: scale(1.1); opacity: 1; }
+    .group-nav-btn {
+      position: absolute;
+      top: 40%;
+      transform: translateY(-50%);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--blm-white);
+      border: none;
+      color: var(--blm-ink);
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      z-index: 5;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .group-nav-btn:hover { background: var(--blm-gold); }
+    .group-nav-btn.prev { left: -14px; }
+    .group-nav-btn.next { right: -14px; }
+    @media (max-width: 600px) {
+      .group-nav-btn { width: 32px; height: 32px; font-size: 14px; }
+      .group-nav-btn.prev { left: -8px; }
+      .group-nav-btn.next { right: -8px; }
+    }
 
   </style>
 </head>
@@ -638,6 +695,8 @@
   <!-- SECTION 2: SLIDER SECTION -->
   <section class="slider-section">
     <div class="slider-wrapper" id="bannerSliderWrapper">
+      <button class="slider-nav-btn prev" onclick="prevBannerSlide()" aria-label="Previous">‹</button>
+      <button class="slider-nav-btn next" onclick="nextBannerSlide()" aria-label="Next">›</button>
       <div class="slider-track" id="bannerTrack">
 
         <div class="slide-item">
@@ -667,13 +726,9 @@
       </div>
     </div>
 
-    <!-- Bottom Counter & Navigation -->
+    <!-- Bottom Counter -->
     <div class="slider-nav-bar">
       <div class="slide-counter" id="bannerCounter">1 — 4</div>
-      <div class="slider-arrows">
-        <button class="slider-btn" onclick="prevBannerSlide()" aria-label="Previous">‹</button>
-        <button class="slider-btn" onclick="nextBannerSlide()" aria-label="Next">›</button>
-      </div>
     </div>
   </section>
 
@@ -688,14 +743,14 @@
       <div class="members-track">
         <a href="profile.html" class="member-mini">
           <div class="member-mini-photo">
-            <span class="member-mini-badge" data-i18n="captain_badge">SHIHAININ</span>
+            <span class="member-mini-badge" data-i18n="pos_shihainin">SHIHAININ</span>
             <img src="https://lh3.googleusercontent.com/d/1zXgJmp6jmNjMcnZbc_f4gU9qisrrz0Jq=s600" alt="Gino" loading="lazy">
           </div>
           <div class="member-mini-name">Gino</div>
         </a>
         <a href="profile.html" class="member-mini">
           <div class="member-mini-photo">
-            <span class="member-mini-badge" data-i18n="captain_badge">VICE SHIHAININ</span>            
+            <span class="member-mini-badge" data-i18n="pos_vice_shihainin">VICE SHIHAININ</span>
             <img src="https://lh3.googleusercontent.com/d/1FZNJQWvzZxUi4ZfCdTmhWLMTfDtUTZ3p=s600" alt="Emmy" loading="lazy">
           </div>
           <div class="member-mini-name">Emmy</div>
@@ -1050,22 +1105,26 @@
   <!-- SECTION 5: AKB48 GROUP -->
   <div class="idol-group-container">
     <h3 class="idol-group-title" data-i18n="group_title">AKB48 Group</h3>
-    <div class="logo-grid">
-      <!-- Japan Groups -->
-      <a href="https://www.akb48.co.jp/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_akb48.png?ver=53" alt="AKB48"></a>
-      <a href="https://www.ske48.co.jp/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_ske48.png?ver=53" alt="SKE48"></a>
-      <a href="https://nmb48.com/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_nmb48.png?ver=53" alt="NMB48"></a>
-      <a href="http://www.hkt48.jp/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_hkt48.png?ver=53" alt="HKT48"></a>
-      <a href="https://ngt48.jp/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_ngt48.png?ver=53" alt="NGT48"></a>
-      <a href="https://www.stu48.com/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_stu48.png?ver=53" alt="STU48"></a>
+    <div class="logo-grid-wrap">
+      <button class="group-nav-btn prev" onclick="prevGroupSlide()" aria-label="Previous">‹</button>
+      <button class="group-nav-btn next" onclick="nextGroupSlide()" aria-label="Next">›</button>
+      <div class="logo-grid" id="groupTrack">
+        <!-- Japan Groups -->
+        <a href="https://www.akb48.co.jp/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_akb48.png?ver=53" alt="AKB48"></a>
+        <a href="https://www.ske48.co.jp/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_ske48.png?ver=53" alt="SKE48"></a>
+        <a href="https://nmb48.com/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_nmb48.png?ver=53" alt="NMB48"></a>
+        <a href="http://www.hkt48.jp/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_hkt48.png?ver=53" alt="HKT48"></a>
+        <a href="https://ngt48.jp/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_ngt48.png?ver=53" alt="NGT48"></a>
+        <a href="https://www.stu48.com/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_stu48.png?ver=53" alt="STU48"></a>
 
-      <!-- International Groups -->
-      <a href="https://www.jkt48.com/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_jkt48.png?ver=53" alt="JKT48"></a>
-      <a href="https://www.bnk48.com/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_bnk48.png?ver=53" alt="BNK48"></a>
-      <a href="https://weibo.com/akb48teamsh" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_tsh48.png?ver=53" alt="TSH48"></a>
-      <a href="https://www.tpe48.tw/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_tpe48.png" alt="TPE48"></a>
-      <a href="https://www.cgm48official.com/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_cgm48.png?ver=53" alt="CGM48"></a>
-      <a href="https://klp48.my/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_klp48.png?ver=53" alt="KLP48"></a>
+        <!-- International Groups -->
+        <a href="https://www.jkt48.com/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_jkt48.png?ver=53" alt="JKT48"></a>
+        <a href="https://www.bnk48.com/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_bnk48.png?ver=53" alt="BNK48"></a>
+        <a href="https://weibo.com/akb48teamsh" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_tsh48.png?ver=53" alt="TSH48"></a>
+        <a href="https://www.tpe48.tw/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_tpe48.png" alt="TPE48"></a>
+        <a href="https://www.cgm48official.com/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_cgm48.png?ver=53" alt="CGM48"></a>
+        <a href="https://klp48.my/" target="_blank"><img src="https://s.akb48.co.jp/v2/index/img/g_klp48.png?ver=53" alt="KLP48"></a>
+      </div>
     </div>
   </div>
 
@@ -1208,6 +1267,14 @@
 
     function nextBannerSlide() { if(bannerSlider) bannerSlider.next(); }
     function prevBannerSlide() { if(bannerSlider) bannerSlider.prev(); }
+
+    // --- AKB48 Group Logo Row Scroll ---
+    function scrollGroupBy(amount) {
+      const track = document.getElementById('groupTrack');
+      if (track) track.scrollBy({ left: amount, behavior: 'smooth' });
+    }
+    function nextGroupSlide() { scrollGroupBy(200); }
+    function prevGroupSlide() { scrollGroupBy(-200); }
 
     // Initialize Video Swiper Slider
     const videoSwiper = new Swiper('.video-swiper', {
