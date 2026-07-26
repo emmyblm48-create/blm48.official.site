@@ -21,11 +21,12 @@
     { href: 'https://youtu.be/rdWq9BKqpBU?si=LefsrZ5m9pwW8N0T', text: 'BLM48 3rd Album C/W Senbatsu Announcement' },
     { href: 'https://www.instagram.com/p/DXj_bnLiYls/', text: 'New Logo BLM48 The Campus' },
     { href: 'https://www.instagram.com/p/DaXTGLEvLuL/', text: 'Jih BLM48 - Champ of The Month' },
+    { href: 'https://youtu.be/QaxSjLIxcSE?si=AESKBzHHlw6bLENo', text: 'BINGO! - Top Streaming of the Month' },
     { href: 'https://www.instagram.com/p/DXj-1-EiaBr/', text: 'BLM48 Concert This Letter Says "Marry Me"' }
   ];
 
   function currentPage() {
-    var path = window.location.pathname.split('/').pop() || 'index.html';
+    var path = window.location.pathname.split('/').pop() || 'index.html';S
     var name = path.replace('.html', '');
     return name === '' ? 'index' : name;
   }
@@ -63,7 +64,7 @@
       '<header class="site-header">' +
         '<div class="site-header-inner">' +
           '<a href="index.html" class="site-logo">' +
-            '<img class="logo-img" src="https://lh3.googleusercontent.com/d/1KHThPCdGEn8HV3QdN_ROwcSSlqbUYyIp=s1000" alt="BLM48">' +
+            '<img class="logo-img" src="https://lh3.googleusercontent.com/d/1NQTKcl_qiE_5Y9tX4xaPKnTcaJ9YwrqY=s1000" alt="BLM48">' +
             '<span class="logo-sub">OFFICIAL SITE</span>' +
           '</a>' +
           '<nav class="site-nav" aria-label="Main navigation">' + navLinksHTML('') + '</nav>' +
