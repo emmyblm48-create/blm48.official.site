@@ -65,7 +65,7 @@
       theater_header: "โรงละคร",
       pos_shihainin: "ผู้จัดการ",
       pos_vice_shihainin: "รองผู้จัดการ",
-      team_bloom_label: "ทีม บลูม",
+      team_bloom_label: "ทีม Bloom",
       trainee_label: "เด็กฝึกหัด",
       captain_badge: "กัปตันทีม Bloom",
 
@@ -136,9 +136,9 @@
       theater_header: "THEATER",
       pos_shihainin: "Shihainin",
       pos_vice_shihainin: "Vice Shihainin",
-      team_bloom_label: "TEAM BLOOM",
-      trainee_label: "TRAINEE",
-      captain_badge: "CAPTAIN Team Bloom",
+      team_bloom_label: "Team Bloom",
+      trainee_label: "Trainee",
+      captain_badge: "Captain Team Bloom",
 
       disco_header: "DISCOGRAPHY",
       filter_all: "ALL",
