@@ -9,7 +9,7 @@
     { href: 'profile.html', page: 'profile', key: 'nav_profile' },
     { href: 'discography.html', page: 'discography', key: 'nav_discography' },
     { href: 'about.html', page: 'about', key: 'nav_about' },
-    { href: 'https://blm48-membership.vercel.app/', page: 'membership', key: 'nav_membership' },   
+    { href: 'https://blm48-membership.vercel.app/', page: 'membership', key: 'nav_membership' } 
   ];
 
   var LANGS = [
