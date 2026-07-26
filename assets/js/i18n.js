@@ -13,6 +13,7 @@
       nav_profile: "โปรไฟล์สมาชิก",
       nav_theater: "โรงละคร",
       nav_discography: "ผลงานเพลง",
+      nav_membership: "สมาชิกเมมเบอร์ชิพ",
       nav_news: "ข่าวสาร",
       nav_schedule: "ตารางกิจกรรม",
       badge_release: "วางจำหน่าย",
@@ -80,10 +81,11 @@
 
     en: {
       nav_home: "HOME",
-      nav_about: "ABOUT",
+      nav_about: "ABOUT BLM48?",
       nav_profile: "PROFILE",
       nav_theater: "THEATER",
       nav_discography: "DISCOGRAPHY",
+      nav_membership: "BLM48 MEMBERSHIP",      
       nav_news: "NEWS",
       nav_schedule: "SCHEDULE",
       badge_release: "RELEASE",
@@ -155,6 +157,7 @@
       nav_profile: "メンバー",
       nav_theater: "劇場",
       nav_discography: "ディスコグラフィー",
+      nav_membership: "BLM48 MEMBERSHIP",   
       nav_news: "ニュース",
       nav_schedule: "スケジュール",
       badge_release: "リリース",

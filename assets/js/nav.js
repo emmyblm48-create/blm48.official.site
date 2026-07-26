@@ -8,7 +8,8 @@
     { href: 'schedule.html', page: 'schedule', key: 'nav_schedule' },
     { href: 'profile.html', page: 'profile', key: 'nav_profile' },
     { href: 'discography.html', page: 'discography', key: 'nav_discography' },
-    { href: 'about.html', page: 'about', key: 'nav_about' }
+    { href: 'about.html', page: 'about', key: 'nav_about' },
+    { href: 'https://blm48-membership.vercel.app/', page: 'membership', key: 'nav_membership' },   
   ];
 
   var LANGS = [
@@ -64,7 +65,7 @@
       '<header class="site-header">' +
         '<div class="site-header-inner">' +
           '<a href="index.html" class="site-logo">' +
-            '<img class="logo-img" src="https://lh3.googleusercontent.com/d/1NQTKcl_qiE_5Y9tX4xaPKnTcaJ9YwrqY=s1000" alt="BLM48">' +
+            '<img class="logo-img" src="https://lh3.googleusercontent.com/d/12PFpDx6bOmQpf_UMhhh6ltZwvOAkVyvW=s1000" alt="BLM48">' +
             '<span class="logo-sub">OFFICIAL SITE</span>' +
           '</a>' +
           '<nav class="site-nav" aria-label="Main navigation">' + navLinksHTML('') + '</nav>' +
