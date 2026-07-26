@@ -67,7 +67,7 @@
       pos_vice_shihainin: "รองผู้จัดการ",
       team_bloom_label: "ทีม บลูม",
       trainee_label: "เด็กฝึกหัด",
-      captain_badge: "กัปตัน",
+      captain_badge: "กัปตันทีม Bloom",
 
       disco_header: "ผลงานเพลง",
       filter_all: "ทั้งหมด",
@@ -138,7 +138,7 @@
       pos_vice_shihainin: "Vice Shihainin",
       team_bloom_label: "TEAM BLOOM",
       trainee_label: "TRAINEE",
-      captain_badge: "CAPTAIN",
+      captain_badge: "CAPTAIN Team Bloom",
 
       disco_header: "DISCOGRAPHY",
       filter_all: "ALL",
