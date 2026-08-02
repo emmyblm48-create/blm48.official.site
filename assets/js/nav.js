@@ -21,7 +21,7 @@
   var TICKER_ITEMS = [
     { href: 'https://youtu.be/rdWq9BKqpBU?si=LefsrZ5m9pwW8N0T', text: 'BLM48 3rd Album C/W Senbatsu Announcement' },
     { href: 'https://www.instagram.com/p/DXj_bnLiYls/', text: 'New Logo BLM48 The Campus' },
-    { href: 'https://www.instagram.com/p/DaXTGLEvLuL/', text: 'Jih BLM48 - Champ of The Month' },
+    { href: 'https://www.instagram.com/p/DaXTGLEvLuL/', text: 'Mashi BLM48 - Champ of The Month' },
     { href: 'https://youtu.be/QaxSjLIxcSE?si=AESKBzHHlw6bLENo', text: 'BINGO! - Top Streaming of the Month' },
     { href: 'https://www.instagram.com/p/DXj-1-EiaBr/', text: 'BLM48 Concert This Letter Says "Marry Me"' }
   ];
