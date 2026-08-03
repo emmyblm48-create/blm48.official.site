@@ -107,13 +107,23 @@
     .member-photo { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
     .member-card:hover .member-photo { transform: scale(1.05); }
 
-    .card-info { width: 100%; margin-bottom: 14px; cursor: pointer; }
+    .card-info { width: 100%; margin-bottom: 10px; text-align: left; }
+    .card-name-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
     .member-name-main {
       font-family: var(--font-display);
-      font-size: 16px;
-      font-weight: 500;
+      font-size: 17px;
+      font-weight: 700;
       color: var(--blm-ink);
       line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      cursor: pointer;
     }
     .member-name-sub {
       font-size: 11px;
@@ -122,24 +132,16 @@
       letter-spacing: 0.5px;
       margin-top: 3px;
       text-transform: uppercase;
+      cursor: pointer;
     }
 
-    .card-actions { width: 100%; }
-    .card-btn {
-      width: 100%;
-      background: var(--blm-cream);
-      border: none;
-      color: var(--blm-ink);
-      font-family: var(--font-body);
-      font-size: 13px;
-      font-weight: 700;
-      padding: 9px 0;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      border-radius: var(--radius-pill);
-      letter-spacing: 0.5px;
+    .card-socials { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .card-social-link {
+      color: var(--blm-ink-faint);
+      font-size: 14px;
+      transition: color 0.2s, transform 0.2s;
     }
-    .card-btn:hover { background: var(--blm-gold); }
+    .card-social-link:hover { color: var(--blm-gold-deep); transform: translateY(-2px); }
 
     /* --- Detail View Style --- */
     #detail-view { display: none; animation: fadeIn 0.4s ease; }
@@ -321,20 +323,25 @@
             displayTeam = 'Team ' + displayTeam;
         }
 
-        const nameMain = m.fullNameTH || m.name;
+        const nameMain = m.name;
         const nameSub = (m.fullNameEN || m.name).toUpperCase();
 
+        let socialsHTML = '';
+        if (m.instagram && m.instagram !== '-') socialsHTML += `<a href="${m.instagram}" class="card-social-link" target="_blank" rel="noopener" onclick="event.stopPropagation()"><i class="fab fa-instagram"></i></a>`;
+        if (m.tiktok && m.tiktok !== '-') socialsHTML += `<a href="${m.tiktok}" class="card-social-link" target="_blank" rel="noopener" onclick="event.stopPropagation()"><i class="fab fa-tiktok"></i></a>`;
+        if (m.twitter && m.twitter !== '-') socialsHTML += `<a href="${m.twitter}" class="card-social-link" target="_blank" rel="noopener" onclick="event.stopPropagation()"><i class="fab fa-x-twitter"></i></a>`;
+
         grid.innerHTML += `
-          <div class="member-card">
+          <div class="member-card" data-name="${m.name}">
             <div class="photo-box" onclick="viewDetail('${m.name}')">
               <img src="${getDirectImgLink(m.image)}" class="member-photo" onerror="this.src='https://via.placeholder.com/400x533?text=BLM48'">
             </div>
-            <div class="card-info" onclick="viewDetail('${m.name}')">
-              <div class="member-name-main">${nameMain}</div>
-              <div class="member-name-sub">${nameSub}</div>
-            </div>
-            <div class="card-actions">
-              <button class="card-btn" onclick="viewDetail('${m.name}')">${T('btn_profile')}</button>
+            <div class="card-info">
+              <div class="card-name-row">
+                <div class="member-name-main" onclick="viewDetail('${m.name}')">${nameMain}</div>
+                <div class="card-socials">${socialsHTML}</div>
+              </div>
+              <div class="member-name-sub" onclick="viewDetail('${m.name}')">${nameSub}</div>
             </div>
           </div>
         `;
@@ -382,7 +389,13 @@
     function goBack() {
       document.getElementById('detail-view').style.display = 'none';
       document.getElementById('main-view').style.display = 'block';
-      window.scrollTo(0,0);
+
+      const card = currentMemberName && document.querySelector(`.member-card[data-name="${CSS.escape(currentMemberName)}"]`);
+      if (card) {
+        card.scrollIntoView({ block: 'center' });
+      } else {
+        window.scrollTo(0,0);
+      }
     }
 
     init();
