@@ -192,6 +192,43 @@
     .todays-item:hover .todays-title-text { color: var(--blm-gold-deep); }
     .todays-title-text { color: var(--blm-ink); transition: color 0.2s; }
 
+    .birthday-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .birthday-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .birthday-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--blm-cream);
+      border: 2px solid var(--blm-gold);
+    }
+    .birthday-item:nth-child(4n+2) .birthday-avatar { border-color: var(--blm-pink); }
+    .birthday-item:nth-child(4n+3) .birthday-avatar { border-color: var(--blm-mint-deep); }
+    .birthday-item:nth-child(4n) .birthday-avatar { border-color: var(--blm-cream-deep); }
+    .birthday-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .birthday-info { display: flex; flex-direction: column; gap: 2px; }
+    .birthday-name {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--blm-ink);
+      transition: color 0.2s;
+    }
+    .birthday-item:hover .birthday-name { color: var(--blm-gold-deep); }
+    .birthday-date { font-size: 12.5px; font-weight: 600; color: var(--blm-ink-soft); }
+    .birthday-empty { font-size: 14px; color: var(--blm-ink-soft); font-weight: 600; }
+
     /* --- SECTION 2: SLIDE BAR --- */
     .slider-section {
       max-width: 1400px;
@@ -633,34 +670,21 @@
         </div>
       </div>
 
-      <!-- Right: TODAY'S BLM48 Box -->
+      <!-- Right: Birthday This Month Box -->
       <div class="top-right-card">
         <div>
           <div class="todays-header">
-            <span class="pill pill-gold" data-i18n="today_label">TODAY'S BLM48</span>
-            <span class="todays-date">/ 2026.07.01-09.30</span>
+            <span class="pill pill-gold" data-i18n="birthday_label">BIRTHDAY THIS MONTH</span>
+            <span class="todays-date" id="birthdayMonthLabel"></span>
           </div>
 
-          <div class="todays-list">
-            <a href="https://youtu.be/rdWq9BKqpBU?si=LefsrZ5m9pwW8N0T" class="todays-item">
-              <span class="pill pill-mint" data-i18n="badge_media">MEDIA</span>
-              <span class="todays-title-text">BLM48 3rd Album C/W Senbatsu Announcement</span>
-            </a>
-
-            <a href="https://www.instagram.com/p/DZKrI_FCRZM/?img_index=2" class="todays-item">
-              <span class="pill pill-pink" data-i18n="badge_live">LIVE</span>
-              <span class="todays-title-text">BLM48 Concert This Letter Says "Marry Me"</span>
-            </a>
-
-            <a href="https://www.instagram.com/p/DXj_bnLiYls/" class="todays-item">
-              <span class="pill pill-cream" data-i18n="badge_event">EVENT</span>
-              <span class="todays-title-text">New Logo BLM48 The Campus</span>
-            </a>
+          <div class="birthday-list" id="birthdayList">
+            <div class="birthday-empty">...</div>
           </div>
         </div>
 
-        <a href="https://sites.google.com/view/blm48/schedule" class="arrow-link">
-          <span data-i18n="schedule_top">SCHEDULE TOP</span>
+        <a href="profile.html" class="arrow-link">
+          <span data-i18n="members_cta">SEE ALL MEMBERS</span>
         </a>
       </div>
     </div>
@@ -1276,6 +1300,82 @@
         }
       }
     });
+  </script>
+
+  <!-- Birthday This Month -->
+  <script>
+    const membersScriptURL = 'https://script.google.com/macros/s/AKfycbyKX1fncf8dJuPWadPk9w-4t0pPnkNPZlFDvUqllC1aJwbqQ4vVdepMcU6fjbTIOHqz/exec';
+    const localeMap = { th: 'th-TH', en: 'en-US', ja: 'ja-JP' };
+    let allMembersData = [];
+
+    function birthdayImgLink(url) {
+      if (!url) return 'https://via.placeholder.com/100x100?text=BLM48';
+      if (url.includes('drive.google.com')) {
+        const fileId = url.match(/[-\w]{25,}/);
+        return fileId ? `https://lh3.googleusercontent.com/u/0/d/${fileId}` : url;
+      }
+      return url;
+    }
+
+    function T2(key) {
+      return (window.BLM48_I18N && window.BLM48_I18N.t(key)) || key;
+    }
+
+    function renderBirthdayMonth() {
+      const lang = (window.BLM48_I18N && window.BLM48_I18N.getLang()) || 'en';
+      const locale = localeMap[lang] || 'en-US';
+      const today = new Date();
+
+      const monthLabelEl = document.getElementById('birthdayMonthLabel');
+      if (monthLabelEl) {
+        monthLabelEl.textContent = '/ ' + today.toLocaleDateString(locale, { month: 'long', year: 'numeric' });
+      }
+
+      const listEl = document.getElementById('birthdayList');
+      if (!listEl) return;
+
+      const celebrants = allMembersData
+        .map(m => {
+          const bday = m.birthday ? new Date(m.birthday) : null;
+          return bday && !isNaN(bday) ? { member: m, bday } : null;
+        })
+        .filter(entry => entry && entry.bday.getMonth() === today.getMonth())
+        .sort((a, b) => a.bday.getDate() - b.bday.getDate());
+
+      if (!celebrants.length) {
+        listEl.innerHTML = `<div class="birthday-empty">${T2('birthday_empty')}</div>`;
+        return;
+      }
+
+      listEl.innerHTML = celebrants.map(({ member, bday }) => `
+        <a href="profile.html" class="birthday-item">
+          <div class="birthday-avatar">
+            <img src="${birthdayImgLink(member.image)}" alt="${member.name}" onerror="this.src='https://via.placeholder.com/100x100?text=BLM48'">
+          </div>
+          <div class="birthday-info">
+            <span class="birthday-name">${member.name}</span>
+            <span class="birthday-date">${bday.toLocaleDateString(locale, { day: 'numeric', month: 'short' })}</span>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    async function initBirthdayMonth() {
+      try {
+        const response = await fetch(membersScriptURL);
+        allMembersData = await response.json();
+        renderBirthdayMonth();
+      } catch (err) {
+        const listEl = document.getElementById('birthdayList');
+        if (listEl) listEl.innerHTML = `<div class="birthday-empty">${T2('birthday_empty')}</div>`;
+      }
+    }
+
+    document.addEventListener('blm48:langchange', () => {
+      if (allMembersData.length) renderBirthdayMonth();
+    });
+
+    initBirthdayMonth();
   </script>
 
 </body>
